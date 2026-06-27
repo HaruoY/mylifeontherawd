@@ -1,4 +1,4 @@
-﻿[
+[
   {
     "id": 1,
     "titolo": "Nyhavn - panorama",
@@ -8,6 +8,17 @@
     "lng": 12.589847,
     "data": "2026-06-27",
     "immagine_url": "images/nyhavn.jpg",
+    "pubblicato": true
+  },
+  {
+    "id": 2,
+    "titolo": "Dean Village",
+    "categoria": "paesaggi",
+    "luogo": "Edinburgh",
+    "lat": 55.952267,
+    "lng": -3.218433,
+    "data": "2026-06-27",
+    "immagine_url": "images/dean-village.jpg",
     "pubblicato": true
   }
 ]
