@@ -129,6 +129,9 @@
     position: absolute;
     left: 0; right: 0; bottom: 0;
     padding: 18px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
     background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
     color: #fff;
     opacity: 0;
@@ -142,6 +145,14 @@
     font-family: 'Archivo Black', sans-serif;
     font-size: 0.85rem;
     text-transform: uppercase;
+  }
+
+  .item-meta .coords {
+    font-size: 0.65rem;
+    letter-spacing: 0.03em;
+    color: rgba(255,255,255,0.7);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
   }
 
   .empty-state {
@@ -224,6 +235,13 @@
     return div.innerHTML;
   }
 
+  function formatCoords(lat, lng) {
+    if (lat == null || lng == null || lat === '' || lng === '') return '';
+    const ns = lat >= 0 ? 'N' : 'S';
+    const ew = lng >= 0 ? 'E' : 'W';
+    return `${Math.abs(lat).toFixed(2)}° ${ns}, ${Math.abs(lng).toFixed(2)}° ${ew}`;
+  }
+
   function layoutClass(index) {
     if (index % 4 === 0) return 'wide';
     return '';
@@ -261,6 +279,7 @@
           <img src="${photo.immagine_url}" alt="${escapeHtml(photo.titolo || '')}" loading="lazy">
           <div class="item-meta">
             <span class="titolo">${escapeHtml(photo.titolo || '')}</span>
+            <span class="coords">${formatCoords(photo.lat, photo.lng)}</span>
           </div>
         </a>
       `).join('');
