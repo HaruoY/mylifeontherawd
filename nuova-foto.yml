@@ -1,0 +1,85 @@
+name: 📷 Nuova foto
+description: Aggiungi una foto al portfolio. Compila i campi e trascina l'immagine.
+title: "[foto] "
+labels: ["nuova-foto"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Compila i campi sotto. Per l'immagine, trascinala nel campo di testo
+        in fondo a questo form (oppure clicca dentro e usa "Aggiungi file"):
+        GitHub la carica automaticamente e inserisce un link — lascialo
+        invariato, è quello che il sistema userà per recuperare il file.
+
+        Dopo l'invio, l'automazione preparerà tutto da sola: in 1-2 minuti
+        la foto sarà online, e questa Issue si chiuderà da sé con un commento
+        di conferma.
+
+  - type: input
+    id: titolo
+    attributes:
+      label: Titolo
+      description: Il titolo dello scatto
+      placeholder: "es. Galizia"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: categoria
+    attributes:
+      label: Categoria
+      options:
+        - reportage
+        - street
+        - architettura
+        - arte
+        - paesaggi
+    validations:
+      required: true
+
+  - type: input
+    id: luogo
+    attributes:
+      label: Luogo
+      description: Città e paese, se vuoi mostrarlo
+      placeholder: "es. Vigo, ES"
+    validations:
+      required: false
+
+  - type: input
+    id: lat
+    attributes:
+      label: Latitudine
+      description: Lascia vuoto se non la conosci
+      placeholder: "es. 42.231358"
+    validations:
+      required: false
+
+  - type: input
+    id: lng
+    attributes:
+      label: Longitudine
+      description: Lascia vuoto se non la conosci
+      placeholder: "es. -8.712447"
+    validations:
+      required: false
+
+  - type: input
+    id: data
+    attributes:
+      label: Data dello scatto
+      description: Formato AAAA-MM-GG. Lascia vuoto per usare la data di oggi.
+      placeholder: "es. 2026-06-27"
+    validations:
+      required: false
+
+  - type: textarea
+    id: immagine
+    attributes:
+      label: Immagine
+      description: >-
+        Trascina qui il file della foto (JPEG, PNG o WebP). Non scrivere
+        nulla a mano: GitHub genera da solo il link quando rilasci il file.
+      placeholder: Trascina l'immagine qui...
+    validations:
+      required: true

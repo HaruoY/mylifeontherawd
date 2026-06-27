@@ -1,0 +1,55 @@
+name: Valida e pubblica il portfolio
+
+# Si attiva automaticamente ad ogni push sul branch main
+# (cioè ogni volta che aggiungi una foto o modifichi il sito)
+on:
+  push:
+    branches: [main]
+
+# Permessi necessari per pubblicare su GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Evita deploy sovrapposti se fai più push veloci di seguito
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  valida:
+    name: Valida foto.json
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scarica il repository
+        uses: actions/checkout@v4
+
+      - name: Imposta Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Controlla che foto.json sia corretto
+        run: node scripts/validate-foto.js
+
+  pubblica:
+    name: Pubblica su GitHub Pages
+    needs: valida
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Scarica il repository
+        uses: actions/checkout@v4
+
+      - name: Prepara i file per Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Pubblica tutto il repository tranne le cartelle tecniche
+          path: '.'
+
+      - name: Pubblica
+        id: deployment
+        uses: actions/deploy-pages@v4
