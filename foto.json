@@ -1,1 +1,13 @@
-[]
+﻿[
+  {
+    "id": 1,
+    "titolo": "Nyhavn - panorama",
+    "categoria": "reportage",
+    "luogo": "Copenaghen",
+    "lat": 55.680131,
+    "lng": 12.589847,
+    "data": "2026-06-27",
+    "immagine_url": "images/nyhavn.jpg",
+    "pubblicato": true
+  }
+]
