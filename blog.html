@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Projects — My life on the rawd</title>
+<title>Blog — My life on the rawd</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=Archivo+Black&family=Inter:wght@400;500&display=swap" rel="stylesheet">
@@ -81,6 +81,16 @@
     margin-bottom: 56px;
   }
 
+  .page-intro .label {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--accent);
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
   .page-intro h1 {
     font-family: 'Archivo Black', sans-serif;
     font-weight: 400;
@@ -88,56 +98,66 @@
     text-transform: uppercase;
     line-height: 1.05;
     letter-spacing: -0.01em;
-    margin-bottom: 16px;
   }
-
-  .page-intro h1 .accent { color: var(--accent); }
 
   .page-intro p {
     color: var(--muted);
     font-size: 0.95rem;
-    line-height: 1.65;
+    line-height: 1.6;
+    margin-top: 14px;
   }
 
-  .projects-grid {
+  .museums-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 24px;
+    gap: 20px;
   }
 
-  .project-card {
-    background: var(--surface);
-    border: 1px solid var(--line);
+  .museum-card {
+    position: relative;
+    overflow: hidden;
     border-radius: 4px;
-    padding: 28px;
-    transition: border-color 0.25s ease;
+    aspect-ratio: 4/3;
+    background: var(--surface);
   }
 
-  .project-card:hover { border-color: var(--accent); }
+  .museum-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(10%) contrast(1.05);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+  }
 
-  .project-card .count {
-    font-size: 0.7rem;
-    letter-spacing: 0.05em;
+  .museum-card:hover img {
+    transform: scale(1.04);
+    filter: grayscale(0%) contrast(1);
+  }
+
+  .museum-card .overlay {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 18px 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+    color: #fff;
+  }
+
+  .museum-card .overlay .museum-name {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.05rem;
     text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 10px;
   }
 
-  .project-card h2 {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-weight: 400;
-    font-size: 1.15rem;
-    margin-bottom: 8px;
+  .museum-card .overlay .museum-meta {
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-top: 4px;
   }
 
-  .project-card p {
-    color: var(--muted);
-    font-size: 0.88rem;
-    line-height: 1.6;
-  }
-
-  .empty-projects {
+  .empty-state {
     padding: 60px 0;
     color: var(--muted);
     font-size: 0.9rem;
@@ -158,10 +178,11 @@
     .logo { font-size: 0.85rem; }
     nav { gap: 16px; font-size: 0.7rem; }
     main { padding: 130px 22px 70px; }
+    .museums-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
     footer { padding: 24px 22px 32px; }
   }
 
-  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 </style>
 </head>
 <body>
@@ -170,25 +191,25 @@
   <div class="logo">My life on the rawd</div>
   <nav>
     <a href="gallery.html">Gallery</a>
+    <a href="travel.html">Travel</a>
+    <a href="map.html">Map</a>
+    <a class="active" href="blog.html">Blog</a>
     <a href="bio.html">Bio</a>
-    <a class="active" href="projects.html">Projects</a>
     <a href="gear.html">Gear</a>
   </nav>
 </header>
 
 <main>
   <div class="page-intro">
-    <h1>Themed <span class="accent">projects</span></h1>
-    <p>
-      Collections outside the main travel flow: photo series organized by
-      theme rather than location.
-    </p>
+    <div class="label">Blog</div>
+    <h1>Museums and art</h1>
+    <p>Works and details encountered in museums along the way, with notes on each piece.</p>
   </div>
 
-  <div class="projects-grid" id="projects-grid"></div>
+  <div class="museums-grid" id="museums-grid"></div>
 
-  <p class="empty-projects" id="empty-projects" hidden>
-    No projects published yet. Projects will appear here as they're ready.
+  <p class="empty-state" id="empty-state" hidden>
+    No museum albums published yet.
   </p>
 </main>
 
@@ -197,16 +218,8 @@
 </footer>
 
 <script>
-  const progetti = [
-    {
-      titolo: "Art around the world",
-      descrizione: "Artworks and details encountered while traveling.",
-      numeroScatti: 0
-    }
-  ];
-
-  const grid = document.getElementById('projects-grid');
-  const emptyState = document.getElementById('empty-projects');
+  const grid = document.getElementById('museums-grid');
+  const emptyState = document.getElementById('empty-state');
 
   function escapeHtml(str) {
     const div = document.createElement('div');
@@ -214,25 +227,36 @@
     return div.innerHTML;
   }
 
-  function renderProjects() {
-    if (progetti.length === 0) {
-      emptyState.hidden = false;
-      return;
-    }
+  async function loadMuseums() {
+    try {
+      const res = await fetch('./blog.json');
+      if (!res.ok) throw new Error(`Invalid response: ${res.status}`);
+      const museums = await res.json();
 
-    grid.innerHTML = progetti.map(p => {
-      const contenuto = `
-        <div class="count">${p.numeroScatti || 0} photos</div>
-        <h2>${escapeHtml(p.titolo)}</h2>
-        <p>${escapeHtml(p.descrizione || '')}</p>
-      `;
-      return p.link
-        ? `<a class="project-card" href="${p.link}">${contenuto}</a>`
-        : `<div class="project-card">${contenuto}</div>`;
-    }).join('');
+      const pubblicati = museums.filter(m => m.pubblicato !== false);
+
+      if (pubblicati.length === 0) {
+        emptyState.hidden = false;
+        return;
+      }
+
+      grid.innerHTML = pubblicati.map(m => `
+        <a class="museum-card" href="museum.html?id=${encodeURIComponent(m.id)}">
+          <img src="${m.copertina}" alt="${escapeHtml(m.nome)}" loading="lazy">
+          <div class="overlay">
+            <div class="museum-name">${escapeHtml(m.nome)}</div>
+            <div class="museum-meta">${escapeHtml(m.luogo || '')}${m.opere ? ' · ' + m.opere.length + (m.opere.length === 1 ? ' work' : ' works') : ''}</div>
+          </div>
+        </a>
+      `).join('');
+    } catch (err) {
+      emptyState.hidden = false;
+      emptyState.textContent = 'Could not load museum albums right now.';
+      console.error('Error loading museums:', err);
+    }
   }
 
-  renderProjects();
+  loadMuseums();
 </script>
 
 </body>
