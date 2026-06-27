@@ -41,10 +41,22 @@ function estraiCampo(body, etichetta) {
 
 function estraiUrlImmagine(testoImmagine) {
   if (!testoImmagine) return null;
-  // Le immagini trascinate in una Issue diventano un link Markdown:
-  // ![nome](https://github.com/user-attachments/assets/...)
-  const match = testoImmagine.match(/!\[.*?\]\((https:\/\/[^\)]+)\)/);
-  return match ? match[1] : null;
+
+  // Le immagini trascinate in una Issue possono generare due formati diversi:
+  // 1. Sintassi Markdown:  ![nome](https://github.com/user-attachments/assets/...)
+  // 2. Tag HTML:           <img width="..." src="https://github.com/user-attachments/assets/..." />
+  const matchMarkdown = testoImmagine.match(/!\[.*?\]\((https:\/\/[^\)]+)\)/);
+  if (matchMarkdown) return matchMarkdown[1];
+
+  const matchHtml = testoImmagine.match(/<img[^>]+src=["']([^"']+)["']/i);
+  if (matchHtml) return matchHtml[1];
+
+  // Fallback finale: qualsiasi URL che punti agli allegati di GitHub,
+  // indipendentemente dal markup che lo racchiude.
+  const matchGenerico = testoImmagine.match(/(https:\/\/github\.com\/user-attachments\/assets\/[^\s"'\)]+)/);
+  if (matchGenerico) return matchGenerico[1];
+
+  return null;
 }
 
 function slugify(str) {
