@@ -140,9 +140,9 @@
   }
 
   #world-map .land {
-    fill: #E5E2D6;
+    fill: #D4CFBE;
     stroke: var(--bg);
-    stroke-width: 0.5;
+    stroke-width: 0.75;
   }
 
   .map-marker {
@@ -162,22 +162,6 @@
     fill: none;
     stroke: var(--bg);
     stroke-width: 1.5px;
-  }
-
-  .map-marker rect.label-bg {
-    fill: var(--bg);
-    opacity: 0.85;
-  }
-
-  .map-marker text {
-    font-family: 'Fraunces', serif;
-    font-size: 11px;
-    fill: var(--ink);
-    transition: fill 0.2s ease;
-  }
-
-  .map-marker:hover text {
-    fill: var(--accent);
   }
 
   .map-caption {
@@ -333,6 +317,8 @@
       .append('a')
       .attr('class', 'map-marker');
 
+    entered.append('title');
+
     entered.append('clipPath')
       .attr('id', d => `flag-clip-${d.codice || 'none'}`)
       .append('circle').attr('r', 8);
@@ -344,54 +330,20 @@
       .attr('preserveAspectRatio', 'xMidYMid slice');
 
     entered.append('circle').attr('class', 'dot-ring').attr('r', 8);
-    entered.append('rect').attr('class', 'label-bg');
-    entered.append('text').attr('text-anchor', 'middle');
 
     const all = entered.merge(markers);
 
     all.attr('href', d => `nazione.html?nome=${encodeURIComponent(d.nazione)}`);
 
+    all.select('title').text(d => d.nazione);
+
     all.select('image.flag-img')
       .attr('clip-path', d => `url(#flag-clip-${d.codice || 'none'})`)
       .attr('href', d => d.codice ? `https://flagcdn.com/w40/${d.codice}.png` : null);
 
-    // Calcola le coordinate schermo di ciascun pin, poi assegna l'offset
-    // dell'etichetta in base alla vicinanza ad altri pin già posizionati:
-    // se un'altra etichetta è già nelle vicinanze, alterna sopra/sotto
-    // per evitare la sovrapposizione del testo.
-    const posizioni = nazioniUniche.map(d => {
+    all.attr('transform', d => {
       const coords = mapProjection([d.lng, d.lat]) || [-9999, -9999];
-      return { dato: d, x: coords[0], y: coords[1] };
-    });
-
-    const SOGLIA_VICINANZA = 70;
-    posizioni.forEach((p, i) => {
-      const vicino = posizioni.slice(0, i).some(altro =>
-        Math.hypot(p.x - altro.x, p.y - altro.y) < SOGLIA_VICINANZA
-      );
-      p.labelSotto = vicino;
-    });
-
-    all.attr('transform', (d, i) => {
-      const p = posizioni[i];
-      return `translate(${p.x},${p.y})`;
-    });
-
-    all.select('text')
-      .attr('y', (d, i) => posizioni[i].labelSotto ? 20 : -12)
-      .text(d => d.nazione);
-
-    // Sfondo dietro al testo per garantire leggibilità anche quando
-    // due etichette finiscono ravvicinate.
-    all.each(function(d, i) {
-      const group = d3.select(this);
-      const textNode = group.select('text').node();
-      const bbox = textNode.getBBox();
-      group.select('rect.label-bg')
-        .attr('x', bbox.x - 4)
-        .attr('y', bbox.y - 2)
-        .attr('width', bbox.width + 8)
-        .attr('height', bbox.height + 4);
+      return `translate(${coords[0]},${coords[1]})`;
     });
 
     if (nazioniUniche.length === 0) {
