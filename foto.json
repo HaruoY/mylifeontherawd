@@ -1,1 +1,13 @@
-[]
+[
+  {
+    "id": 1,
+    "titolo": "Film",
+    "categoria": "reportage",
+    "luogo": "copenaghen",
+    "lat": null,
+    "lng": null,
+    "data": "2026-06-27",
+    "immagine_url": "images/film.jpg",
+    "pubblicato": true
+  }
+]
