@@ -22,5 +22,17 @@
     "data": "2026-06-27",
     "immagine_url": "images/dean-village.jpg",
     "pubblicato": true
+  },
+  {
+    "id": 3,
+    "titolo": "Cíes Islands - panorama",
+    "categoria": "paesaggi",
+    "viaggio": "Spain 2026",
+    "luogo": "Vigo",
+    "lat": 42.2233,
+    "lng": -8.9039,
+    "data": "2026-06-27",
+    "immagine_url": "images/cies-islands.jpg",
+    "pubblicato": true
   }
 ]
