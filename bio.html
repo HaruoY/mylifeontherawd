@@ -1,26 +1,25 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bio — My life on the rawd</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=Archivo+Black&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #F2EEE4;
-    --ink: #1D191A;
-    --muted: #6B6B63;
+    --bg: #161412;
+    --ink: #F2EEE4;
+    --muted: #9B9690;
     --accent: #EE1337;
-    --line: rgba(10,10,10,0.1);
+    --line: #3A3633;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background-color: var(--bg);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14'%3E%3Ccircle cx='1' cy='1' r='1' fill='%23000000' fill-opacity='0.035'/%3E%3C/svg%3E");
+    background: var(--bg);
     color: var(--ink);
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -39,18 +38,18 @@
     justify-content: space-between;
     align-items: center;
     padding: 28px 40px;
-    background: linear-gradient(to bottom, rgba(250,250,248,0.92), rgba(250,250,248,0));
+    background: linear-gradient(to bottom, rgba(22,20,18,0.92), rgba(22,20,18,0));
   }
 
   .logo {
-    font-family: 'Fraunces', serif;
-    font-weight: 500;
-    font-size: 1.05rem;
-    letter-spacing: 0.01em;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
     white-space: nowrap;
   }
 
-  nav { display: flex; gap: 28px; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; }
+  nav { display: flex; gap: 28px; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; }
 
   nav a {
     color: var(--muted);
@@ -83,11 +82,11 @@
   }
 
   .statement {
-    font-family: 'Caveat', cursive;
-    font-weight: 600;
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1.6rem, 3.6vw, 2.4rem);
     line-height: 1.4;
-    letter-spacing: 0.01em;
     color: var(--accent);
     max-width: 600px;
   }
@@ -115,7 +114,7 @@
 <header>
   <div class="logo">My life on the rawd</div>
   <nav>
-    <a href="map.html">Home</a>
+    <a href="gallery.html">Gallery</a>
     <a class="active" href="bio.html">Bio</a>
     <a href="projects.html">Projects</a>
     <a href="gear.html">Gear</a>
