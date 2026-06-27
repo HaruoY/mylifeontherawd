@@ -1,13 +1,1 @@
-[
-  {
-    "id": 1,
-    "titolo": "Galizia",
-    "categoria": "paesaggi",
-    "luogo": "Vigo, ES",
-    "lat": 42.231358,
-    "lng": -8.712447,
-    "data": "2026-06-27",
-    "immagine_url": "images/galizia.jpg",
-    "pubblicato": true
-  }
-]
+[]
