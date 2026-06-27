@@ -154,7 +154,8 @@ async function main() {
   console.log(`Immagine salvata in ${percorsoFinale}`);
 
   // Aggiorna foto.json
-  const foto = JSON.parse(fs.readFileSync(FOTO_JSON_PATH, 'utf8'));
+  const fotoRaw = fs.readFileSync(FOTO_JSON_PATH, 'utf8').replace(/^\uFEFF/, '');
+  const foto = JSON.parse(fotoRaw);
   const nuovoId = foto.length > 0 ? Math.max(...foto.map(f => f.id)) + 1 : 1;
 
   const nuovaVoce = {

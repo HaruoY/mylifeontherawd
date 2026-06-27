@@ -22,7 +22,11 @@ let errori = [];
 // 1. Il file esiste ed è JSON valido?
 let foto;
 try {
-  const raw = fs.readFileSync(FOTO_JSON_PATH, 'utf8');
+  let raw = fs.readFileSync(FOTO_JSON_PATH, 'utf8');
+  // Rimuove un eventuale BOM (Byte Order Mark) iniziale: alcuni editor o
+  // comandi (es. PowerShell Set-Content -Encoding utf8) lo aggiungono
+  // automaticamente, e JSON.parse() non lo tollera.
+  raw = raw.replace(/^\uFEFF/, '');
   foto = JSON.parse(raw);
 } catch (err) {
   console.error(`❌ foto.json non è un JSON valido: ${err.message}`);
