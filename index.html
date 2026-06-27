@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio — Fotografia</title>
+<title>My life on the rawd — Fotografia di viaggio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
@@ -50,6 +50,8 @@
     font-weight: 500;
     font-size: 1.05rem;
     letter-spacing: 0.01em;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
   nav {
@@ -206,6 +208,7 @@
   /* ---------- RESPONSIVE ---------- */
   @media (max-width: 860px) {
     header { padding: 20px 22px; }
+    .logo { font-size: 0.85rem; }
     nav { gap: 16px; font-size: 0.7rem; }
     .intro { padding: 110px 22px 32px; }
     .gallery { grid-template-columns: repeat(2, 1fr); }
@@ -232,7 +235,7 @@
 <body>
 
 <header>
-  <div class="logo">N. Cognome</div>
+  <div class="logo">My life on the rawd</div>
   <nav id="filters">
     <button class="active" data-filter="all">Tutti</button>
     <button data-filter="reportage">Reportage</button>
