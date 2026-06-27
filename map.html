@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My life on the rawd — Travel photography</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+<script src="geo.js"></script>
+<style>
+  :root {
+    --bg: #F2EEE4;
+    --ink: #1D191A;
+    --muted: #6B6B63;
+    --accent: #EE1337;
+    --line: rgba(10,10,10,0.1);
+    --gap: 2px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--bg);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14'%3E%3Ccircle cx='1' cy='1' r='1' fill='%23000000' fill-opacity='0.035'/%3E%3C/svg%3E");
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- HEADER ---------- */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 40px;
+    background: linear-gradient(to bottom, rgba(250,250,248,0.92), rgba(250,250,248,0));
+    pointer-events: none;
+  }
+
+  header * { pointer-events: auto; }
+
+  .logo {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 1.05rem;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  nav {
+    display: flex;
+    gap: 28px;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  nav a {
+    color: var(--muted);
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    padding: 4px 0;
+    position: relative;
+    transition: color 0.25s ease;
+  }
+
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 100%; height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  nav a:hover { color: var(--ink); }
+  nav a.active { color: var(--ink); }
+  nav a.active::after { transform: scaleX(1); }
+
+  /* ---------- INTRO STRIP ---------- */
+  .intro {
+    padding: 150px 40px 56px;
+    max-width: 760px;
+  }
+
+  .intro h1 {
+    font-family: 'Caveat', cursive;
+    font-weight: 600;
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .intro h1 em {
+    font-style: normal;
+  }
+
+  /* ---------- MAP ---------- */
+  .map-section {
+    padding: 0 40px 56px;
+  }
+
+  #world-map {
+    width: 100%;
+  }
+
+  #world-map svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    overflow: visible;
+  }
+
+  #world-map .land {
+    fill: #D4CFBE;
+    stroke: var(--bg);
+    stroke-width: 0.75;
+  }
+
+  .map-marker {
+    cursor: pointer;
+  }
+
+  .map-marker .flag-img {
+    transition: transform 0.2s ease;
+    transform-origin: center;
+  }
+
+  .map-marker:hover .flag-img {
+    transform: scale(1.15);
+  }
+
+  .map-marker circle.dot-ring {
+    fill: none;
+    stroke: var(--bg);
+    stroke-width: 1.5px;
+  }
+
+  .map-caption {
+    margin-top: 12px;
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    padding: 32px 40px 40px;
+    font-size: 0.75rem;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 860px) {
+    header { padding: 20px 22px; }
+    .logo { font-size: 0.85rem; }
+    nav { gap: 16px; font-size: 0.7rem; }
+    .intro { padding: 110px 22px 32px; }
+    .intro h1 { white-space: normal; font-size: clamp(1.5rem, 7vw, 2.2rem); }
+    .map-section { padding: 0 22px 40px; }
+    footer { padding: 24px 22px 32px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; scroll-behavior: auto !important; }
+  }
+
+  button:focus-visible, a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">My life on the rawd</div>
+  <nav>
+    <a class="active" href="map.html">Home</a>
+    <a href="bio.html">Bio</a>
+    <a href="projects.html">Projects</a>
+    <a href="gear.html">Gear</a>
+  </nav>
+</header>
+
+<main>
+  <section class="intro">
+    <h1>Life is like photography, we develop from the negatives.</h1>
+  </section>
+
+  <section class="map-section">
+    <div id="world-map" role="img" aria-label="Map of visited locations, clickable"></div>
+    <p class="map-caption" id="map-caption"></p>
+  </section>
+</main>
+
+<footer>
+  <span>© 2026 — All rights reserved</span>
+</footer>
+
+<script>
+
+  const API_URL = './foto.json';
+  const mapCaption = document.getElementById('map-caption');
+
+  let photos = [];
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  const mapContainer = document.getElementById('world-map');
+  let mapProjection = null;
+  let mapSvg = null;
+  let worldLoaded = false;
+  let renderMapInCorso = false;
+  let renderMapRichiestaPendente = false;
+
+  const MAP_WIDTH = 680;
+  const MAP_HEIGHT = 360;
+
+  async function initMap() {
+    try {
+      const world = await d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/land-110m.json');
+      const land = topojson.feature(world, world.objects.land);
+
+      const projection = d3.geoNaturalEarth1()
+        .fitSize([MAP_WIDTH, MAP_HEIGHT], land);
+      mapProjection = projection;
+
+      const path = d3.geoPath(projection);
+
+      mapSvg = d3.select(mapContainer)
+        .append('svg')
+        .attr('viewBox', `0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`);
+
+      mapSvg.append('path')
+        .datum(land)
+        .attr('class', 'land')
+        .attr('d', path);
+
+      mapSvg.append('g').attr('id', 'map-markers-layer');
+
+      worldLoaded = true;
+      renderMap();
+    } catch (err) {
+      console.error('Impossibile caricare i dati geografici:', err);
+      mapCaption.textContent = '';
+    }
+  }
+
+  async function renderMap() {
+    if (!worldLoaded || !mapProjection) return;
+
+    // Evita esecuzioni concorrenti: initMap() e loadPhotos() possono
+    // entrambe chiamare renderMap() quasi in contemporanea, e due
+    // esecuzioni in corso allo stesso tempo disallineerebbero i dati
+    // associati a ciascun marker (bandiera sbagliata sotto al tooltip
+    // sbagliato). Se una è già in corso, segnala solo che ne serve
+    // un'altra subito dopo, invece di farle correre insieme.
+    if (renderMapInCorso) {
+      renderMapRichiestaPendente = true;
+      return;
+    }
+    renderMapInCorso = true;
+
+    try {
+      await renderMapEsegui();
+      while (renderMapRichiestaPendente) {
+        renderMapRichiestaPendente = false;
+        await renderMapEsegui();
+      }
+    } finally {
+      renderMapInCorso = false;
+    }
+  }
+
+  async function renderMapEsegui() {
+    const luoghiConCoordinate = photos.filter(p => p.lat != null && p.lng != null && p.luogo);
+
+    if (luoghiConCoordinate.length === 0) {
+      mapCaption.textContent = 'No locations yet.';
+      return;
+    }
+
+    mapCaption.textContent = 'Finding visited countries…';
+
+    // Determina la nazione di ciascuna foto tramite geocoding inverso
+    // (con cache condivisa in geo.js) e raggruppa per nazione: ogni
+    // nazione diventa un pin sulla mappa, posizionato sulla prima
+    // coordinata trovata per quella nazione.
+    const nazioniMap = new Map();
+    for (const p of luoghiConCoordinate) {
+      const risultato = await getNazione(p.lat, p.lng);
+      if (!risultato) continue;
+      if (!nazioniMap.has(risultato.nome)) {
+        nazioniMap.set(risultato.nome, { nazione: risultato.nome, codice: risultato.codice, lat: p.lat, lng: p.lng });
+      }
+    }
+
+    const nazioniUniche = Array.from(nazioniMap.values());
+
+    const markersLayer = mapSvg.select('#map-markers-layer');
+
+    const markers = markersLayer.selectAll('a.map-marker')
+      .data(nazioniUniche, d => d.nazione);
+
+    markers.exit().remove();
+
+    const entered = markers.enter()
+      .append('a')
+      .attr('class', 'map-marker');
+
+    entered.append('title');
+
+    entered.append('clipPath')
+      .attr('id', d => `flag-clip-${d.codice || 'none'}`)
+      .append('circle').attr('r', 8);
+
+    entered.append('image')
+      .attr('class', 'flag-img')
+      .attr('width', 16).attr('height', 16)
+      .attr('x', -8).attr('y', -8)
+      .attr('preserveAspectRatio', 'xMidYMid slice');
+
+    entered.append('circle').attr('class', 'dot-ring').attr('r', 8);
+
+    const all = entered.merge(markers);
+
+    all.attr('href', d => `nazione.html?nome=${encodeURIComponent(d.nazione)}`);
+
+    all.select('title').text(d => d.nazione);
+
+    all.select('image.flag-img')
+      .attr('clip-path', d => `url(#flag-clip-${d.codice || 'none'})`)
+      .attr('href', d => d.codice ? `https://flagcdn.com/w40/${d.codice}.png` : null);
+
+    all.attr('transform', d => {
+      const coords = mapProjection([d.lng, d.lat]) || [-9999, -9999];
+      return `translate(${coords[0]},${coords[1]})`;
+    });
+
+    if (nazioniUniche.length === 0) {
+      mapCaption.textContent = 'No locations yet.';
+    } else if (nazioniUniche.length === 1) {
+      mapCaption.textContent = '1 country visited — click the dot to explore.';
+    } else {
+      mapCaption.textContent = `${nazioniUniche.length} countries visited — click a dot to explore.`;
+    }
+  }
+
+  async function loadPhotos() {
+    try {
+      const res = await fetch(API_URL);
+      if (!res.ok) throw new Error(`Risposta non valida: ${res.status}`);
+      photos = await res.json();
+      renderMap();
+    } catch (err) {
+      mapCaption.textContent = '';
+      console.error('Errore nel caricamento delle foto:', err);
+    }
+  }
+
+  // Avvia in parallelo il caricamento delle foto e della mappa geografica.
+  // renderMap() viene chiamata da entrambi i flussi e si protegge da sola
+  // controllando worldLoaded — produce risultato corretto indipendentemente
+  // da quale delle due richieste di rete termina prima.
+  Promise.all([loadPhotos(), initMap()]);
+</script>
+
+</body>
+</html>
