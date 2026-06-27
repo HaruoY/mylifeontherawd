@@ -252,7 +252,10 @@
       const fotoConNazione = await Promise.all(
         photos
           .filter(p => p.lat != null && p.lng != null && p.luogo)
-          .map(async p => ({ ...p, nazione: await getNazione(p.lat, p.lng) }))
+          .map(async p => {
+            const risultato = await getNazione(p.lat, p.lng);
+            return { ...p, nazione: risultato ? risultato.nome : null };
+          })
       );
 
       const fotoDellaNazione = fotoConNazione.filter(p => p.nazione === nomeNazione);

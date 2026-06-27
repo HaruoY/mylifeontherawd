@@ -7,7 +7,7 @@
  * di fair-use di Nominatim (massimo 1 richiesta al secondo).
  */
 
-const GEO_CACHE_KEY = 'geo-nazione-cache-v2';
+const GEO_CACHE_KEY = 'geo-nazione-cache-v3';
 const GEO_RICHIESTA_INTERVALLO_MS = 1100;
 
 let geoCache = null;
@@ -52,6 +52,12 @@ async function geoRichiestaConRateLimit(url) {
   return res.json();
 }
 
+/**
+ * Restituisce { nome, codice } per la nazione alle coordinate date.
+ * "nome" è il nome leggibile (es. "Denmark"), "codice" è il codice
+ * ISO 3166-1 alpha-2 in minuscolo (es. "dk"), usato per le bandiere.
+ * Restituisce null se il geocoding fallisce.
+ */
 async function getNazione(lat, lng) {
   const cache = geoCaricaCache();
   const chiave = geoChiaveCache(lat, lng);
@@ -63,14 +69,16 @@ async function getNazione(lat, lng) {
   try {
     const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}&zoom=3`;
     const data = await geoRichiestaConRateLimit(url);
-    const nazione = data && data.address ? data.address.country : null;
+    const nome = data && data.address ? data.address.country : null;
+    const codice = data && data.address ? data.address.country_code : null;
 
-    if (nazione) {
-      cache[chiave] = nazione;
-      geoSalvaCache();
-    }
+    if (!nome) return null;
 
-    return nazione;
+    const risultato = { nome, codice: codice || null };
+    cache[chiave] = risultato;
+    geoSalvaCache();
+
+    return risultato;
   } catch (err) {
     console.error('Errore nel geocoding inverso:', err);
     return null;

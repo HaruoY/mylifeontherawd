@@ -149,13 +149,24 @@
     cursor: pointer;
   }
 
-  .map-marker circle.dot {
-    fill: var(--accent);
-    transition: r 0.2s ease;
+  .map-marker .flag-img {
+    transition: transform 0.2s ease;
+    transform-origin: center;
   }
 
-  .map-marker:hover circle.dot {
-    r: 5.5;
+  .map-marker:hover .flag-img {
+    transform: scale(1.15);
+  }
+
+  .map-marker circle.dot-ring {
+    fill: none;
+    stroke: var(--bg);
+    stroke-width: 1.5px;
+  }
+
+  .map-marker rect.label-bg {
+    fill: var(--bg);
+    opacity: 0.85;
   }
 
   .map-marker text {
@@ -302,10 +313,10 @@
     // coordinata trovata per quella nazione.
     const nazioniMap = new Map();
     for (const p of luoghiConCoordinate) {
-      const nazione = await getNazione(p.lat, p.lng);
-      if (!nazione) continue;
-      if (!nazioniMap.has(nazione)) {
-        nazioniMap.set(nazione, { nazione, lat: p.lat, lng: p.lng });
+      const risultato = await getNazione(p.lat, p.lng);
+      if (!risultato) continue;
+      if (!nazioniMap.has(risultato.nome)) {
+        nazioniMap.set(risultato.nome, { nazione: risultato.nome, codice: risultato.codice, lat: p.lat, lng: p.lng });
       }
     }
 
@@ -320,22 +331,68 @@
 
     const entered = markers.enter()
       .append('a')
-      .attr('class', 'map-marker')
-      .attr('href', d => `nazione.html?nome=${encodeURIComponent(d.nazione)}`);
+      .attr('class', 'map-marker');
 
-    entered.append('circle').attr('class', 'dot').attr('r', 4);
+    entered.append('clipPath')
+      .attr('id', d => `flag-clip-${d.codice || 'none'}`)
+      .append('circle').attr('r', 8);
+
+    entered.append('image')
+      .attr('class', 'flag-img')
+      .attr('width', 16).attr('height', 16)
+      .attr('x', -8).attr('y', -8)
+      .attr('preserveAspectRatio', 'xMidYMid slice');
+
+    entered.append('circle').attr('class', 'dot-ring').attr('r', 8);
+    entered.append('rect').attr('class', 'label-bg');
     entered.append('text').attr('text-anchor', 'middle');
 
     const all = entered.merge(markers);
 
-    all.attr('transform', d => {
-      const coords = mapProjection([d.lng, d.lat]);
-      return coords ? `translate(${coords[0]},${coords[1]})` : 'translate(-9999,-9999)';
+    all.attr('href', d => `nazione.html?nome=${encodeURIComponent(d.nazione)}`);
+
+    all.select('image.flag-img')
+      .attr('clip-path', d => `url(#flag-clip-${d.codice || 'none'})`)
+      .attr('href', d => d.codice ? `https://flagcdn.com/w40/${d.codice}.png` : null);
+
+    // Calcola le coordinate schermo di ciascun pin, poi assegna l'offset
+    // dell'etichetta in base alla vicinanza ad altri pin già posizionati:
+    // se un'altra etichetta è già nelle vicinanze, alterna sopra/sotto
+    // per evitare la sovrapposizione del testo.
+    const posizioni = nazioniUniche.map(d => {
+      const coords = mapProjection([d.lng, d.lat]) || [-9999, -9999];
+      return { dato: d, x: coords[0], y: coords[1] };
+    });
+
+    const SOGLIA_VICINANZA = 70;
+    posizioni.forEach((p, i) => {
+      const vicino = posizioni.slice(0, i).some(altro =>
+        Math.hypot(p.x - altro.x, p.y - altro.y) < SOGLIA_VICINANZA
+      );
+      p.labelSotto = vicino;
+    });
+
+    all.attr('transform', (d, i) => {
+      const p = posizioni[i];
+      return `translate(${p.x},${p.y})`;
     });
 
     all.select('text')
-      .attr('y', -12)
+      .attr('y', (d, i) => posizioni[i].labelSotto ? 20 : -12)
       .text(d => d.nazione);
+
+    // Sfondo dietro al testo per garantire leggibilità anche quando
+    // due etichette finiscono ravvicinate.
+    all.each(function(d, i) {
+      const group = d3.select(this);
+      const textNode = group.select('text').node();
+      const bbox = textNode.getBBox();
+      group.select('rect.label-bg')
+        .attr('x', bbox.x - 4)
+        .attr('y', bbox.y - 2)
+        .attr('width', bbox.width + 8)
+        .attr('height', bbox.height + 4);
+    });
 
     if (nazioniUniche.length === 0) {
       mapCaption.textContent = 'No locations yet.';
