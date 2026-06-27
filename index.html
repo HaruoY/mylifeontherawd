@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My life on the rawd — Fotografia di viaggio</title>
+<title>My life on the rawd — Travel photography</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
@@ -224,13 +224,13 @@
   </section>
 
   <section class="map-section">
-    <div id="world-map" role="img" aria-label="Mappa dei luoghi visitati, cliccabile"></div>
+    <div id="world-map" role="img" aria-label="Map of visited locations, clickable"></div>
     <p class="map-caption" id="map-caption"></p>
   </section>
 </main>
 
 <footer>
-  <span>© 2026 — Tutti i diritti riservati</span>
+  <span>© 2026 — All rights reserved</span>
 </footer>
 
 <script>
@@ -290,11 +290,11 @@
     const luoghiConCoordinate = photos.filter(p => p.lat != null && p.lng != null && p.luogo);
 
     if (luoghiConCoordinate.length === 0) {
-      mapCaption.textContent = 'Nessun luogo geolocalizzato, per ora.';
+      mapCaption.textContent = 'No locations yet.';
       return;
     }
 
-    mapCaption.textContent = 'Individuo le nazioni visitate…';
+    mapCaption.textContent = 'Finding visited countries…';
 
     // Determina la nazione di ciascuna foto tramite geocoding inverso
     // (con cache condivisa in geo.js) e raggruppa per nazione: ogni
@@ -338,11 +338,11 @@
       .text(d => d.nazione);
 
     if (nazioniUniche.length === 0) {
-      mapCaption.textContent = 'Nessun luogo geolocalizzato, per ora.';
+      mapCaption.textContent = 'No locations yet.';
     } else if (nazioniUniche.length === 1) {
-      mapCaption.textContent = '1 nazione visitata — clicca il punto per esplorare.';
+      mapCaption.textContent = '1 country visited — click the dot to explore.';
     } else {
-      mapCaption.textContent = `${nazioniUniche.length} nazioni visitate — clicca un punto per esplorare.`;
+      mapCaption.textContent = `${nazioniUniche.length} countries visited — click a dot to explore.`;
     }
   }
 

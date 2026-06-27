@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luogo — My life on the rawd</title>
+<title>Location — My life on the rawd</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
@@ -71,7 +71,7 @@
   nav a:hover { color: var(--ink); }
 
   .breadcrumb {
-    padding: 0 40px 0;
+    padding: 130px 40px 0;
     max-width: 720px;
   }
 
@@ -172,7 +172,7 @@
     header { padding: 20px 22px; }
     .logo { font-size: 0.85rem; }
     nav { gap: 16px; font-size: 0.7rem; }
-    .breadcrumb { padding: 0 22px 0; }
+    .breadcrumb { padding: 110px 22px 0; }
     .place-header { padding: 14px 22px 32px; }
     .gallery { grid-template-columns: repeat(2, 1fr); }
     .item.wide { grid-column: span 2; }
@@ -199,21 +199,20 @@
   </nav>
 </header>
 
-<p class="breadcrumb"><a href="index.html">← Torna alla mappa</a></p>
+<p class="breadcrumb"><a href="index.html">← Back to map</a></p>
 
 <div class="place-header">
   <h1 id="place-title">Luogo</h1>
-  <p class="count" id="place-count"></p>
 </div>
 
 <div class="gallery" id="gallery"></div>
 
 <p class="empty-state" id="empty-state" hidden>
-  Nessuna foto trovata per questo luogo. <a href="index.html">Torna alla home</a>.
+  No photos for this location. <a href="index.html">Back to home</a>.
 </p>
 
 <footer>
-  <span>© 2026 — Tutti i diritti riservati</span>
+  <span>© 2026 — All rights reserved</span>
 </footer>
 
 <script>
@@ -238,7 +237,6 @@
   const nomeLuogo = params.get('nome');
 
   const titleEl = document.getElementById('place-title');
-  const countEl = document.getElementById('place-count');
   const gallery = document.getElementById('gallery');
   const emptyState = document.getElementById('empty-state');
 
@@ -255,7 +253,7 @@
 
   async function loadLuogo() {
     if (!nomeLuogo) {
-      titleEl.textContent = 'Luogo non specificato';
+      titleEl.textContent = 'Location not specified';
       emptyState.hidden = false;
       return;
     }
@@ -272,13 +270,8 @@
 
       if (fotoDelLuogo.length === 0) {
         emptyState.hidden = false;
-        countEl.textContent = '';
         return;
       }
-
-      countEl.textContent = fotoDelLuogo.length === 1
-        ? '1 scatto'
-        : `${fotoDelLuogo.length} scatti`;
 
       gallery.innerHTML = fotoDelLuogo.map((photo, i) => `
         <a class="item ${layoutClass(i)}" href="${photo.immagine_url}" target="_blank" rel="noopener">
@@ -290,7 +283,7 @@
       `).join('');
     } catch (err) {
       emptyState.hidden = false;
-      emptyState.textContent = 'Impossibile caricare le foto in questo momento.';
+      emptyState.textContent = 'Could not load photos right now.';
       console.error('Errore nel caricamento:', err);
     }
   }
