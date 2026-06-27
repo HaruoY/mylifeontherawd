@@ -7,7 +7,7 @@
  * di fair-use di Nominatim (massimo 1 richiesta al secondo).
  */
 
-const GEO_CACHE_KEY = 'geo-nazione-cache-v1';
+const GEO_CACHE_KEY = 'geo-nazione-cache-v2';
 const GEO_RICHIESTA_INTERVALLO_MS = 1100;
 
 let geoCache = null;
@@ -46,7 +46,7 @@ async function geoRichiestaConRateLimit(url) {
   await geoCodaPromise;
 
   const res = await fetch(url, {
-    headers: { 'Accept-Language': 'it' }
+    headers: { 'Accept-Language': 'en' }
   });
   if (!res.ok) throw new Error(`Geocoding fallito: ${res.status}`);
   return res.json();
