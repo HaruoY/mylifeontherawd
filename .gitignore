@@ -1,0 +1,7 @@
+# File di sistema
+.DS_Store
+Thumbs.db
+
+# Eventuali file temporanei di editor
+*.swp
+*~

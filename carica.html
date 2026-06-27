@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carica foto — Strumento locale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAF8;
+    --ink: #0A0A0A;
+    --muted: #6B6B63;
+    --accent: #C4441E;
+    --line: rgba(10,10,10,0.12);
+    --card: #ffffff;
+    --ok: #2F6B3A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 48px 24px 100px;
+  }
+
+  .wrap { max-width: 720px; margin: 0 auto; }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 1.7rem;
+    letter-spacing: -0.01em;
+  }
+
+  .sub {
+    color: var(--muted);
+    font-size: 0.92rem;
+    margin-top: 8px;
+    line-height: 1.5;
+    max-width: 540px;
+  }
+
+  .panel {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 28px;
+    margin-top: 32px;
+  }
+
+  .panel + .panel { margin-top: 20px; }
+
+  .panel h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 1.05rem;
+    margin-bottom: 18px;
+  }
+
+  .drop {
+    border: 1.5px dashed var(--line);
+    border-radius: 4px;
+    padding: 36px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+
+  .drop:hover, .drop.dragover {
+    border-color: var(--accent);
+    background: rgba(196, 68, 30, 0.03);
+  }
+
+  .drop p { color: var(--muted); font-size: 0.88rem; }
+  .drop p.main { color: var(--ink); font-size: 0.95rem; margin-bottom: 4px; }
+
+  input[type="file"] { display: none; }
+
+  .preview {
+    margin-top: 18px;
+    display: none;
+  }
+
+  .preview.show { display: block; }
+
+  .preview img {
+    max-width: 100%;
+    max-height: 320px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 2px;
+  }
+
+  .preview-info {
+    margin-top: 12px;
+    font-size: 0.82rem;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .preview-info .ok { color: var(--ok); font-weight: 500; }
+
+  label {
+    display: block;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    margin-bottom: 6px;
+    margin-top: 18px;
+  }
+
+  label:first-of-type { margin-top: 0; }
+
+  input[type="text"], input[type="number"], select {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.92rem;
+    background: var(--bg);
+    color: var(--ink);
+  }
+
+  input:focus, select:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  .row { display: flex; gap: 14px; }
+  .row > div { flex: 1; }
+
+  .hint {
+    font-size: 0.76rem;
+    color: var(--muted);
+    margin-top: 5px;
+  }
+
+  button {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .btn-primary {
+    background: var(--ink);
+    color: #fff;
+    padding: 13px 22px;
+    width: 100%;
+    margin-top: 24px;
+  }
+
+  .btn-primary:hover:not(:disabled) { opacity: 0.88; }
+
+  .btn-secondary {
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--ink);
+    padding: 9px 16px;
+    font-size: 0.8rem;
+  }
+
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  .output {
+    display: none;
+  }
+
+  .output.show { display: block; }
+
+  .output-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .output-row span { font-size: 0.85rem; color: var(--muted); }
+
+  pre {
+    background: #14140f;
+    color: #e8e6e0;
+    padding: 16px;
+    border-radius: 3px;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin-top: 10px;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: #fff;
+    font-size: 0.7rem;
+    margin-right: 8px;
+    flex-shrink: 0;
+  }
+
+  .panel h2 { display: flex; align-items: center; }
+
+  .copied {
+    color: var(--ok);
+    font-size: 0.78rem;
+    margin-left: 8px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .copied.show { opacity: 1; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <h1>Prepara una foto per il portfolio</h1>
+  <p class="sub">Strumento locale: tutto avviene nel tuo browser, nessun file viene inviato altrove. Carica uno scatto, compila i dati, poi scarica l'immagine compressa e copia il blocco dati nel repository.</p>
+
+  <div class="panel">
+    <h2><span class="step-num">1</span>Immagine</h2>
+
+    <div class="drop" id="drop">
+      <p class="main">Trascina qui una foto, o clicca per scegliere il file</p>
+      <p>JPEG, PNG o WebP — verrà ridimensionata automaticamente</p>
+      <input type="file" id="fileInput" accept="image/*">
+    </div>
+
+    <div class="preview" id="preview">
+      <img id="previewImg" alt="Anteprima">
+      <div class="preview-info">
+        <span id="sizeOriginal"></span>
+        <span class="ok" id="sizeCompressed"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2><span class="step-num">2</span>Dati dello scatto</h2>
+
+    <label for="titolo">Titolo</label>
+    <input type="text" id="titolo" placeholder="es. Galizia">
+
+    <label for="categoria">Categoria</label>
+    <select id="categoria">
+      <option value="reportage">Reportage</option>
+      <option value="street">Street</option>
+      <option value="architettura">Architettura</option>
+      <option value="arte">Arte</option>
+      <option value="paesaggi" selected>Paesaggi</option>
+    </select>
+
+    <label for="luogo">Luogo</label>
+    <input type="text" id="luogo" placeholder="es. Vigo, ES">
+
+    <div class="row">
+      <div>
+        <label for="lat">Latitudine</label>
+        <input type="number" id="lat" step="0.000001" placeholder="es. 42.231358">
+      </div>
+      <div>
+        <label for="lng">Longitudine</label>
+        <input type="number" id="lng" step="0.000001" placeholder="es. -8.712447">
+      </div>
+    </div>
+    <p class="hint">Se non conosci le coordinate esatte, lasciale vuote: il sito mostrerà solo titolo e luogo.</p>
+
+    <label for="data">Data dello scatto</label>
+    <input type="text" id="data" placeholder="AAAA-MM-GG">
+  </div>
+
+  <button class="btn-primary" id="generaBtn" disabled>Genera file pronti</button>
+
+  <div class="panel output" id="output">
+    <h2><span class="step-num">3</span>File pronti da salvare</h2>
+
+    <div class="output-row">
+      <span>Immagine compressa, pronta per <code>images/</code></span>
+      <button class="btn-secondary" id="downloadImg">Scarica immagine</button>
+    </div>
+
+    <div class="output-row">
+      <span>Blocco da aggiungere a <code>foto.json</code></span>
+      <button class="btn-secondary" id="copyJson">Copia<span class="copied" id="copiedLabel">Copiato ✓</span></button>
+    </div>
+    <pre id="jsonOutput"></pre>
+
+    <p class="hint" style="margin-top:16px;">
+      1. Salva l'immagine scaricata nella cartella <code>images/</code> del repository.<br>
+      2. Apri <code>foto.json</code> su GitHub, incolla questo blocco dentro l'array (separato dagli altri con una virgola).<br>
+      3. Fai commit. Il sito si aggiorna in automatico in pochi secondi.
+    </p>
+  </div>
+</div>
+
+<script>
+  const drop = document.getElementById('drop');
+  const fileInput = document.getElementById('fileInput');
+  const preview = document.getElementById('preview');
+  const previewImg = document.getElementById('previewImg');
+  const sizeOriginal = document.getElementById('sizeOriginal');
+  const sizeCompressed = document.getElementById('sizeCompressed');
+  const generaBtn = document.getElementById('generaBtn');
+  const output = document.getElementById('output');
+
+  let compressedBlob = null;
+  let compressedDataUrl = null;
+  let suggestedFilename = 'foto.jpg';
+
+  const MAX_DIMENSION = 2000;
+  const JPEG_QUALITY = 0.85;
+
+  // Imposta la data di oggi come default
+  document.getElementById('data').value = new Date().toISOString().split('T')[0];
+
+  drop.addEventListener('click', () => fileInput.click());
+
+  drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('dragover'); });
+  drop.addEventListener('dragleave', () => drop.classList.remove('dragover'));
+  drop.addEventListener('drop', e => {
+    e.preventDefault();
+    drop.classList.remove('dragover');
+    if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+  });
+
+  fileInput.addEventListener('change', () => {
+    if (fileInput.files.length) handleFile(fileInput.files[0]);
+  });
+
+  function handleFile(file) {
+    if (!file.type.startsWith('image/')) {
+      alert('Seleziona un file immagine (JPEG, PNG, WebP).');
+      return;
+    }
+
+    suggestedFilename = slugify(file.name.replace(/\.[^.]+$/, '')) + '.jpg';
+
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => compressImage(img, file.size);
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function compressImage(img, originalSize) {
+    let { width, height } = img;
+
+    if (width > MAX_DIMENSION || height > MAX_DIMENSION) {
+      if (width > height) {
+        height = Math.round(height * (MAX_DIMENSION / width));
+        width = MAX_DIMENSION;
+      } else {
+        width = Math.round(width * (MAX_DIMENSION / height));
+        height = MAX_DIMENSION;
+      }
+    }
+
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0, width, height);
+
+    canvas.toBlob(blob => {
+      compressedBlob = blob;
+      compressedDataUrl = canvas.toDataURL('image/jpeg', JPEG_QUALITY);
+
+      previewImg.src = compressedDataUrl;
+      preview.classList.add('show');
+
+      sizeOriginal.textContent = `Originale: ${formatBytes(originalSize)}`;
+      sizeCompressed.textContent = `Compressa: ${formatBytes(blob.size)} (${width}×${height})`;
+
+      generaBtn.disabled = false;
+    }, 'image/jpeg', JPEG_QUALITY);
+  }
+
+  function formatBytes(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(0) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+  }
+
+  function slugify(str) {
+    return str
+      .toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '') || 'foto';
+  }
+
+  generaBtn.addEventListener('click', () => {
+    const titolo = document.getElementById('titolo').value.trim();
+    const categoria = document.getElementById('categoria').value;
+    const luogo = document.getElementById('luogo').value.trim();
+    const latVal = document.getElementById('lat').value;
+    const lngVal = document.getElementById('lng').value;
+    const data = document.getElementById('data').value.trim();
+
+    if (!titolo) {
+      alert('Inserisci almeno il titolo dello scatto.');
+      return;
+    }
+
+    const filename = slugify(titolo) + '.jpg';
+    suggestedFilename = filename;
+
+    const entry = {
+      id: Date.now(),
+      titolo,
+      categoria,
+      luogo: luogo || null,
+      lat: latVal !== '' ? parseFloat(latVal) : null,
+      lng: lngVal !== '' ? parseFloat(lngVal) : null,
+      data: data || null,
+      immagine_url: `images/${filename}`,
+      pubblicato: true
+    };
+
+    document.getElementById('jsonOutput').textContent = JSON.stringify(entry, null, 2) + ',';
+    output.classList.add('show');
+    output.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  document.getElementById('downloadImg').addEventListener('click', () => {
+    if (!compressedBlob) return;
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(compressedBlob);
+    a.download = suggestedFilename;
+    a.click();
+  });
+
+  document.getElementById('copyJson').addEventListener('click', () => {
+    const text = document.getElementById('jsonOutput').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const label = document.getElementById('copiedLabel');
+      label.classList.add('show');
+      setTimeout(() => label.classList.remove('show'), 1800);
+    });
+  });
+</script>
+
+</body>
+</html>
