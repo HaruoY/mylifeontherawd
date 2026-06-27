@@ -154,20 +154,13 @@
 
   .map-marker { cursor: pointer; }
 
-  .map-marker .flag-img {
-    transition: transform 0.2s ease;
-    transform-box: fill-box;
-    transform-origin: center;
+  .map-marker circle.dot {
+    fill: var(--accent);
+    transition: r 0.2s ease;
   }
 
-  .map-marker:hover .flag-img {
-    transform: scale(1.15);
-  }
-
-  .map-marker circle.dot-ring {
-    fill: none;
-    stroke: var(--bg);
-    stroke-width: 1.5px;
+  .map-marker:hover circle.dot {
+    r: 7;
   }
 
   .map-caption {
@@ -380,22 +373,11 @@
     const entered = markers.enter().append('a').attr('class', 'map-marker');
 
     entered.append('title');
-    entered.append('clipPath')
-      .attr('id', d => `flag-clip-${d.codice || 'none'}`)
-      .append('circle').attr('r', 8);
-    entered.append('image')
-      .attr('class', 'flag-img')
-      .attr('width', 16).attr('height', 16)
-      .attr('x', -8).attr('y', -8)
-      .attr('preserveAspectRatio', 'xMidYMid slice');
-    entered.append('circle').attr('class', 'dot-ring').attr('r', 8);
+    entered.append('circle').attr('class', 'dot').attr('r', 5);
 
     const all = entered.merge(markers);
 
     all.select('title').text(d => d.nazione);
-    all.select('image.flag-img')
-      .attr('clip-path', d => `url(#flag-clip-${d.codice || 'none'})`)
-      .attr('href', d => d.codice ? `https://flagcdn.com/w40/${d.codice}.png` : null);
     all.attr('transform', d => {
       const coords = mapProjection([d.lng, d.lat]) || [-9999, -9999];
       return `translate(${coords[0]},${coords[1]})`;
