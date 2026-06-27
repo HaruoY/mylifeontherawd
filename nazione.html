@@ -70,7 +70,7 @@
   nav a:hover { color: var(--ink); }
 
   .breadcrumb {
-    padding: 170px 40px 0;
+    padding: 0 40px 0;
     max-width: 720px;
   }
 
@@ -168,7 +168,7 @@
     header { padding: 20px 22px; }
     .logo { font-size: 0.85rem; }
     nav { gap: 16px; font-size: 0.7rem; }
-    .breadcrumb { padding: 140px 22px 0; }
+    .breadcrumb { padding: 0 22px 0; }
     .place-header { padding: 14px 22px 32px; }
     .cities-grid { padding: 0 22px 60px; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
     footer { padding: 24px 22px 32px; }
@@ -207,6 +207,18 @@
 </footer>
 
 <script src="geo.js"></script>
+<script>
+  function aggiornaSpazioHeader() {
+    const header = document.querySelector('header');
+    const breadcrumb = document.querySelector('.breadcrumb');
+    if (!header || !breadcrumb) return;
+    const altezza = header.getBoundingClientRect().height;
+    breadcrumb.style.paddingTop = `${altezza + 30}px`;
+  }
+
+  aggiornaSpazioHeader();
+  window.addEventListener('resize', aggiornaSpazioHeader);
+</script>
 <script>
   const params = new URLSearchParams(window.location.search);
   const nomeNazione = params.get('nome');

@@ -71,7 +71,7 @@
   nav a:hover { color: var(--ink); }
 
   .breadcrumb {
-    padding: 170px 40px 0;
+    padding: 0 40px 0;
     max-width: 720px;
   }
 
@@ -172,7 +172,7 @@
     header { padding: 20px 22px; }
     .logo { font-size: 0.85rem; }
     nav { gap: 16px; font-size: 0.7rem; }
-    .breadcrumb { padding: 140px 22px 0; }
+    .breadcrumb { padding: 0 22px 0; }
     .place-header { padding: 14px 22px 32px; }
     .gallery { grid-template-columns: repeat(2, 1fr); }
     .item.wide { grid-column: span 2; }
@@ -215,6 +215,23 @@
 <footer>
   <span>© 2026 — Tutti i diritti riservati</span>
 </footer>
+
+<script>
+  // Misura l'altezza reale dell'header (che può variare leggermente in
+  // base a font, dimensioni schermo o wrap del testo) e imposta il
+  // padding-top del breadcrumb di conseguenza, con un margine extra
+  // per evitare qualunque sovrapposizione, indipendentemente dal dispositivo.
+  function aggiornaSpazioHeader() {
+    const header = document.querySelector('header');
+    const breadcrumb = document.querySelector('.breadcrumb');
+    if (!header || !breadcrumb) return;
+    const altezza = header.getBoundingClientRect().height;
+    breadcrumb.style.paddingTop = `${altezza + 30}px`;
+  }
+
+  aggiornaSpazioHeader();
+  window.addEventListener('resize', aggiornaSpazioHeader);
+</script>
 
 <script>
   const params = new URLSearchParams(window.location.search);
