@@ -6,7 +6,7 @@
 <title>My life on the rawd</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Archivo+Black&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=Archivo+Black&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #161412;
@@ -32,16 +32,14 @@
     position: relative;
     height: 100vh;
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     overflow: hidden;
   }
 
   .landing-photo-frame {
-    position: relative;
-    width: min(60vw, 560px);
-    height: min(80vh, 760px);
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
   }
 
@@ -50,13 +48,74 @@
     top: 0; left: 0;
     width: 100%; height: 100%;
     object-fit: cover;
-    filter: grayscale(15%) contrast(1.05);
+    filter: grayscale(15%) contrast(1.05) brightness(0.8);
   }
 
+  /* ---------- HEADER / NAV ---------- */
+  header {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px 0;
+    padding: 30px 40px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    line-height: 1.25;
+    text-shadow: 0 1px 10px rgba(0,0,0,0.5);
+  }
+
+  .logo .bar {
+    width: 2px;
+    height: 34px;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  nav {
+    display: flex;
+    gap: 30px;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  nav a {
+    position: relative;
+    padding-top: 14px;
+    text-shadow: 0 1px 10px rgba(0,0,0,0.5);
+  }
+
+  nav a::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 1px;
+    background: rgba(242,238,228,0.4);
+    transition: background 0.25s ease;
+  }
+
+  nav a:hover::before,
+  nav a.active::before {
+    background: var(--accent);
+  }
+
+  /* ---------- TITLE ---------- */
   .landing-title {
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 56%;
     transform: translate(-50%, -50%);
     text-align: center;
     z-index: 10;
@@ -68,10 +127,11 @@
     font-family: 'Archivo Black', sans-serif;
     font-weight: 400;
     color: var(--accent);
-    font-size: clamp(2.4rem, 9vw, 6.5rem);
+    font-size: clamp(2.2rem, 8vw, 5.8rem);
     line-height: 0.95;
     letter-spacing: -0.01em;
     text-transform: uppercase;
+    text-shadow: 0 2px 24px rgba(0,0,0,0.5);
   }
 
   .landing-title .subtitle {
@@ -83,33 +143,14 @@
     max-width: 480px;
     margin-left: auto;
     margin-right: auto;
-  }
-
-  .enter-link {
-    position: absolute;
-    bottom: 56px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 0.95rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--ink);
-    padding: 12px 0;
-    border-bottom: 1px solid var(--ink);
-    transition: opacity 0.2s ease, border-color 0.2s ease;
-  }
-
-  .enter-link:hover {
-    color: var(--accent);
-    border-color: var(--accent);
+    text-shadow: 0 1px 16px rgba(0,0,0,0.5);
   }
 
   @media (max-width: 720px) {
-    .landing-photo-frame { width: 86vw; height: 70vh; }
-    .enter-link { bottom: 40px; }
+    header { padding: 22px 20px; }
+    .logo { font-size: 0.78rem; }
+    .logo .bar { height: 28px; }
+    nav { gap: 18px; font-size: 0.65rem; flex-wrap: wrap; }
   }
 
   a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
@@ -122,12 +163,24 @@
     <img src="images/landing-cover.jpg" alt="">
   </div>
 
+  <header>
+    <div class="logo">
+      <span class="bar"></span>
+      <span>My life<br>on the rawd</span>
+    </div>
+    <nav>
+      <a class="active" href="map.html">Map</a>
+      <a href="travel.html">Travel</a>
+      <a href="blog.html">Blog</a>
+      <a href="bio.html">Bio</a>
+      <a href="gear.html">Gear</a>
+    </nav>
+  </header>
+
   <div class="landing-title">
     <h1>My life on the rawd</h1>
     <div class="subtitle">Life is photography — we develop from negatives.</div>
   </div>
-
-  <a class="enter-link" href="gallery.html">Enter</a>
 </div>
 
 </body>
