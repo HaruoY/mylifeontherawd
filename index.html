@@ -9,9 +9,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+<script src="geo.js"></script>
 <style>
   :root {
-    --bg: #FAFAF8;
+    --bg: #F2EEE4;
     --ink: #1D191A;
     --muted: #6B6B63;
     --accent: #EE1337;
@@ -24,7 +25,8 @@
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--bg);
+    background-color: var(--bg);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14'%3E%3Ccircle cx='1' cy='1' r='1' fill='%23000000' fill-opacity='0.035'/%3E%3C/svg%3E");
     color: var(--ink);
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -156,13 +158,6 @@
     r: 5.5;
   }
 
-  .map-marker circle.pulse {
-    fill: var(--accent);
-    opacity: 0.2;
-    transform-origin: center;
-    animation: pulse 2.6s ease-in-out infinite;
-  }
-
   .map-marker text {
     font-family: 'Fraunces', serif;
     font-size: 11px;
@@ -172,11 +167,6 @@
 
   .map-marker:hover text {
     fill: var(--accent);
-  }
-
-  @keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 0.22; }
-    50% { transform: scale(1.6); opacity: 0.06; }
   }
 
   .map-caption {
@@ -294,36 +284,45 @@
     }
   }
 
-  function renderMap() {
+  async function renderMap() {
     if (!worldLoaded || !mapProjection) return;
 
     const luoghiConCoordinate = photos.filter(p => p.lat != null && p.lng != null && p.luogo);
 
-    // Raggruppa per luogo, per evitare marker sovrapposti identici
-    // se più foto condividono la stessa posizione.
-    const luoghiUnici = [];
-    const visti = new Set();
-    luoghiConCoordinate.forEach(p => {
-      const chiave = p.luogo;
-      if (!visti.has(chiave)) {
-        visti.add(chiave);
-        luoghiUnici.push(p);
+    if (luoghiConCoordinate.length === 0) {
+      mapCaption.textContent = 'Nessun luogo geolocalizzato, per ora.';
+      return;
+    }
+
+    mapCaption.textContent = 'Individuo le nazioni visitate…';
+
+    // Determina la nazione di ciascuna foto tramite geocoding inverso
+    // (con cache condivisa in geo.js) e raggruppa per nazione: ogni
+    // nazione diventa un pin sulla mappa, posizionato sulla prima
+    // coordinata trovata per quella nazione.
+    const nazioniMap = new Map();
+    for (const p of luoghiConCoordinate) {
+      const nazione = await getNazione(p.lat, p.lng);
+      if (!nazione) continue;
+      if (!nazioniMap.has(nazione)) {
+        nazioniMap.set(nazione, { nazione, lat: p.lat, lng: p.lng });
       }
-    });
+    }
+
+    const nazioniUniche = Array.from(nazioniMap.values());
 
     const markersLayer = mapSvg.select('#map-markers-layer');
 
     const markers = markersLayer.selectAll('a.map-marker')
-      .data(luoghiUnici, d => d.luogo);
+      .data(nazioniUniche, d => d.nazione);
 
     markers.exit().remove();
 
     const entered = markers.enter()
       .append('a')
       .attr('class', 'map-marker')
-      .attr('href', d => `luogo.html?nome=${encodeURIComponent(d.luogo)}`);
+      .attr('href', d => `nazione.html?nome=${encodeURIComponent(d.nazione)}`);
 
-    entered.append('circle').attr('class', 'pulse').attr('r', 6);
     entered.append('circle').attr('class', 'dot').attr('r', 4);
     entered.append('text').attr('text-anchor', 'middle');
 
@@ -336,14 +335,14 @@
 
     all.select('text')
       .attr('y', -12)
-      .text(d => d.luogo);
+      .text(d => d.nazione);
 
-    if (luoghiUnici.length === 0) {
+    if (nazioniUniche.length === 0) {
       mapCaption.textContent = 'Nessun luogo geolocalizzato, per ora.';
-    } else if (luoghiUnici.length === 1) {
-      mapCaption.textContent = '1 luogo visitato — clicca il punto per esplorare.';
+    } else if (nazioniUniche.length === 1) {
+      mapCaption.textContent = '1 nazione visitata — clicca il punto per esplorare.';
     } else {
-      mapCaption.textContent = `${luoghiUnici.length} luoghi visitati — clicca un punto per esplorare.`;
+      mapCaption.textContent = `${nazioniUniche.length} nazioni visitate — clicca un punto per esplorare.`;
     }
   }
 
