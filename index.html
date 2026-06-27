@@ -245,6 +245,8 @@
   let mapProjection = null;
   let mapSvg = null;
   let worldLoaded = false;
+  let renderMapInCorso = false;
+  let renderMapRichiestaPendente = false;
 
   const MAP_WIDTH = 680;
   const MAP_HEIGHT = 360;
@@ -282,6 +284,30 @@
   async function renderMap() {
     if (!worldLoaded || !mapProjection) return;
 
+    // Evita esecuzioni concorrenti: initMap() e loadPhotos() possono
+    // entrambe chiamare renderMap() quasi in contemporanea, e due
+    // esecuzioni in corso allo stesso tempo disallineerebbero i dati
+    // associati a ciascun marker (bandiera sbagliata sotto al tooltip
+    // sbagliato). Se una è già in corso, segnala solo che ne serve
+    // un'altra subito dopo, invece di farle correre insieme.
+    if (renderMapInCorso) {
+      renderMapRichiestaPendente = true;
+      return;
+    }
+    renderMapInCorso = true;
+
+    try {
+      await renderMapEsegui();
+      while (renderMapRichiestaPendente) {
+        renderMapRichiestaPendente = false;
+        await renderMapEsegui();
+      }
+    } finally {
+      renderMapInCorso = false;
+    }
+  }
+
+  async function renderMapEsegui() {
     const luoghiConCoordinate = photos.filter(p => p.lat != null && p.lng != null && p.luogo);
 
     if (luoghiConCoordinate.length === 0) {
