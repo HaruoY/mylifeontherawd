@@ -109,10 +109,11 @@
 
   .work img {
     width: 100%;
-    aspect-ratio: 4/5;
-    object-fit: cover;
+    max-height: 640px;
+    object-fit: contain;
     border-radius: 2px;
     border: 1px solid var(--ink);
+    background: var(--surface);
     filter: grayscale(100%) contrast(1.05);
     transition: filter 0.5s ease;
   }
