@@ -46,5 +46,17 @@
     "data": "2026-06-27",
     "immagine_url": "images/golden-gate.jpg",
     "pubblicato": true
+  },
+  {
+    "id": 5,
+    "titolo": "Zaanse Schans",
+    "categoria": "reportage",
+    "viaggio": "Netherlands 2021",
+    "luogo": "Zaanse Schans",
+    "lat": 52.4710,
+    "lng": 4.8098,
+    "data": "2021-01-01",
+    "immagine_url": "images/zaanse-schans.jpg",
+    "pubblicato": true
   }
 ]
