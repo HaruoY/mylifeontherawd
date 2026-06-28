@@ -26,6 +26,24 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    position: relative;
+  }
+
+  .bg-photo {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: grayscale(25%) brightness(0.4);
+    z-index: -2;
+  }
+
+  .bg-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(180deg, rgba(22,20,18,0.55) 0%, rgba(22,20,18,0.75) 100%);
+    z-index: -1;
   }
 
   a { color: inherit; text-decoration: none; }
@@ -111,6 +129,9 @@
 </head>
 <body>
 
+<img class="bg-photo" src="images/bio-bg.jpg" alt="">
+<div class="bg-overlay"></div>
+
 <header>
   <a class="logo" href="index.html">My life on the rawd</a>
   <nav>
@@ -123,7 +144,11 @@
 </header>
 
 <main>
-  <p class="statement">Born at a very young age, my life is based on a true story: I just picked up a camera, and that, apparently, made me a mighty photographer.</p>
+  <p class="statement">Born at a very young age,<br>
+  my life is based on a true story.<br>
+  I just picked up a camera,<br>
+  and that, apparently,<br>
+  made me a mighty photographer.</p>
 </main>
 
 <footer>
