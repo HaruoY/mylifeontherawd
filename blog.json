@@ -1,1 +1,52 @@
-[]
+﻿[
+  {
+    "id": 1,
+    "nome": "Van Gogh Museum, Amsterdam",
+    "luogo": "Amsterdam, NL",
+    "pubblicato": true,
+    "opere": [
+      {
+        "titolo": "Almond Blossom",
+        "artista": "Vincent van Gogh, 1890",
+        "immagine_url": "images/vangogh-almond-blossom.jpg",
+        "descrizione": "Painted in Saint-Remy as a gift for his newborn nephew, this branch against a vivid blue sky borrows its bold outlines from Japanese woodcuts. Almond trees bloom early in spring, making them a symbol of new life - the nephew, Vincent Willem, later founded this very museum."
+      },
+      {
+        "titolo": "Tree Roots",
+        "artista": "Vincent van Gogh, 1890",
+        "immagine_url": "images/vangogh-tree-roots.jpg",
+        "descrizione": "A tangle of roots and trunks on a slope in Auvers-sur-Oise, rendered in restless, fragmented brushstrokes. Long believed to be Van Gogh's final painting, made the morning of the day he shot himself. Its exact location was identified in 2020 from an old postcard."
+      },
+      {
+        "titolo": "Self-Portrait",
+        "artista": "Vincent van Gogh, 1887",
+        "immagine_url": "images/vangogh-self-portrait.jpg",
+        "descrizione": "One of more than thirty self-portraits Van Gogh painted, mostly during his Paris years when he could not always afford models. The cool blue background and direct gaze are typical of this period, just before his palette exploded with color in Arles."
+      },
+      {
+        "titolo": "Skull with Burning Cigarette",
+        "artista": "Vincent van Gogh, 1885",
+        "immagine_url": "images/vangogh-skull-cigarette.jpg",
+        "descrizione": "Painted as an anatomy study during his brief, frustrating time at the Antwerp academy, this small canvas reads as a dry joke at the expense of his teachers - a skeleton smoking, defiantly alive. The museum itself calls it a juvenile joke."
+      },
+      {
+        "titolo": "The Bedroom",
+        "artista": "Vincent van Gogh, 1888",
+        "immagine_url": "images/vangogh-bedroom.jpg",
+        "descrizione": "Van Gogh's room in the Yellow House in Arles, painted with deliberately flat perspective and clashing colors inspired by Japanese prints. He considered it one of his best compositions and painted three versions; this is the first."
+      },
+      {
+        "titolo": "Sunflowers",
+        "artista": "Vincent van Gogh, 1889",
+        "immagine_url": "images/vangogh-sunflowers.jpg",
+        "descrizione": "Part of a series painted to decorate Gauguin's room in the Yellow House, this version shows fifteen sunflowers against a yellow background. Van Gogh signed his name on the vase itself, a rare gesture of pride in his own work."
+      },
+      {
+        "titolo": "Wheatfield with Crows",
+        "artista": "Vincent van Gogh, 1890",
+        "immagine_url": "images/vangogh-wheatfield-crows.jpg",
+        "descrizione": "Painted in Auvers weeks before his death, this turbulent sky over a wheatfield is often called his last work - a persistent myth, since several paintings followed it. Van Gogh wanted it to express both sorrow and what he called the healthy, fortifying nature of the countryside."
+      }
+    ]
+  }
+]
