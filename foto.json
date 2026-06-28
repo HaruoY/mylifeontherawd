@@ -34,5 +34,17 @@
     "data": "2026-06-27",
     "immagine_url": "images/cies-islands.jpg",
     "pubblicato": true
+  },
+  {
+    "id": 4,
+    "titolo": "Golden Gate Bridge",
+    "categoria": "arte",
+    "viaggio": "USA 2026",
+    "luogo": "San Francisco",
+    "lat": 37.8199,
+    "lng": -122.4783,
+    "data": "2026-06-27",
+    "immagine_url": "images/golden-gate.jpg",
+    "pubblicato": true
   }
 ]

@@ -7,7 +7,7 @@
  * di fair-use di Nominatim (massimo 1 richiesta al secondo).
  */
 
-const GEO_CACHE_KEY = 'geo-nazione-cache-v3';
+const GEO_CACHE_KEY = 'geo-nazione-cache-v4';
 const GEO_RICHIESTA_INTERVALLO_MS = 1100;
 
 let geoCache = null;
@@ -52,6 +52,15 @@ async function geoRichiestaConRateLimit(url) {
   return res.json();
 }
 
+/**
+ * Restituisce { nome, codice, stato } per la posizione alle coordinate date.
+ * "nome" è il nome della nazione (es. "Denmark"), "codice" è il codice
+ * ISO 3166-1 alpha-2 in minuscolo (es. "dk"). "stato" è lo stato federale
+ * (es. "California") SOLO quando la nazione è gli Stati Uniti, altrimenti
+ * è null — usato per mostrare un pin per stato invece che per nazione
+ * nel caso specifico degli USA.
+ * Restituisce null se il geocoding fallisce.
+ */
 async function getNazione(lat, lng) {
   const cache = geoCaricaCache();
   const chiave = geoChiaveCache(lat, lng);
@@ -61,14 +70,18 @@ async function getNazione(lat, lng) {
   }
 
   try {
-    const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}&zoom=3`;
+    // zoom=8 (livello regionale) invece di zoom=3 (livello nazionale):
+    // necessario per ottenere address.state, ma restituisce comunque
+    // anche country/country_code nella stessa risposta.
+    const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}&zoom=8`;
     const data = await geoRichiestaConRateLimit(url);
     const nome = data && data.address ? data.address.country : null;
     const codice = data && data.address ? data.address.country_code : null;
+    const stato = (codice === 'us' && data && data.address) ? data.address.state || null : null;
 
     if (!nome) return null;
 
-    const risultato = { nome, codice: codice || null };
+    const risultato = { nome, codice: codice || null, stato };
     cache[chiave] = risultato;
     geoSalvaCache();
 

@@ -292,11 +292,11 @@
     return Math.round(totale);
   }
 
-  function aggiornaStatistiche(fotoConCoordinate, nazioniUniche) {
+  function aggiornaStatistiche(fotoConCoordinate, nazioniReali) {
     const cittaUniche = new Set(fotoConCoordinate.map(p => p.luogo)).size;
     const km = calcolaKmTotali(fotoConCoordinate);
 
-    document.getElementById('stat-countries').textContent = nazioniUniche.length;
+    document.getElementById('stat-countries').textContent = nazioniReali.size;
     document.getElementById('stat-cities').textContent = cittaUniche;
     document.getElementById('stat-photos').textContent = photos.filter(p => p.pubblicato !== false).length;
     document.getElementById('stat-km').textContent = km.toLocaleString('en-US');
@@ -360,29 +360,44 @@
 
     if (luoghiConCoordinate.length === 0) {
       mapCaption.textContent = 'No locations yet.';
-      aggiornaStatistiche([], []);
+      aggiornaStatistiche([], new Set());
       return;
     }
 
     mapCaption.textContent = 'Finding visited countries…';
 
-    const nazioniMap = new Map();
+    // Raggruppa i pin: per gli Stati Uniti, un pin per ogni stato federale
+    // (es. California, Nevada); per qualsiasi altra nazione, un pin unico
+    // per l'intera nazione, come prima.
+    const pinMap = new Map();
+    const nazioniReali = new Set();
     for (const p of luoghiConCoordinate) {
       const risultato = await getNazione(p.lat, p.lng);
       if (!risultato) continue;
-      if (!nazioniMap.has(risultato.nome)) {
-        nazioniMap.set(risultato.nome, { nazione: risultato.nome, codice: risultato.codice, lat: p.lat, lng: p.lng });
+
+      nazioniReali.add(risultato.nome);
+
+      const isUSA = risultato.codice === 'us' && risultato.stato;
+      const chiave = isUSA ? `us:${risultato.stato}` : risultato.nome;
+
+      if (!pinMap.has(chiave)) {
+        pinMap.set(chiave, {
+          tipo: isUSA ? 'stato' : 'nazione',
+          etichetta: isUSA ? risultato.stato : risultato.nome,
+          lat: p.lat,
+          lng: p.lng
+        });
       }
     }
 
-    const nazioniUniche = Array.from(nazioniMap.values());
+    const pinUnici = Array.from(pinMap.values());
 
-    aggiornaStatistiche(luoghiConCoordinate, nazioniUniche);
+    aggiornaStatistiche(luoghiConCoordinate, nazioniReali);
 
     const markersLayer = mapSvg.select('#map-markers-layer');
 
     const markers = markersLayer.selectAll('a.map-marker')
-      .data(nazioniUniche, d => d.nazione);
+      .data(pinUnici, d => d.etichetta);
 
     markers.exit().remove();
 
@@ -393,18 +408,19 @@
 
     const all = entered.merge(markers);
 
-    all.select('title').text(d => d.nazione);
+    all.attr('href', d => `travel.html?luogo=${encodeURIComponent(d.etichetta)}`);
+    all.select('title').text(d => d.etichetta);
     all.attr('transform', d => {
       const coords = mapProjection([d.lng, d.lat]) || [-9999, -9999];
       return `translate(${coords[0]},${coords[1]})`;
     });
 
-    if (nazioniUniche.length === 0) {
+    if (pinUnici.length === 0) {
       mapCaption.textContent = 'No locations yet.';
-    } else if (nazioniUniche.length === 1) {
-      mapCaption.textContent = '1 country visited so far.';
+    } else if (pinUnici.length === 1) {
+      mapCaption.textContent = '1 place visited so far.';
     } else {
-      mapCaption.textContent = `${nazioniUniche.length} countries visited so far.`;
+      mapCaption.textContent = `${pinUnici.length} places visited so far.`;
     }
   }
 
