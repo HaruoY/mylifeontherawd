@@ -1,0 +1,5 @@
+titolo: Zaanse Schans
+categoria: paesaggi
+viaggio: Olanda
+luogo: Zaanse Schans, Zaandam
+data: 2021-08-14

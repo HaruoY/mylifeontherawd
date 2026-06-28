@@ -53,11 +53,23 @@
     "categoria": "reportage",
     "viaggio": "Netherlands 2021",
     "luogo": "Zaanse Schans",
-    "lat": 52.4710,
+    "lat": 52.471,
     "lng": 4.8098,
     "data": "2021-01-01",
     "immagine_url": "images/zaanse-schans.jpg",
     "crop_position": "center bottom",
+    "pubblicato": true
+  },
+  {
+    "id": 6,
+    "titolo": "Zaanse Schans",
+    "categoria": "paesaggi",
+    "viaggio": "Olanda",
+    "luogo": "Zaanse Schans, Zaandam",
+    "lat": 52.4750534,
+    "lng": 4.8179761,
+    "data": "2021-08-14",
+    "immagine_url": "images/zaanse-schans-6.jpg",
     "pubblicato": true
   }
 ]
