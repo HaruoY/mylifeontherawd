@@ -54,6 +54,7 @@
     "nome": "Art Institute of Chicago",
     "luogo": "Chicago, IL, US",
     "pubblicato": true,
+    "copertina": "images/aic-nighthawks.jpg",
     "opere": [
       {
         "titolo": "Self-Portrait",
