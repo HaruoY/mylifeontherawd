@@ -60,7 +60,7 @@
   nav a:hover { color: var(--ink); }
 
   .breadcrumb {
-    padding: 130px 40px 0;
+    padding: 150px 40px 0;
     max-width: 720px;
   }
 
@@ -175,7 +175,7 @@
     header { padding: 20px 22px; }
     .logo { font-size: 0.85rem; }
     nav { gap: 16px; font-size: 0.7rem; }
-    .breadcrumb { padding: 110px 22px 0; }
+    .breadcrumb { padding: 125px 22px 0; }
     .trip-header { padding: 14px 22px 32px; }
     .gallery { grid-template-columns: repeat(2, 1fr); }
     .item.wide { grid-column: span 2; }
@@ -242,7 +242,8 @@
     return `${Math.abs(lat).toFixed(2)}° ${ns}, ${Math.abs(lng).toFixed(2)}° ${ew}`;
   }
 
-  function layoutClass(index) {
+  function layoutClass(index, totale) {
+    if (totale < 4) return '';
     if (index % 4 === 0) return 'wide';
     return '';
   }
@@ -275,7 +276,7 @@
         : `${fotoDelViaggio.length} photos`;
 
       gallery.innerHTML = fotoDelViaggio.map((photo, i) => `
-        <div class="item ${layoutClass(i)}">
+        <div class="item ${layoutClass(i, fotoDelViaggio.length)}">
           <img src="${photo.immagine_url}" alt="${escapeHtml(photo.titolo || '')}" loading="lazy">
           <div class="item-meta">
             <span class="titolo">${escapeHtml(photo.titolo || '')}</span>
