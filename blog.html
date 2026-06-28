@@ -240,15 +240,18 @@
         return;
       }
 
-      grid.innerHTML = pubblicati.map(m => `
+      grid.innerHTML = pubblicati.map(m => {
+        const copertina = m.copertina || (m.opere && m.opere[0] ? m.opere[0].immagine_url : '');
+        return `
         <a class="museum-card" href="museum.html?id=${encodeURIComponent(m.id)}">
-          <img src="${m.copertina}" alt="${escapeHtml(m.nome)}" loading="lazy">
+          <img src="${copertina}" alt="${escapeHtml(m.nome)}" loading="lazy">
           <div class="overlay">
             <div class="museum-name">${escapeHtml(m.nome)}</div>
             <div class="museum-meta">${escapeHtml(m.luogo || '')}${m.opere ? ' · ' + m.opere.length + (m.opere.length === 1 ? ' work' : ' works') : ''}</div>
           </div>
         </a>
-      `).join('');
+      `;
+      }).join('');
     } catch (err) {
       emptyState.hidden = false;
       emptyState.textContent = 'Could not load museum albums right now.';
