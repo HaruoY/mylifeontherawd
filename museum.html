@@ -111,7 +111,13 @@
     aspect-ratio: 4/5;
     object-fit: cover;
     border-radius: 2px;
-    filter: grayscale(8%) contrast(1.05);
+    border: 1px solid var(--ink);
+    filter: grayscale(100%) contrast(1.05);
+    transition: filter 0.5s ease;
+  }
+
+  .work:hover img {
+    filter: grayscale(0%) contrast(1);
   }
 
   .work .work-title {
