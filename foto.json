@@ -57,6 +57,7 @@
     "lng": 4.8098,
     "data": "2021-01-01",
     "immagine_url": "images/zaanse-schans.jpg",
+    "crop_position": "center bottom",
     "pubblicato": true
   }
 ]

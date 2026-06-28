@@ -277,7 +277,7 @@
 
       gallery.innerHTML = fotoDelViaggio.map((photo, i) => `
         <div class="item ${layoutClass(i, fotoDelViaggio.length)}">
-          <img src="${photo.immagine_url}" alt="${escapeHtml(photo.titolo || '')}" loading="lazy">
+          <img src="${photo.immagine_url}" alt="${escapeHtml(photo.titolo || '')}" loading="lazy"${photo.crop_position ? ` style="object-position: ${escapeHtml(photo.crop_position)}"` : ''}>
           <div class="item-meta">
             <span class="titolo">${escapeHtml(photo.titolo || '')}</span>
             <span class="coords">${formatCoords(photo.lat, photo.lng)}</span>
