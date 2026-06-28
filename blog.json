@@ -9,7 +9,7 @@
         "titolo": "Almond Blossom",
         "artista": "Vincent van Gogh, 1890",
         "immagine_url": "images/vangogh-almond-blossom.jpg",
-        "descrizione": "Painted in Saint-Rémy as a gift for his newborn nephew, this branch against a vivid blue sky borrows its bold outlines from Japanese woodcuts. Almond trees bloom early in spring, making them a symbol of new life — the nephew, Vincent Willem, later founded this very museum."
+        "descrizione": "Painted in Saint-Remy as a gift for his newborn nephew, this branch against a vivid blue sky borrows its bold outlines from Japanese woodcuts. Almond trees bloom early in spring, making them a symbol of new life - the nephew, Vincent Willem, later founded this very museum."
       },
       {
         "titolo": "Tree Roots",
@@ -21,13 +21,13 @@
         "titolo": "Self-Portrait",
         "artista": "Vincent van Gogh, 1887",
         "immagine_url": "images/vangogh-self-portrait.jpg",
-        "descrizione": "One of more than thirty self-portraits Van Gogh painted, mostly during his Paris years when he couldn't always afford models. The cool blue background and direct gaze are typical of this period, just before his palette exploded with color in Arles."
+        "descrizione": "One of more than thirty self-portraits Van Gogh painted, mostly during his Paris years when he could not always afford models. The cool blue background and direct gaze are typical of this period, just before his palette exploded with color in Arles."
       },
       {
         "titolo": "Skull with Burning Cigarette",
         "artista": "Vincent van Gogh, 1885",
         "immagine_url": "images/vangogh-skull-cigarette.jpg",
-        "descrizione": "Painted as an anatomy study during his brief, frustrating time at the Antwerp academy, this small canvas reads as a dry joke at the expense of his teachers — a skeleton smoking, defiantly alive. The museum itself calls it 'a juvenile joke.'"
+        "descrizione": "Painted as an anatomy study during his brief, frustrating time at the Antwerp academy, this small canvas reads as a dry joke at the expense of his teachers - a skeleton smoking, defiantly alive. The museum itself calls it a juvenile joke."
       },
       {
         "titolo": "The Bedroom",
@@ -45,7 +45,7 @@
         "titolo": "Wheatfield with Crows",
         "artista": "Vincent van Gogh, 1890",
         "immagine_url": "images/vangogh-wheatfield-crows.jpg",
-        "descrizione": "Painted in Auvers weeks before his death, this turbulent sky over a wheatfield is often called his last work — a persistent myth, since several paintings followed it. Van Gogh wanted it to express both sorrow and what he called the healthy, fortifying nature of the countryside."
+        "descrizione": "Painted in Auvers weeks before his death, this turbulent sky over a wheatfield is often called his last work - a persistent myth, since several paintings followed it. Van Gogh wanted it to express both sorrow and what he called the healthy, fortifying nature of the countryside."
       }
     ]
   },
@@ -81,7 +81,7 @@
       },
       {
         "titolo": "A Sunday on La Grande Jatte",
-        "artista": "Georges Seurat, 1884–86",
+        "artista": "Georges Seurat, 1884-86",
         "immagine_url": "images/aic-grande-jatte.jpg",
         "descrizione": "Seurat spent two years applying tiny dots of pure color, a technique he called divisionism, to build this enormous scene of Parisians at leisure on an island in the Seine. Up close it dissolves into thousands of individual marks; from a distance, it reassembles into light."
       },
@@ -96,56 +96,6 @@
         "artista": "Andy Warhol, 1963",
         "immagine_url": "images/aic-warhol-liz.jpg",
         "descrizione": "One of thirteen canvases from the same publicity photo of Elizabeth Taylor, each set against a different jewel-toned background. Made the year of Taylor's near-fatal illness during the filming of Cleopatra, when she was as much a subject of public anxiety as admiration."
-      }
-    ]
-  },
-  {
-    "id": 3,
-    "nome": "MoMA, New York",
-    "luogo": "New York, NY, US",
-    "pubblicato": true,
-    "opere": [
-      {
-        "titolo": "Dance (I)",
-        "artista": "Henri Matisse, 1909",
-        "immagine_url": "images/moma-matisse-dance.jpg",
-        "descrizione": "A study for a larger mural commissioned by the Russian collector Sergei Shchukin, reduced to just three colors. Matisse called the simplified palette and flattened figures essential to the painting's sense of release and rhythm."
-      },
-      {
-        "titolo": "Water Lilies",
-        "artista": "Claude Monet, 1914–26",
-        "immagine_url": "images/moma-monet-water-lilies.jpg",
-        "descrizione": "Part of the series Monet painted in his garden at Giverny during his last decades, increasingly abstract as his eyesight failed. This triptych, nearly 42 feet wide when fully assembled, has no horizon line — only water, light, and lilies."
-      },
-      {
-        "titolo": "The Lovers",
-        "artista": "René Magritte, 1928",
-        "immagine_url": "images/moma-magritte-lovers.jpg",
-        "descrizione": "Two figures kiss with their heads wrapped in cloth, a recurring motif Magritte returned to several times. He never explained the veiled faces, leaving the painting suspended between intimacy and concealment."
-      },
-      {
-        "titolo": "The Starry Night",
-        "artista": "Vincent van Gogh, 1889",
-        "immagine_url": "images/moma-vangogh-starry-night.jpg",
-        "descrizione": "Painted from memory and imagination at the asylum in Saint-Rémy, looking out his window before sunrise. Van Gogh considered it a failure compared to his daytime work, yet it's now one of the most recognized paintings in the world."
-      },
-      {
-        "titolo": "Unique Forms of Continuity in Space",
-        "artista": "Umberto Boccioni, 1913",
-        "immagine_url": "images/moma-boccioni-unique-forms.jpg",
-        "descrizione": "A bronze figure striding forward, its surface dissolved into flame-like forms to express motion itself rather than a body in motion. Boccioni, a leading voice of Italian Futurism, died just two years later, at 33, after a fall from a horse."
-      },
-      {
-        "titolo": "Campbell's Soup Cans",
-        "artista": "Andy Warhol, 1962",
-        "immagine_url": "images/moma-warhol-soup-cans.jpg",
-        "descrizione": "Thirty-two canvases, one for every variety of soup Campbell's sold at the time, each hand-painted to look machine-printed. Warhol's first major Pop Art statement turned a supermarket shelf into a gallery wall."
-      },
-      {
-        "titolo": "The Red Studio",
-        "artista": "Henri Matisse, 1911",
-        "immagine_url": "images/moma-matisse-red-studio.jpg",
-        "descrizione": "Matisse painted over the original gray-green walls of his actual studio in flat red, leaving only outlines for the furniture and his own paintings shown in miniature on the walls. The room reads as memory more than a real place."
       }
     ]
   }
