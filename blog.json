@@ -1,4 +1,4 @@
-﻿[
+[
   {
     "id": 1,
     "nome": "Van Gogh Museum, Amsterdam",
@@ -9,7 +9,7 @@
         "titolo": "Almond Blossom",
         "artista": "Vincent van Gogh, 1890",
         "immagine_url": "images/vangogh-almond-blossom.jpg",
-        "descrizione": "Painted in Saint-Remy as a gift for his newborn nephew, this branch against a vivid blue sky borrows its bold outlines from Japanese woodcuts. Almond trees bloom early in spring, making them a symbol of new life - the nephew, Vincent Willem, later founded this very museum."
+        "descrizione": "Painted in Saint-Rémy as a gift for his newborn nephew, this branch against a vivid blue sky borrows its bold outlines from Japanese woodcuts. Almond trees bloom early in spring, making them a symbol of new life — the nephew, Vincent Willem, later founded this very museum."
       },
       {
         "titolo": "Tree Roots",
@@ -21,13 +21,13 @@
         "titolo": "Self-Portrait",
         "artista": "Vincent van Gogh, 1887",
         "immagine_url": "images/vangogh-self-portrait.jpg",
-        "descrizione": "One of more than thirty self-portraits Van Gogh painted, mostly during his Paris years when he could not always afford models. The cool blue background and direct gaze are typical of this period, just before his palette exploded with color in Arles."
+        "descrizione": "One of more than thirty self-portraits Van Gogh painted, mostly during his Paris years when he couldn't always afford models. The cool blue background and direct gaze are typical of this period, just before his palette exploded with color in Arles."
       },
       {
         "titolo": "Skull with Burning Cigarette",
         "artista": "Vincent van Gogh, 1885",
         "immagine_url": "images/vangogh-skull-cigarette.jpg",
-        "descrizione": "Painted as an anatomy study during his brief, frustrating time at the Antwerp academy, this small canvas reads as a dry joke at the expense of his teachers - a skeleton smoking, defiantly alive. The museum itself calls it a juvenile joke."
+        "descrizione": "Painted as an anatomy study during his brief, frustrating time at the Antwerp academy, this small canvas reads as a dry joke at the expense of his teachers — a skeleton smoking, defiantly alive. The museum itself calls it 'a juvenile joke.'"
       },
       {
         "titolo": "The Bedroom",
@@ -45,7 +45,57 @@
         "titolo": "Wheatfield with Crows",
         "artista": "Vincent van Gogh, 1890",
         "immagine_url": "images/vangogh-wheatfield-crows.jpg",
-        "descrizione": "Painted in Auvers weeks before his death, this turbulent sky over a wheatfield is often called his last work - a persistent myth, since several paintings followed it. Van Gogh wanted it to express both sorrow and what he called the healthy, fortifying nature of the countryside."
+        "descrizione": "Painted in Auvers weeks before his death, this turbulent sky over a wheatfield is often called his last work — a persistent myth, since several paintings followed it. Van Gogh wanted it to express both sorrow and what he called the healthy, fortifying nature of the countryside."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "nome": "Art Institute of Chicago",
+    "luogo": "Chicago, IL, US",
+    "pubblicato": true,
+    "opere": [
+      {
+        "titolo": "Self-Portrait",
+        "artista": "Andy Warhol, 1966",
+        "immagine_url": "images/aic-warhol-self-portrait.jpg",
+        "descrizione": "One of several self-portraits Warhol made throughout his career, this acid green and pink silkscreen turns the artist's own face into the same kind of repeatable, depersonalized image he used for celebrities and consumer goods. Part of the Edlis/Neeson gift, the largest in the museum's history."
+      },
+      {
+        "titolo": "Four Mona Lisas",
+        "artista": "Andy Warhol, 1978",
+        "immagine_url": "images/aic-warhol-mona-lisas.jpg",
+        "descrizione": "Warhol returns to the most reproduced image in art history and reproduces it again, in his own silkscreen language. By multiplying the world's most famous smile, he flattens the line between masterpiece and souvenir."
+      },
+      {
+        "titolo": "American Gothic",
+        "artista": "Grant Wood, 1930",
+        "immagine_url": "images/aic-american-gothic.jpg",
+        "descrizione": "Possibly the most parodied painting in American art, this portrait of a farmer and his daughter (often mistaken for his wife) was modeled on a real house in Eldon, Iowa, in the Carpenter Gothic style. Wood intended it as a sincere, if ambiguous, image of rural values."
+      },
+      {
+        "titolo": "Nighthawks",
+        "artista": "Edward Hopper, 1942",
+        "immagine_url": "images/aic-nighthawks.jpg",
+        "descrizione": "Painted in the weeks after Pearl Harbor, this late-night diner scene became one of the defining images of American loneliness and quiet unease. Hopper said he was simply painting the loneliness of a large city."
+      },
+      {
+        "titolo": "A Sunday on La Grande Jatte",
+        "artista": "Georges Seurat, 1884–86",
+        "immagine_url": "images/aic-grande-jatte.jpg",
+        "descrizione": "Seurat spent two years applying tiny dots of pure color, a technique he called divisionism, to build this enormous scene of Parisians at leisure on an island in the Seine. Up close it dissolves into thousands of individual marks; from a distance, it reassembles into light."
+      },
+      {
+        "titolo": "Woman in Tub",
+        "artista": "Jeff Koons, 1988",
+        "immagine_url": "images/aic-koons-woman-in-tub.jpg",
+        "descrizione": "Part of Koons' Banality series, this porcelain sculpture borrows the kitsch finish of 18th-century figurines for a crude, cartoonish joke. Like much of Koons' work, it sits deliberately between bad taste and fine art, refusing to pick a side."
+      },
+      {
+        "titolo": "Liz #3 [Early Colored Liz]",
+        "artista": "Andy Warhol, 1963",
+        "immagine_url": "images/aic-warhol-liz.jpg",
+        "descrizione": "One of thirteen canvases from the same publicity photo of Elizabeth Taylor, each set against a different jewel-toned background. Made the year of Taylor's near-fatal illness during the filming of Cleopatra, when she was as much a subject of public anxiety as admiration."
       }
     ]
   }
