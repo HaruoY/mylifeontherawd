@@ -1,0 +1,74 @@
+name: 🖼️ Nuova opera (museo)
+description: Aggiungi un'opera a un album museo nel Blog. Compila i campi e trascina l'immagine.
+title: "[opera] "
+labels: ["nuova-opera"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Usa questo form per aggiungere una singola opera a un album museo.
+        Se il museo non esiste ancora, viene creato automaticamente con
+        questa come prima opera; se esiste già, l'opera viene aggiunta
+        a quell'album esistente.
+
+        Per l'immagine, trascinala nel campo in fondo a questo form:
+        GitHub la carica automaticamente e inserisce un link — lascialo
+        invariato.
+
+        Dopo l'invio, l'automazione preparerà tutto da sola: in 1-2 minuti
+        l'opera sarà online, e questa Issue si chiuderà da sé con un commento
+        di conferma.
+
+  - type: input
+    id: museo
+    attributes:
+      label: Museo
+      description: Nome del museo. Deve essere scritto in modo identico ogni volta per finire nello stesso album.
+      placeholder: "es. Van Gogh Museum, Amsterdam"
+    validations:
+      required: true
+
+  - type: input
+    id: luogo_museo
+    attributes:
+      label: Città del museo
+      description: Solo per il primo inserimento di questo museo — verrà ignorato se l'album esiste già.
+      placeholder: "es. Amsterdam, NL"
+    validations:
+      required: false
+
+  - type: input
+    id: titolo_opera
+    attributes:
+      label: Titolo dell'opera
+      placeholder: "es. Almond Blossom"
+    validations:
+      required: true
+
+  - type: input
+    id: artista
+    attributes:
+      label: Artista e anno
+      placeholder: "es. Vincent van Gogh, 1890"
+    validations:
+      required: false
+
+  - type: textarea
+    id: descrizione
+    attributes:
+      label: Descrizione
+      description: Una nota breve sull'opera (qualche riga).
+      placeholder: "Cosa rende quest'opera interessante, il contesto in cui è stata realizzata, ecc."
+    validations:
+      required: false
+
+  - type: textarea
+    id: immagine
+    attributes:
+      label: Immagine
+      description: >-
+        Trascina qui il file della foto dell'opera. Non scrivere nulla
+        a mano: GitHub genera da solo il link quando rilasci il file.
+      placeholder: Trascina l'immagine qui...
+    validations:
+      required: true

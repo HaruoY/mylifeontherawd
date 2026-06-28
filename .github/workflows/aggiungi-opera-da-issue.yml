@@ -1,0 +1,87 @@
+name: Aggiungi opera museo da Issue
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  aggiungi-opera:
+    if: contains(github.event.issue.labels.*.name, 'nuova-opera')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scarica il repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Imposta Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Installa le dipendenze (sharp, per il ridimensionamento immagini)
+        run: npm install sharp --no-save
+
+      - name: Elabora la Issue e aggiorna blog.json
+        id: elabora
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: node scripts/processa-opera.js
+
+      - name: Valida blog.json
+        if: success()
+        run: node scripts/validate-blog.js
+
+      - name: Fai il commit delle modifiche
+        if: success()
+        run: |
+          git config user.name "portfolio-bot"
+          git config user.email "actions@github.com"
+          git add blog.json images/
+          git commit -m "Nuova opera: ${{ steps.elabora.outputs.titolo }} in ${{ steps.elabora.outputs.museo }} (da issue #${{ github.event.issue.number }})"
+          git push
+
+      - name: Commenta e chiudi la Issue (successo)
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: '✅ Opera pubblicata. Il sito si aggiornerà in 1-2 minuti.'
+            });
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              state: 'closed'
+            });
+
+      - name: Commenta in caso di errore
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let dettagli = 'Controlla il log dell\'esecuzione per i dettagli.';
+            try {
+              dettagli = fs.readFileSync('scripts/errori.txt', 'utf8');
+            } catch (e) {}
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `❌ Non sono riuscito a pubblicare l'opera:\n\n\`\`\`\n${dettagli}\n\`\`\`\n\nCorreggi i campi e apri una nuova Issue, oppure modifica questa e riprova.`
+            });
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: ['errore']
+            });

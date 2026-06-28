@@ -33,6 +33,9 @@ jobs:
       - name: Controlla che foto.json sia corretto
         run: node scripts/validate-foto.js
 
+      - name: Controlla che blog.json sia corretto
+        run: node scripts/validate-blog.js
+
   pubblica:
     name: Pubblica su GitHub Pages
     needs: valida
