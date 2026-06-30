@@ -95,5 +95,17 @@
     "data": "2019-08-19",
     "immagine_url": "images/kyoto.jpg",
     "pubblicato": true
+  },
+  {
+    "id": 9,
+    "titolo": "Cloud Gate - The Bean",
+    "categoria": "architettura",
+    "viaggio": "Chicago 2026",
+    "luogo": "Chicago",
+    "lat": 41.8827,
+    "lng": -87.6233,
+    "data": "2026-06-30",
+    "immagine_url": "images/chicago-cloud-gate.jpg",
+    "pubblicato": true
   }
 ]
