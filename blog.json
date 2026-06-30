@@ -104,7 +104,7 @@
   "id": 3,
   "nome": "MoMA, New York",
   "luogo": "New York, NY, US",
-  "pubblicato": true,
+  "pubblicato": true, "copertina": "images/moma-matisse-dance.jpg",
   "opere": [
     {
       "titolo": "Dance (I)",
