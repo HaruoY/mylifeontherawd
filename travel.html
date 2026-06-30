@@ -304,12 +304,20 @@
       const viaggiMap = new Map();
       fotoConViaggio.forEach(p => {
         if (!viaggiMap.has(p.viaggio)) {
-          viaggiMap.set(p.viaggio, { copertina: p.immagine_url, cropPosition: p.crop_position || null, count: 0 });
+          viaggiMap.set(p.viaggio, { copertina: p.immagine_url, cropPosition: p.crop_position || null, count: 0, dataMin: p.data || null });
         }
-        viaggiMap.get(p.viaggio).count++;
+        const info = viaggiMap.get(p.viaggio);
+        info.count++;
+        if (p.data && (!info.dataMin || p.data < info.dataMin)) {
+          info.dataMin = p.data;
+        }
       });
 
-      const viaggi = Array.from(viaggiMap.entries());
+      const viaggi = Array.from(viaggiMap.entries()).sort((a, b) => {
+        const dataA = a[1].dataMin || '';
+        const dataB = b[1].dataMin || '';
+        return dataA.localeCompare(dataB);
+      });
 
       grid.innerHTML = viaggi.map(([nomeViaggio, info]) => `
         <a class="trip-card" href="trip.html?nome=${encodeURIComponent(nomeViaggio)}">
