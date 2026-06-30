@@ -48,7 +48,7 @@
     white-space: nowrap;
   }
 
-  nav { display: flex; gap: 28px; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; }
+  nav { display: flex; flex-wrap: nowrap; gap: 16px; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; }
 
   nav a {
     color: var(--muted);
@@ -152,6 +152,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     display: block;
     filter: grayscale(100%) contrast(1.05);
     transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
@@ -303,7 +304,7 @@
       const viaggiMap = new Map();
       fotoConViaggio.forEach(p => {
         if (!viaggiMap.has(p.viaggio)) {
-          viaggiMap.set(p.viaggio, { copertina: p.immagine_url, count: 0 });
+          viaggiMap.set(p.viaggio, { copertina: p.immagine_url, cropPosition: p.crop_position || null, count: 0 });
         }
         viaggiMap.get(p.viaggio).count++;
       });
@@ -312,7 +313,7 @@
 
       grid.innerHTML = viaggi.map(([nomeViaggio, info]) => `
         <a class="trip-card" href="trip.html?nome=${encodeURIComponent(nomeViaggio)}">
-          <img src="${info.copertina}" alt="${escapeHtml(nomeViaggio)}" loading="lazy">
+          <img src="${info.copertina}" alt="${escapeHtml(nomeViaggio)}" loading="lazy"${info.cropPosition ? ` style="object-position: ${info.cropPosition};"` : ''}>
           <div class="overlay">
             <div class="trip-name">${escapeHtml(nomeViaggio)}</div>
             <div class="trip-count">${info.count === 1 ? '1 photo' : info.count + ' photos'}</div>

@@ -106,6 +106,7 @@
     "lng": -87.6233,
     "data": "2026-06-30",
     "immagine_url": "images/chicago-cloud-gate.jpg",
+    "crop_position": "center 65%",
     "pubblicato": true
   }
 ]
