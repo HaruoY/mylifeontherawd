@@ -4,6 +4,8 @@
     "nome": "Van Gogh Museum, Amsterdam",
     "luogo": "Amsterdam, NL",
     "pubblicato": true,
+    "copertina": "images/vangogh-almond-blossom.jpg",
+    "copertina_position": "center 35%",
     "opere": [
       {
         "titolo": "Almond Blossom",
@@ -55,6 +57,7 @@
     "luogo": "Chicago, IL, US",
     "pubblicato": true,
     "copertina": "images/aic-nighthawks.jpg",
+    "copertina_position": "center 50%",
     "opere": [
       {
         "titolo": "Self-Portrait",
