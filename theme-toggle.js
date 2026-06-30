@@ -89,13 +89,15 @@
       'background: transparent',
       'border: 1px solid currentColor',
       'border-radius: 3px',
-      'padding: 6px 12px',
+      'padding: 4px 8px',
+      'margin-left: 4px',
       'font-family: Inter, sans-serif',
-      'font-size: 0.7rem',
-      'letter-spacing: 0.06em',
+      'font-size: 0.65rem',
+      'letter-spacing: 0.04em',
       'text-transform: uppercase',
       'cursor: pointer',
-      'opacity: 0.85'
+      'opacity: 0.85',
+      'white-space: nowrap'
     ].join(';');
 
     btn.addEventListener('click', function () {
