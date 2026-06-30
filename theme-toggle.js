@@ -86,17 +86,18 @@
     btn.className = 'theme-toggle';
     btn.type = 'button';
     btn.style.cssText = [
-      'background: transparent',
-      'border: 1px solid currentColor',
+      'background: #EE1337',
+      'border: 1px solid #EE1337',
       'border-radius: 3px',
-      'padding: 4px 8px',
+      'padding: 5px 10px',
       'margin-left: 4px',
       'font-family: Inter, sans-serif',
       'font-size: 0.65rem',
       'letter-spacing: 0.04em',
       'text-transform: uppercase',
+      'color: #fff',
       'cursor: pointer',
-      'opacity: 0.85',
+      'opacity: 1',
       'white-space: nowrap'
     ].join(';');
 
