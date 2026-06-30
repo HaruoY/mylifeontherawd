@@ -1,193 +1,166 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My life on the rawd</title>
-<link href="fonts.css" rel="stylesheet">
-<style>
-  :root {
-    --bg: #161412;
-    --ink: #F2EEE4;
-    --muted: #9B9690;
-    --accent: #EE1337;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html, body {
-    height: 100%;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: 'Inter', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    overflow: hidden;
-  }
-
-  a { color: inherit; text-decoration: none; }
-
-  .landing {
-    position: relative;
-    height: 100vh;
-    width: 100%;
-    overflow: hidden;
-  }
-
-  .landing-photo-frame {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-  }
-
-  .landing-photo-frame img {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    filter: grayscale(15%) contrast(1.05) brightness(0.8);
-  }
-
-  /* ---------- HEADER / NAV ---------- */
-  header {
-    position: relative;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 14px 0;
-    padding: 30px 40px;
-  }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    line-height: 1.25;
-    text-shadow: 0 1px 10px rgba(0,0,0,0.5);
-  }
-
-  .logo .bar {
-    width: 2px;
-    height: 44px;
-    background: var(--accent);
-    flex-shrink: 0;
-  }
-
-  .logo .tagline {
-    display: block;
-    font-size: 0.6rem;
-    letter-spacing: 0.02em;
-    color: var(--ink);
-    margin-top: 4px;
-    opacity: 0.85;
-    text-transform: none;
-  }
-
-  nav {
-    display: flex;
-    gap: 30px;
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  nav a {
-    position: relative;
-    padding: 14px 0 8px;
-    text-shadow: 0 1px 10px rgba(0,0,0,0.5);
-  }
-
-  nav a::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 1px;
-    background: rgba(242,238,228,0.4);
-    transition: background 0.25s ease;
-  }
-
-  nav a:hover::before,
-  nav a.active::before {
-    background: var(--accent);
-  }
-
-  /* ---------- TITLE ---------- */
-  .landing-title {
-    position: absolute;
-    left: 50%;
-    top: 56%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    z-index: 10;
-    width: 100%;
-    padding: 0 24px;
-  }
-
-  .landing-title h1 {
-    font-family: 'Archivo Black', sans-serif;
-    font-weight: 400;
-    color: var(--accent);
-    font-size: clamp(2.2rem, 8vw, 5.8rem);
-    line-height: 0.95;
-    letter-spacing: -0.01em;
-    text-transform: uppercase;
-    text-shadow: 0 2px 24px rgba(0,0,0,0.6);
-    -webkit-text-stroke: 1.5px var(--ink);
-    paint-order: stroke fill;
-  }
-
-  @media (max-width: 720px) {
-    header { padding: 22px 20px; }
-    .logo { font-size: 0.78rem; }
-    .logo .bar { height: 38px; }
-    .logo .tagline { font-size: 0.52rem; max-width: 200px; }
-    nav { gap: 18px; font-size: 0.65rem; flex-wrap: wrap; }
-  }
-
-  @media (max-width: 420px) {
-    .logo .tagline { display: none; }
-    .logo .bar { height: 28px; }
-  }
-
-  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigatore Minimal</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: white;
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #inputs {
+            margin-bottom: 20px;
+            text-align: center;
+            z-index: 10;
+        }
+        input {
+            padding: 8px;
+            margin: 4px;
+            border-radius: 5px;
+            border: none;
+            width: 120px;
+        }
+        button {
+            padding: 8px 15px;
+            background-color: #00adb5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #compass-container {
+            width: 300px;
+            height: 300px;
+            position: relative;
+        }
+        #arrow {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.1s ease-out;
+        }
+        #info {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #aaaaaa;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
-<div class="landing">
-  <div class="landing-photo-frame">
-    <img src="images/landing-cover.jpg" alt="">
-  </div>
-
-  <header>
-    <div class="logo">
-      <span class="bar"></span>
-      <span>
-        My life<br>on the rawd
-        <span class="tagline">Life is photography we develop from negatives</span>
-      </span>
+    <div id="inputs">
+        <input type="number" id="destLat" placeholder="Lat Destinazione" step="any" value="41.8902">
+        <input type="number" id="destLon" placeholder="Lon Destinazione" step="any" value="12.4922">
+        <button onclick="startNavigation()">Avvia</button>
     </div>
-    <nav>
-      <a class="active" href="map.html">Map</a>
-      <a href="travel.html">Travel</a>
-      <a href="blog.html">Blog</a>
-      <a href="bio.html">Bio</a>
-      <a href="gear.html">Gear</a>
-    </nav>
-  </header>
 
-  <div class="landing-title">
-    <h1>My life on the rawd</h1>
-  </div>
-</div>
+    <div id="compass-container">
+        <svg id="arrow" viewBox="0 0 100 100">
+            <polygon points="50,5 95,95 50,75 5,95" fill="#00adb5" />
+        </svg>
+    </div>
 
+    <div id="info">Inserisci le coordinate e premi Avvia.<br>Richiede GPS e Bussola attivi.</div>
+
+    <script>
+        let destLat = 0;
+        let destLon = 0;
+        let currentLat = 0;
+        let currentLon = 0;
+        let deviceHeading = 0; // Direzione del telefono rispetto al Nord
+
+        function startNavigation() {
+            destLat = parseFloat(document.getElementById('destLat').value);
+            destLon = parseFloat(document.getElementById('destLon').value);
+            
+            // Richiesta permessi per i sensori (fondamentale su iOS)
+            if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+                DeviceOrientationEvent.requestPermission()
+                    .then(permissionState => {
+                        if (permissionState === 'granted') {
+                            window.addEventListener('deviceorientationabsolute', handleOrientation, true);
+                            window.addEventListener('deviceorientation', handleOrientation, true);
+                        }
+                    })
+                    .catch(console.error);
+            } else {
+                window.addEventListener('deviceorientationabsolute', handleOrientation, true);
+                window.addEventListener('deviceorientation', handleOrientation, true);
+            }
+
+            // Attiva il GPS ad alta precisione
+            if (navigator.geolocation) {
+                navigator.geolocation.watchPosition(updatePosition, handleError, {
+                    enableHighAccuracy: true, // Estrema precisione
+                    maximumAge: 0,
+                    timeout: 5000
+                });
+            } else {
+                alert("Il tuo browser non supporta il GPS.");
+            }
+        }
+
+        function updatePosition(position) {
+            currentLat = position.coords.coords ? position.coords.coords.latitude : position.coords.latitude;
+            currentLon = position.coords.coords ? position.coords.coords.longitude : position.coords.longitude;
+            updateArrow();
+        }
+
+        function handleOrientation(event) {
+            // Cerca di ottenere l'orientamento corretto rispetto al Nord magnetico/geografico
+            if (event.webkitCompassHeading) {
+                deviceHeading = event.webkitCompassHeading; // iOS
+            } else if (event.alpha) {
+                deviceHeading = 360 - event.alpha; // Android (approssimato se non absolute)
+            }
+            updateArrow();
+        }
+
+        // Formula matematica per calcolare l'angolo tra due punti sulla Terra (Bearing)
+        function calculateBearing(lat1, lon1, lat2, lon2) {
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            lat1 = lat1 * Math.PI / 180;
+            lat2 = lat2 * Math.PI / 180;
+
+            const y = Math.sin(dLon) * Math.cos(lat2);
+            const x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon);
+            
+            let bearing = Math.atan2(y, x) * 180 / Math.PI;
+            return (bearing + 360) % 360;
+        }
+
+        function updateArrow() {
+            if (currentLat === 0 && currentLon === 0) return;
+
+            const targetBearing = calculateBearing(currentLat, currentLon, destLat, destLon);
+            
+            // L'angolo finale della freccia sullo schermo
+            let arrowAngle = targetBearing - deviceHeading;
+            
+            // Applica la rotazione alla freccia SVG
+            document.getElementById('arrow').style.transform = `rotate(${arrowAngle}deg)`;
+            
+            // Mostra info di debug
+            document.getElementById('info').innerHTML = `
+                La tua pos: ${currentLat.toFixed(5)}, ${currentLon.toFixed(5)}<br>
+                Angolo Meta: ${targetBearing.toFixed(1)}° | Tua Direzione: ${deviceHeading.toFixed(1)}°
+            `;
+        }
+
+        function handleError(error) {
+            console.warn(`Errore GPS (${error.code}): ${error.message}`);
+        }
+    </script>
+<script src="theme-toggle.js"></script>
 </body>
 </html>
