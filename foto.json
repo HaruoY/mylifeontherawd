@@ -130,5 +130,18 @@
     "immagine_url": "images/the-vessel-10.jpg",
     "thumbnail_url": "images/the-vessel-10-thumb.jpg",
     "pubblicato": true
+  },
+  {
+    "id": 11,
+    "titolo": "Coney Island",
+    "categoria": "architettura",
+    "viaggio": "New York 2022",
+    "luogo": "Coney Island, New York",
+    "lat": null,
+    "lng": null,
+    "data": "2022-08-12",
+    "immagine_url": "images/coney-island-11.jpg",
+    "thumbnail_url": "images/coney-island-11-thumb.jpg",
+    "pubblicato": true
   }
 ]

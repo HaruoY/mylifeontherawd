@@ -1,0 +1,5 @@
+titolo: Coney Island
+categoria: architettura
+viaggio: New York 2022
+luogo: Coney Island, New York
+data: 2022-08-12
