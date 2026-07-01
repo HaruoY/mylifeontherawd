@@ -332,22 +332,25 @@
     const minLng = Math.min(...lngs);
     const maxLng = Math.max(...lngs);
 
-    // Se tutte le foto sono nello stesso punto, allarga un po' la vista
-    const dLat = Math.max(maxLat - minLat, 2);
-    const dLng = Math.max(maxLng - minLng, 2);
+    // Margine fisso in gradi — abbastanza per vedere il contesto immediato
+    // senza mostrare mezzo continente. Se le foto coprono già un'area ampia
+    // (es. viaggio cross-country) il margine rimane proporzionalmente piccolo.
+    const dLat = maxLat - minLat;
+    const dLng = maxLng - minLng;
+    const margLat = Math.max(dLat * 0.15, 1.5);  // minimo 1.5° (~165 km)
+    const margLng = Math.max(dLng * 0.15, 1.5);
 
     // GeoJSON del bounding box del viaggio (con margine)
-    const margineFactor = 0.4;
     const bbox = {
       type: 'Feature',
       geometry: {
         type: 'Polygon',
         coordinates: [[
-          [minLng - dLng * margineFactor, minLat - dLat * margineFactor],
-          [maxLng + dLng * margineFactor, minLat - dLat * margineFactor],
-          [maxLng + dLng * margineFactor, maxLat + dLat * margineFactor],
-          [minLng - dLng * margineFactor, maxLat + dLat * margineFactor],
-          [minLng - dLng * margineFactor, minLat - dLat * margineFactor],
+          [minLng - margLng, minLat - margLat],
+          [maxLng + margLng, minLat - margLat],
+          [maxLng + margLng, maxLat + margLat],
+          [minLng - margLng, maxLat + margLat],
+          [minLng - margLng, minLat - margLat],
         ]]
       }
     };
