@@ -19,8 +19,8 @@
  *
  * 3. Lancia: node publish.js
  *
- * Lo script comprime ogni foto, aggiorna foto.json, sposta gli originali
- * in nuove-foto/pubblicate/, e fa commit + push automaticamente.
+ * Lo script comprime ogni foto, genera la thumbnail, aggiorna foto.json,
+ * sposta gli originali in nuove-foto/pubblicate/, e fa commit + push.
  *
  * REQUISITI (da installare una sola volta):
  *   npm install sharp
@@ -35,9 +35,15 @@ const NUOVE_FOTO_DIR = path.join(ROOT_DIR, 'nuove-foto');
 const PUBBLICATE_DIR = path.join(NUOVE_FOTO_DIR, 'pubblicate');
 const IMAGES_DIR = path.join(ROOT_DIR, 'images');
 const FOTO_JSON_PATH = path.join(ROOT_DIR, 'foto.json');
+const GEO_CACHE_PATH = path.join(ROOT_DIR, '.geo-cache.json');
 
 const CATEGORIE_VALIDE = ['reportage', 'street', 'architettura', 'arte', 'paesaggi'];
-const GEO_CACHE_PATH = path.join(ROOT_DIR, '.geo-cache.json');
+
+// Dimensioni immagini output
+const IMG_MAX_PX   = 2000;  // lato lungo versione grande
+const THUMB_MAX_PX = 600;   // lato lungo thumbnail
+const IMG_QUALITY  = 87;
+const THUMB_QUALITY = 75;
 
 function slugify(str) {
   return str
@@ -48,11 +54,8 @@ function slugify(str) {
 }
 
 function leggiCacheGeo() {
-  try {
-    return JSON.parse(fs.readFileSync(GEO_CACHE_PATH, 'utf8'));
-  } catch {
-    return {};
-  }
+  try { return JSON.parse(fs.readFileSync(GEO_CACHE_PATH, 'utf8')); }
+  catch { return {}; }
 }
 
 function salvaCacheGeo(cache) {
@@ -90,9 +93,7 @@ function leggiMetadati(percorsoTxt) {
   const dati = {};
   contenuto.split('\n').forEach(riga => {
     const match = riga.match(/^\s*([a-zA-Z_]+)\s*:\s*(.+?)\s*$/);
-    if (match) {
-      dati[match[1].trim().toLowerCase()] = match[2].trim();
-    }
+    if (match) dati[match[1].trim().toLowerCase()] = match[2].trim();
   });
   return dati;
 }
@@ -103,10 +104,8 @@ function trovaCoppieDaPubblicare() {
     console.log(`Creata la cartella ${NUOVE_FOTO_DIR}. Metti li' le foto da pubblicare e rilancia lo script.`);
     return [];
   }
-
   const file = fs.readdirSync(NUOVE_FOTO_DIR);
   const jpgFile = file.filter(f => /\.(jpe?g)$/i.test(f));
-
   const coppie = [];
   for (const jpg of jpgFile) {
     const base = jpg.replace(/\.(jpe?g)$/i, '');
@@ -177,13 +176,26 @@ async function main() {
       }
     }
 
-    const nomeFileFinale = `${slugify(dati.titolo)}-${prossimoId}.jpg`;
-    const percorsoFinale = path.join(IMAGES_DIR, nomeFileFinale);
+    const nomeBase = `${slugify(dati.titolo)}-${prossimoId}`;
+    const nomeFile = `${nomeBase}.jpg`;
+    const nomeThumb = `${nomeBase}-thumb.jpg`;
+    const percorsoFinale = path.join(IMAGES_DIR, nomeFile);
+    const percorsoThumb = path.join(IMAGES_DIR, nomeThumb);
 
+    // Versione grande
     await sharp(percorsoJpg)
-      .resize({ width: 2000, height: 2000, fit: 'inside', withoutEnlargement: true })
-      .jpeg({ quality: 87 })
+      .resize({ width: IMG_MAX_PX, height: IMG_MAX_PX, fit: 'inside', withoutEnlargement: true })
+      .jpeg({ quality: IMG_QUALITY })
       .toFile(percorsoFinale);
+
+    // Thumbnail
+    await sharp(percorsoJpg)
+      .resize({ width: THUMB_MAX_PX, height: THUMB_MAX_PX, fit: 'inside', withoutEnlargement: true })
+      .jpeg({ quality: THUMB_QUALITY })
+      .toFile(percorsoThumb);
+
+    console.log(`  Compressa: ${nomeFile}`);
+    console.log(`  Thumbnail: ${nomeThumb}`);
 
     const nuovaVoce = {
       id: prossimoId,
@@ -191,10 +203,11 @@ async function main() {
       categoria: dati.categoria.toLowerCase(),
       viaggio: dati.viaggio || null,
       luogo: dati.luogo || null,
-      lat: lat,
-      lng: lng,
+      lat,
+      lng,
       data: dati.data || new Date().toISOString().split('T')[0],
-      immagine_url: `images/${nomeFileFinale}`,
+      immagine_url: `images/${nomeFile}`,
+      thumbnail_url: `images/${nomeThumb}`,
       pubblicato: true
     };
 
@@ -224,7 +237,6 @@ async function main() {
     console.log('\nPubblicato! Il sito si aggiornera\' in 1-2 minuti.');
   } catch (err) {
     console.error('\nErrore durante il commit/push. Controlla il messaggio sopra.');
-    console.error('Puoi comunque completare manualmente con: git add . && git commit -m "..." && git push');
   }
 }
 

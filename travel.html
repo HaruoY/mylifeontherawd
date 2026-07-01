@@ -304,7 +304,7 @@
       const viaggiMap = new Map();
       fotoConViaggio.forEach(p => {
         if (!viaggiMap.has(p.viaggio)) {
-          viaggiMap.set(p.viaggio, { copertina: p.immagine_url, cropPosition: p.crop_position || null, count: 0, dataMin: p.data || null });
+          viaggiMap.set(p.viaggio, { copertina: p.thumbnail_url || p.immagine_url, cropPosition: p.crop_position || null, count: 0, dataMin: p.data || null });
         }
         const info = viaggiMap.get(p.viaggio);
         info.count++;

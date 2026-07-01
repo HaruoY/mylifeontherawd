@@ -9,7 +9,8 @@
     "lng": 12.589847,
     "data": "2026-06-27",
     "immagine_url": "images/nyhavn.jpg",
-    "pubblicato": true
+    "pubblicato": true,
+    "thumbnail_url": "images/nyhavn-thumb.jpg"
   },
   {
     "id": 2,
@@ -21,7 +22,8 @@
     "lng": -3.218433,
     "data": "2026-06-27",
     "immagine_url": "images/dean-village.jpg",
-    "pubblicato": true
+    "pubblicato": true,
+    "thumbnail_url": "images/dean-village-thumb.jpg"
   },
   {
     "id": 3,
@@ -33,7 +35,8 @@
     "lng": -8.9039,
     "data": "2026-06-27",
     "immagine_url": "images/cies-islands.jpg",
-    "pubblicato": true
+    "pubblicato": true,
+    "thumbnail_url": "images/cies-islands-thumb.jpg"
   },
   {
     "id": 4,
@@ -45,7 +48,8 @@
     "lng": -122.4783,
     "data": "2026-06-27",
     "immagine_url": "images/golden-gate.jpg",
-    "pubblicato": true
+    "pubblicato": true,
+    "thumbnail_url": "images/golden-gate-thumb.jpg"
   },
   {
     "id": 5,
@@ -58,7 +62,8 @@
     "data": "2021-01-01",
     "immagine_url": "images/zaanse-schans.jpg",
     "crop_position": "center bottom",
-    "pubblicato": true
+    "pubblicato": true,
+    "thumbnail_url": "images/zaanse-schans-thumb.jpg"
   },
   {
     "id": 6,
@@ -70,7 +75,8 @@
     "lng": 4.8179761,
     "data": "2021-08-14",
     "immagine_url": "images/zaanse-schans-6.jpg",
-    "pubblicato": true
+    "pubblicato": true,
+    "thumbnail_url": "images/zaanse-schans-6-thumb.jpg"
   },
   {
     "id": 7,
@@ -79,10 +85,11 @@
     "viaggio": "New York 2022",
     "luogo": "Manhattan, New York",
     "lat": 40.7128,
-    "lng": -74.0060,
+    "lng": -74.006,
     "data": "2022-08-04",
     "immagine_url": "images/new-york.jpg",
-    "pubblicato": true
+    "pubblicato": true,
+    "thumbnail_url": "images/new-york-thumb.jpg"
   },
   {
     "id": 8,
@@ -94,7 +101,8 @@
     "lng": 135.7727,
     "data": "2019-08-19",
     "immagine_url": "images/kyoto.jpg",
-    "pubblicato": true
+    "pubblicato": true,
+    "thumbnail_url": "images/kyoto-thumb.jpg"
   },
   {
     "id": 9,
@@ -107,6 +115,7 @@
     "data": "2026-06-30",
     "immagine_url": "images/chicago-cloud-gate.jpg",
     "crop_position": "center 65%",
-    "pubblicato": true
+    "pubblicato": true,
+    "thumbnail_url": "images/chicago-cloud-gate-thumb.jpg"
   }
 ]
