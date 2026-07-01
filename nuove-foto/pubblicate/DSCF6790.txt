@@ -1,0 +1,7 @@
+titolo: Statue of Liberty
+categoria: architettura
+viaggio: New York 2022
+luogo: Liberty Island, New York
+data: 2022-08-05
+lat: 40.6892
+lng: -74.0445

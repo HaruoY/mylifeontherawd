@@ -1,0 +1,7 @@
+titolo: Flatiron Building
+categoria: architettura
+viaggio: New York 2022
+luogo: Flatiron District, Manhattan, New York
+data: 2022-08-06
+lat: 40.7411
+lng: -73.9897

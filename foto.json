@@ -143,5 +143,83 @@
     "immagine_url": "images/coney-island-11.jpg",
     "thumbnail_url": "images/coney-island-11-thumb.jpg",
     "pubblicato": true
+  },
+  {
+    "id": 12,
+    "titolo": "Steam on the Street",
+    "categoria": "reportage",
+    "viaggio": "New York 2022",
+    "luogo": "Midtown Manhattan, New York",
+    "lat": null,
+    "lng": null,
+    "data": "2022-08-04",
+    "immagine_url": "images/steam-on-the-street-12.jpg",
+    "thumbnail_url": "images/steam-on-the-street-12-thumb.jpg",
+    "pubblicato": true
+  },
+  {
+    "id": 13,
+    "titolo": "Yankees Sign",
+    "categoria": "street",
+    "viaggio": "New York 2022",
+    "luogo": "Bronx, New York",
+    "lat": null,
+    "lng": null,
+    "data": "2022-08-04",
+    "immagine_url": "images/yankees-sign-13.jpg",
+    "thumbnail_url": "images/yankees-sign-13-thumb.jpg",
+    "pubblicato": true
+  },
+  {
+    "id": 14,
+    "titolo": "Statue of Liberty",
+    "categoria": "architettura",
+    "viaggio": "New York 2022",
+    "luogo": "Liberty Island, New York",
+    "lat": 40.6892,
+    "lng": -74.0445,
+    "data": "2022-08-05",
+    "immagine_url": "images/statue-of-liberty-14.jpg",
+    "thumbnail_url": "images/statue-of-liberty-14-thumb.jpg",
+    "pubblicato": true
+  },
+  {
+    "id": 15,
+    "titolo": "Fearless Girl",
+    "categoria": "arte",
+    "viaggio": "New York 2022",
+    "luogo": "Wall Street, Manhattan, New York",
+    "lat": 40.7069,
+    "lng": -74.013,
+    "data": "2022-08-05",
+    "immagine_url": "images/fearless-girl-15.jpg",
+    "thumbnail_url": "images/fearless-girl-15-thumb.jpg",
+    "pubblicato": true
+  },
+  {
+    "id": 16,
+    "titolo": "Flatiron Building",
+    "categoria": "architettura",
+    "viaggio": "New York 2022",
+    "luogo": "Flatiron District, Manhattan, New York",
+    "lat": 40.7411,
+    "lng": -73.9897,
+    "data": "2022-08-06",
+    "immagine_url": "images/flatiron-building-16.jpg",
+    "thumbnail_url": "images/flatiron-building-16-thumb.jpg",
+    "pubblicato": true
+  },
+  {
+    "id": 17,
+    "titolo": "Manhattan Bridge - DUMBO",
+    "categoria": "architettura",
+    "viaggio": "New York 2022",
+    "luogo": "DUMBO, Brooklyn, New York",
+    "lat": 40.7033,
+    "lng": -73.99,
+    "data": "2022-08-06",
+    "immagine_url": "images/manhattan-bridge-dumbo-17.jpg",
+    "thumbnail_url": "images/manhattan-bridge-dumbo-17-thumb.jpg",
+    "pubblicato": true
   }
 ]

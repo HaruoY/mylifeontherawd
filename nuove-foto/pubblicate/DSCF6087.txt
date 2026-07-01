@@ -1,0 +1,5 @@
+titolo: Yankees Sign
+categoria: street
+viaggio: New York 2022
+luogo: Bronx, New York
+data: 2022-08-04

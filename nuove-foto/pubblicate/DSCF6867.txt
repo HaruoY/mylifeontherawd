@@ -1,0 +1,7 @@
+titolo: Fearless Girl
+categoria: arte
+viaggio: New York 2022
+luogo: Wall Street, Manhattan, New York
+data: 2022-08-05
+lat: 40.7069
+lng: -74.0130
