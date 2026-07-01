@@ -3,3 +3,5 @@ categoria: reportage
 viaggio: New York 2022
 luogo: Midtown Manhattan, New York
 data: 2022-08-04
+lat: 40.7549
+lng: -73.9840
