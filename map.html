@@ -268,15 +268,20 @@
     return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   }
 
+  // Coordinate di partenza/arrivo (casa)
+  const CASA = { lat: 41.130643096083396, lng: 14.7609671318006 };
+
   function calcolaKmTotali(fotoConCoordinate) {
     const ordinate = [...fotoConCoordinate].sort((a, b) =>
       new Date(a.data || 0) - new Date(b.data || 0)
     );
+    // Aggiunge casa come punto di partenza e ritorno
+    const percorso = [CASA, ...ordinate, CASA];
     let totale = 0;
-    for (let i = 1; i < ordinate.length; i++) {
+    for (let i = 1; i < percorso.length; i++) {
       totale += distanzaKm(
-        ordinate[i - 1].lat, ordinate[i - 1].lng,
-        ordinate[i].lat, ordinate[i].lng
+        percorso[i - 1].lat, percorso[i - 1].lng,
+        percorso[i].lat, percorso[i].lng
       );
     }
     return Math.round(totale);
