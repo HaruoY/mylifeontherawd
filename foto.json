@@ -351,5 +351,18 @@
     "immagine_url": "images/route-66-27.jpg",
     "thumbnail_url": "images/route-66-27-thumb.jpg",
     "pubblicato": true
+  },
+  {
+    "id": 28,
+    "titolo": "Route 66 General Store",
+    "categoria": "reportage",
+    "viaggio": "Route 66 2018/2023",
+    "luogo": "Tucumcari, New Mexico",
+    "lat": 35.1717,
+    "lng": -103.7249,
+    "data": "2018-07-18",
+    "immagine_url": "images/route-66-general-store-28.jpg",
+    "thumbnail_url": "images/route-66-general-store-28-thumb.jpg",
+    "pubblicato": true
   }
 ]
