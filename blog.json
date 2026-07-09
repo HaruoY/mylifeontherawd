@@ -200,5 +200,51 @@
         "descrizione": "Discovered on the island of Milos in 1820, the statue arrived in Paris within the year — a diplomatic gift that became one of the museum's defining works. The missing arms have been debated for two centuries; the leading theory places one reaching forward, one holding a shield. The marble background installed in the 1980s matches the reddish walls of the original room and is almost never noticed."
       }
     ]
+  },
+  {
+    "id": 5,
+    "nome": "Route 66",
+    "luogo": "Chicago to Los Angeles, US",
+    "pubblicato": true,
+    "copertina": "images/route-66-27.jpg",
+    "copertina_position": "center 40%",
+    "opere": [
+      {
+        "titolo": "Big Texan Steak Ranch",
+        "artista": "Amarillo, Texas",
+        "immagine_url": "images/big-texan-steak-ranch-19.jpg",
+        "descrizione": "An Amarillo institution since 1960, famous for its free 72oz steak challenge. The oversized neon cowboy has been luring drivers off the interstate for decades."
+      },
+      {
+        "titolo": "Cadillac Ranch",
+        "artista": "Ant Farm collective, 1974",
+        "immagine_url": "images/cadillac-ranch-20.jpg",
+        "descrizione": "Ten Cadillacs buried nose-first in a wheat field outside Amarillo. Visitors are encouraged to bring spray paint — the surface changes completely every few weeks."
+      },
+      {
+        "titolo": "Blue Swallow Motel",
+        "artista": "Tucumcari, New Mexico",
+        "immagine_url": "images/blue-swallow-motel-21.jpg",
+        "descrizione": "Open since 1939, one of the last fully intact motor courts on the original route. The neon sign still lights up every night, visible for miles across the high desert."
+      },
+      {
+        "titolo": "Seligman Police Car",
+        "artista": "Seligman, Arizona",
+        "immagine_url": "images/seligman-police-car-24.jpg",
+        "descrizione": "Seligman is where the fight to preserve Route 66 started. Angel Delgadillo organized the Historic Route 66 Association in 1987 after the bypass killed the town overnight."
+      },
+      {
+        "titolo": "Frontier Motel",
+        "artista": "Truxton, Arizona",
+        "immagine_url": "images/frontier-motel-25.jpg",
+        "descrizione": "The sign still stands but the rooms have been empty for years. Truxton lost its traffic when Interstate 40 opened in 1978."
+      },
+      {
+        "titolo": "Route 66",
+        "artista": "Mojave Desert, California",
+        "immagine_url": "images/route-66-27.jpg",
+        "descrizione": "The original shield painted on the asphalt, cracked and bleached by decades of desert sun. One of the longest continuous sections of the original 1926 alignment still driveable."
+      }
+    ]
   }
 ]
