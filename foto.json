@@ -240,7 +240,7 @@
     "titolo": "Big Texan Steak Ranch",
     "categoria": "reportage",
     "viaggio": "Route 66 2018/2023",
-    "luogo": "Amarillo, Texas",
+    "luogo": "Amarillo, Texas",  '"viaggio": null'
     "lat": 35.1978,
     "lng": -101.7845,
     "data": "2023-08-01",
@@ -252,7 +252,7 @@
     "id": 20,
     "titolo": "Cadillac Ranch",
     "categoria": "arte",
-    "viaggio": "Route 66 2018/2023",
+    "viaggio": "Route 66 2018/2023", '"viaggio": null'
     "luogo": "Amarillo, Texas",
     "lat": 35.1872,
     "lng": -101.987,
@@ -265,7 +265,7 @@
     "id": 21,
     "titolo": "Blue Swallow Motel",
     "categoria": "reportage",
-    "viaggio": "Route 66 2018/2023",
+    "viaggio": "Route 66 2018/2023", '"viaggio": null'
     "luogo": "Tucumcari, New Mexico",
     "lat": 35.1717,
     "lng": -103.7249,
@@ -278,7 +278,7 @@
     "id": 22,
     "titolo": "Phillips 66 Museum",
     "categoria": "reportage",
-    "viaggio": "Route 66 201/2023",
+    "viaggio": "Route 66 201/2023", '"viaggio": null'
     "luogo": "McLean, Texas",
     "lat": 35.227,
     "lng": -100.596,
@@ -291,7 +291,7 @@
     "id": 23,
     "titolo": "American Flag",
     "categoria": "street",
-    "viaggio": "Route 66 2018/2023",
+    "viaggio": "Route 66 2018/2023", '"viaggio": null'
     "luogo": "Seligman, Arizona",
     "lat": 35.3264,
     "lng": -112.8874,
@@ -304,7 +304,7 @@
     "id": 24,
     "titolo": "Seligman Police Car",
     "categoria": "reportage",
-    "viaggio": "Route 66 2018/2023",
+    "viaggio": "Route 66 2018/2023", '"viaggio": null'
     "luogo": "Seligman, Arizona",
     "lat": 35.3264,
     "lng": -112.8874,
@@ -317,7 +317,7 @@
     "id": 25,
     "titolo": "Frontier Motel",
     "categoria": "reportage",
-    "viaggio": "Route 66 2018/2023",
+    "viaggio": "Route 66 2018/2023", '"viaggio": null'
     "luogo": "Truxton, Arizona",
     "lat": 35.5378,
     "lng": -113.5678,
@@ -330,7 +330,7 @@
     "id": 26,
     "titolo": "Cool Water Cafe",
     "categoria": "reportage",
-    "viaggio": "Route 66 2018/2023",
+    "viaggio": "Route 66 2018/2023", '"viaggio": null'
     "luogo": "Kingman, Arizona",
     "lat": 35.1895,
     "lng": -114.053,
@@ -343,7 +343,7 @@
     "id": 27,
     "titolo": "Route 66",
     "categoria": "paesaggi",
-    "viaggio": "Route 66 2018/2023",
+    "viaggio": "Route 66 2018/2023", '"viaggio": null'
     "luogo": "Mojave Desert, California",
     "lat": 34.9592,
     "lng": -115.0894,
@@ -356,7 +356,7 @@
     "id": 28,
     "titolo": "Route 66 General Store",
     "categoria": "reportage",
-    "viaggio": "Route 66 2018/2023",
+    "viaggio": "Route 66 2018/2023", '"viaggio": null'
     "luogo": "Tucumcari, New Mexico",
     "lat": 35.1717,
     "lng": -103.7249,
