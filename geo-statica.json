@@ -1,0 +1,127 @@
+{
+  "55.680,12.590": {
+    "nome": "Denmark",
+    "codice": "dk",
+    "stato": null
+  },
+  "55.952,-3.218": {
+    "nome": "United Kingdom",
+    "codice": "gb",
+    "stato": null
+  },
+  "42.223,-8.904": {
+    "nome": "Spain",
+    "codice": "es",
+    "stato": null
+  },
+  "37.820,-122.478": {
+    "nome": "United States",
+    "codice": "us",
+    "stato": "California"
+  },
+  "52.471,4.810": {
+    "nome": "Netherlands",
+    "codice": "nl",
+    "stato": null
+  },
+  "52.475,4.818": {
+    "nome": "Netherlands",
+    "codice": "nl",
+    "stato": null
+  },
+  "40.713,-74.006": {
+    "nome": "United States",
+    "codice": "us",
+    "stato": "New York"
+  },
+  "34.967,135.773": {
+    "nome": "Japan",
+    "codice": "jp",
+    "stato": null
+  },
+  "41.883,-87.623": {
+    "nome": "United States",
+    "codice": "us",
+    "stato": "Illinois"
+  },
+  "40.754,-74.002": {
+    "nome": "United States",
+    "codice": "us",
+    "stato": "New York"
+  },
+  "40.575,-73.986": {
+    "nome": "United States",
+    "codice": "us",
+    "stato": "New York"
+  },
+  "40.755,-73.984": {
+    "nome": "United States",
+    "codice": "us",
+    "stato": "New York"
+  },
+  "40.689,-74.044": {
+    "nome": "United States",
+    "codice": "us",
+    "stato": "New York"
+  },
+  "40.707,-74.013": {
+    "nome": "United States",
+    "codice": "us",
+    "stato": "New York"
+  },
+  "40.741,-73.990": {
+    "nome": "United States",
+    "codice": "us",
+    "stato": "New York"
+  },
+  "40.703,-73.990": {
+    "nome": "United States",
+    "codice": "us",
+    "stato": "New York"
+  },
+  "40.702,-73.996": {
+    "nome": "United States",
+    "codice": "us",
+    "stato": "New York"
+  },
+  "35.198,-101.784": {
+    "nome": "United States",
+    "codice": "us",
+    "stato": "Texas"
+  },
+  "35.187,-101.987": {
+    "nome": "United States",
+    "codice": "us",
+    "stato": "Texas"
+  },
+  "35.172,-103.725": {
+    "nome": "United States",
+    "codice": "us",
+    "stato": "New Mexico"
+  },
+  "35.227,-100.596": {
+    "nome": "United States",
+    "codice": "us",
+    "stato": "Texas"
+  },
+  "35.326,-112.887": {
+    "nome": "United States",
+    "codice": "us",
+    "stato": "Arizona"
+  },
+  "35.538,-113.568": {
+    "nome": "United States",
+    "codice": "us",
+    "stato": "Arizona"
+  },
+  "35.190,-114.053": {
+    "nome": "United States",
+    "codice": "us",
+    "stato": "Arizona"
+  },
+  "34.959,-115.089": {
+    "nome": "United States",
+    "codice": "us",
+    "stato": "California"
+  }
+}
