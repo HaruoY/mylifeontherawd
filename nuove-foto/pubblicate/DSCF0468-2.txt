@@ -1,0 +1,7 @@
+titolo: Blue Swallow Motel
+categoria: reportage
+viaggio: Route 66 2018/2023
+luogo: Tucumcari, New Mexico
+data: 2023-08-02
+lat: 35.1717
+lng: -103.7249

@@ -1,0 +1,7 @@
+titolo: Frontier Motel
+categoria: reportage
+viaggio: Route 66 2018/2023
+luogo: Truxton, Arizona
+data: 2016-07-18
+lat: 35.5378
+lng: -113.5678

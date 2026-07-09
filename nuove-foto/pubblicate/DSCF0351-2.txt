@@ -1,0 +1,7 @@
+titolo: Big Texan Steak Ranch
+categoria: reportage
+viaggio: Route 66 2018/2023
+luogo: Amarillo, Texas
+data: 2023-08-01
+lat: 35.1978
+lng: -101.7845

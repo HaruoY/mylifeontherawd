@@ -1,0 +1,7 @@
+titolo: Seligman Police Car
+categoria: reportage
+viaggio: Route 66 2018/2023
+luogo: Seligman, Arizona
+data: 2016-07-18
+lat: 35.3264
+lng: -112.8874

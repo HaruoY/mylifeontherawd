@@ -1,0 +1,7 @@
+titolo: Phillips 66 Museum
+categoria: reportage
+viaggio: Route 66 201/2023
+luogo: McLean, Texas
+data: 2016-07-15
+lat: 35.2270
+lng: -100.5960

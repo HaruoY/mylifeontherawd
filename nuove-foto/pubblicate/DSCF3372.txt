@@ -1,0 +1,7 @@
+titolo: Cool Water Cafe
+categoria: reportage
+viaggio: Route 66 2018/2023
+luogo: Kingman, Arizona
+data: 2016-07-19
+lat: 35.1895
+lng: -114.0530

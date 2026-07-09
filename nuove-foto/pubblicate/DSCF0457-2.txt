@@ -1,0 +1,7 @@
+titolo: Cadillac Ranch
+categoria: arte
+viaggio: Route 66 2018/2023
+luogo: Amarillo, Texas
+data: 2023-08-01
+lat: 35.1872
+lng: -101.9870

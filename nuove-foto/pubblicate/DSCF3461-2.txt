@@ -1,0 +1,7 @@
+titolo: Route 66
+categoria: paesaggi
+viaggio: Route 66 2018/2023
+luogo: Mojave Desert, California
+data: 2016-07-20
+lat: 34.9592
+lng: -115.0894
