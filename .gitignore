@@ -5,3 +5,8 @@ Thumbs.db
 # Eventuali file temporanei di editor
 *.swp
 *~
+
+*.docx
+*.pdf
+*.xlsx
+*.xls
