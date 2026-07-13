@@ -311,6 +311,11 @@
         if (p.data && (!info.dataMin || p.data < info.dataMin)) {
           info.dataMin = p.data;
         }
+        // Se la foto è marcata come copertina esplicita del viaggio, usala
+        if (p.copertina_viaggio) {
+          info.copertina = p.thumbnail_url || p.immagine_url;
+          info.cropPosition = p.crop_position || null;
+        }
       });
 
       const viaggi = Array.from(viaggiMap.entries()).sort((a, b) => {

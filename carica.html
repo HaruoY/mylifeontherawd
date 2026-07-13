@@ -455,6 +455,14 @@
       <input type="text" id="t-viaggio-nuovo" placeholder="e.g. Japan 2019">
     </div>
 
+    <div class="field" id="new-viaggio-copertina-field" style="display:none">
+      <label>Use this photo as trip cover <span class="optional">optional</span></label>
+      <select id="t-copertina-nuovo">
+        <option value="no">No — just add to the trip</option>
+        <option value="si">Yes — use as cover image</option>
+      </select>
+    </div>
+
     <div class="field">
       <label>Location</label>
       <input type="text" id="t-luogo" placeholder="e.g. Kyoto, Japan">
@@ -714,13 +722,14 @@ async function caricaJson() {
 
 function onViaggioChange() {
   const v = document.getElementById('t-viaggio-select').value;
-  document.getElementById('new-viaggio-field').style.display = v === '__new__' ? 'block' : 'none';
+  const isNew = v === '__new__';
+  document.getElementById('new-viaggio-field').style.display = isNew ? 'block' : 'none';
+  document.getElementById('new-viaggio-copertina-field').style.display = isNew ? 'block' : 'none';
 }
 
 function onMuseoChange() {
   const v = document.getElementById('b-museo').value;
   document.getElementById('new-museo-fields').style.display = v === '__new__' ? 'block' : 'none';
-}
 }
 
 // ---- PUBLISH TRAVEL ----
@@ -733,6 +742,7 @@ async function pubblicaTravel() {
   const viaggio = selViaggio === '__new__'
     ? document.getElementById('t-viaggio-nuovo').value.trim()
     : selViaggio || null;
+  const isCopertina = selViaggio === '__new__' && document.getElementById('t-copertina-nuovo').value === 'si';
   const luogo   = document.getElementById('t-luogo').value.trim();
   const latV    = document.getElementById('t-lat').value;
   const lngV    = document.getElementById('t-lng').value;
@@ -780,12 +790,22 @@ async function pubblicaTravel() {
   };
 
   if (crop) nuovaFoto.crop_position = crop;
+  if (isCopertina) nuovaFoto.copertina_viaggio = true;
 
   fotoJson.data.push(nuovaFoto);
 
   const newContent = btoa(unescape(encodeURIComponent(JSON.stringify(fotoJson.data, null, 2) + '\n')));
   const res = await ghPut('foto.json', newContent, `Upload: ${titolo}`, fotoJson.sha);
   fotoJson.sha = res.content.sha;
+
+  // Aggiorna select viaggi con il nuovo viaggio
+  if (selViaggio === '__new__' && viaggio) {
+    const sel = document.getElementById('t-viaggio-select');
+    const newOpt = document.createElement('option');
+    newOpt.value = viaggio;
+    newOpt.textContent = viaggio;
+    sel.insertBefore(newOpt, sel.querySelector('[value="__new__"]'));
+  }
 
   setProgress('travel', 100);
   setStatus('travel', 'ok', `✓ <strong>${titolo}</strong> published successfully. The site will update in 1–2 minutes.`);
@@ -796,7 +816,9 @@ async function pubblicaTravel() {
   document.getElementById('t-categoria').value = '';
   document.getElementById('t-data').value = '';
   document.getElementById('t-viaggio-select').value = '';
+  document.getElementById('t-copertina-nuovo').value = 'no';
   document.getElementById('new-viaggio-field').style.display = 'none';
+  document.getElementById('new-viaggio-copertina-field').style.display = 'none';
 }
 
 // ---- PUBLISH BLOG ----
