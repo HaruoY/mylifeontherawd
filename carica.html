@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Carica foto — Strumento locale</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Upload — My life on the rawd</title>
+<link href="fonts.css" rel="stylesheet">
 <style>
   :root {
-    --bg: #FAFAF8;
-    --ink: #0A0A0A;
-    --muted: #6B6B63;
-    --accent: #C4441E;
-    --line: rgba(10,10,10,0.12);
-    --card: #ffffff;
-    --ok: #2F6B3A;
+    --bg: #161412;
+    --surface: #1E1B18;
+    --surface2: #252220;
+    --ink: #F2EEE4;
+    --muted: #9B9690;
+    --accent: #EE1337;
+    --line: #3A3633;
+    --green: #2D9B5A;
+    --yellow: #C8960C;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,441 +25,856 @@
     color: var(--ink);
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
-    padding: 48px 24px 100px;
+    min-height: 100vh;
   }
 
-  .wrap { max-width: 720px; margin: 0 auto; }
+  a { color: inherit; text-decoration: none; }
 
-  h1 {
-    font-family: 'Fraunces', serif;
-    font-weight: 500;
-    font-size: 1.7rem;
-    letter-spacing: -0.01em;
-  }
-
-  .sub {
-    color: var(--muted);
-    font-size: 0.92rem;
-    margin-top: 8px;
-    line-height: 1.5;
-    max-width: 540px;
-  }
-
-  .panel {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    padding: 28px;
-    margin-top: 32px;
-  }
-
-  .panel + .panel { margin-top: 20px; }
-
-  .panel h2 {
-    font-family: 'Fraunces', serif;
-    font-weight: 500;
-    font-size: 1.05rem;
-    margin-bottom: 18px;
-  }
-
-  .drop {
-    border: 1.5px dashed var(--line);
-    border-radius: 4px;
-    padding: 36px 20px;
-    text-align: center;
-    cursor: pointer;
-    transition: border-color 0.2s ease, background 0.2s ease;
-  }
-
-  .drop:hover, .drop.dragover {
-    border-color: var(--accent);
-    background: rgba(196, 68, 30, 0.03);
-  }
-
-  .drop p { color: var(--muted); font-size: 0.88rem; }
-  .drop p.main { color: var(--ink); font-size: 0.95rem; margin-bottom: 4px; }
-
-  input[type="file"] { display: none; }
-
-  .preview {
-    margin-top: 18px;
-    display: none;
-  }
-
-  .preview.show { display: block; }
-
-  .preview img {
-    max-width: 100%;
-    max-height: 320px;
-    display: block;
-    margin: 0 auto;
-    border-radius: 2px;
-  }
-
-  .preview-info {
-    margin-top: 12px;
-    font-size: 0.82rem;
-    color: var(--muted);
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
     display: flex;
-    justify-content: space-between;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .preview-info .ok { color: var(--ok); font-weight: 500; }
-
-  label {
-    display: block;
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--muted);
-    margin-bottom: 6px;
-    margin-top: 18px;
-  }
-
-  label:first-of-type { margin-top: 0; }
-
-  input[type="text"], input[type="number"], select {
-    width: 100%;
-    padding: 11px 12px;
-    border: 1px solid var(--line);
-    border-radius: 3px;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.92rem;
-    background: var(--bg);
-    color: var(--ink);
-  }
-
-  input:focus, select:focus {
-    outline: none;
-    border-color: var(--accent);
-  }
-
-  .row { display: flex; gap: 14px; }
-  .row > div { flex: 1; }
-
-  .hint {
-    font-size: 0.76rem;
-    color: var(--muted);
-    margin-top: 5px;
-  }
-
-  button {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.88rem;
-    font-weight: 500;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: opacity 0.2s ease;
-  }
-
-  button:disabled { opacity: 0.4; cursor: not-allowed; }
-
-  .btn-primary {
-    background: var(--ink);
-    color: #fff;
-    padding: 13px 22px;
-    width: 100%;
-    margin-top: 24px;
-  }
-
-  .btn-primary:hover:not(:disabled) { opacity: 0.88; }
-
-  .btn-secondary {
-    background: transparent;
-    border: 1px solid var(--line);
-    color: var(--ink);
-    padding: 9px 16px;
-    font-size: 0.8rem;
-  }
-
-  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
-
-  .output {
-    display: none;
-  }
-
-  .output.show { display: block; }
-
-  .output-row {
-    display: flex;
+    flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
+    padding: 28px 40px;
+    background: linear-gradient(to bottom, rgba(22,20,18,0.95), rgba(22,20,18,0));
+  }
+
+  .logo {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  nav { display: flex; flex-wrap: nowrap; gap: 16px; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; }
+  nav a { color: var(--muted); padding: 10px 0; transition: color 0.2s; }
+  nav a:hover { color: var(--ink); }
+
+  main {
+    padding: 140px 40px 80px;
+    max-width: 760px;
+  }
+
+  .page-label {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--accent);
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
     margin-bottom: 10px;
   }
 
-  .output-row span { font-size: 0.85rem; color: var(--muted); }
-
-  pre {
-    background: #14140f;
-    color: #e8e6e0;
-    padding: 16px;
-    border-radius: 3px;
-    font-size: 0.78rem;
-    line-height: 1.6;
-    overflow-x: auto;
-    margin-top: 10px;
-    white-space: pre-wrap;
-    word-break: break-all;
+  h1 {
+    font-family: 'Archivo Black', sans-serif;
+    font-weight: 400;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    margin-bottom: 40px;
   }
 
-  .step-num {
-    display: inline-flex;
+  /* Token section */
+  .token-section {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 24px;
+    margin-bottom: 32px;
+  }
+
+  .token-section.saved { border-color: var(--green); }
+
+  .token-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .token-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .token-row input {
+    flex: 1;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 10px 14px;
+    color: var(--ink);
+    font-family: 'Inter', monospace;
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+  }
+
+  .token-row input:focus { outline: 2px solid var(--accent); border-color: transparent; }
+
+  .token-status {
+    font-size: 0.72rem;
+    margin-top: 8px;
+    color: var(--muted);
+  }
+
+  .token-status.ok { color: var(--green); }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 32px;
+  }
+
+  .tab {
+    padding: 12px 24px;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.2s;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .tab.active {
+    color: var(--ink);
+    border-bottom-color: var(--accent);
+  }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* Drop zone */
+  .drop-zone {
+    border: 2px dashed var(--line);
+    border-radius: 4px;
+    padding: 48px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    margin-bottom: 28px;
+    position: relative;
+  }
+
+  .drop-zone:hover, .drop-zone.drag-over {
+    border-color: var(--accent);
+    background: rgba(238,19,55,0.04);
+  }
+
+  .drop-zone input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+  }
+
+  .drop-icon {
+    font-size: 2rem;
+    margin-bottom: 12px;
+    color: var(--muted);
+  }
+
+  .drop-text {
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+
+  .drop-text strong { color: var(--ink); }
+
+  /* Preview */
+  .preview-wrap {
+    display: none;
+    margin-bottom: 28px;
+    position: relative;
+  }
+
+  .preview-wrap img {
+    width: 100%;
+    max-height: 360px;
+    object-fit: cover;
+    border-radius: 4px;
+    filter: brightness(0.85);
+  }
+
+  .preview-name {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.03em;
+  }
+
+  .preview-remove {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.6);
+    border: none;
+    color: var(--ink);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--ink);
-    color: #fff;
+  }
+
+  /* Form fields */
+  .field {
+    margin-bottom: 20px;
+  }
+
+  .field label {
+    display: block;
     font-size: 0.7rem;
-    margin-right: 8px;
-    flex-shrink: 0;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
   }
 
-  .panel h2 { display: flex; align-items: center; }
+  .field input, .field select, .field textarea {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 11px 14px;
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.88rem;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+  }
 
-  .copied {
-    color: var(--ok);
+  .field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239B9690' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    cursor: pointer;
+  }
+
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: 2px solid var(--accent);
+    border-color: transparent;
+  }
+
+  .field textarea { resize: vertical; min-height: 90px; }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .field input::placeholder, .field textarea::placeholder { color: var(--muted); opacity: 0.6; }
+
+  /* Optional badge */
+  .optional {
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0.6;
+    margin-left: 6px;
+    font-weight: 400;
+  }
+
+  /* Submit */
+  .submit-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 32px;
+  }
+
+  .btn-publish {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 13px 28px;
+    font-family: 'Archivo Black', sans-serif;
     font-size: 0.78rem;
-    margin-left: 8px;
-    opacity: 0;
-    transition: opacity 0.2s ease;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.2s;
   }
 
-  .copied.show { opacity: 1; }
+  .btn-publish:hover { opacity: 0.88; }
+  .btn-publish:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* Status messages */
+  .status {
+    display: none;
+    padding: 14px 18px;
+    border-radius: 3px;
+    font-size: 0.83rem;
+    line-height: 1.5;
+    margin-top: 20px;
+  }
+
+  .status.info { display: block; background: var(--surface2); color: var(--muted); border-left: 3px solid var(--muted); }
+  .status.ok   { display: block; background: rgba(45,155,90,0.12); color: var(--green); border-left: 3px solid var(--green); }
+  .status.err  { display: block; background: rgba(238,19,55,0.1); color: var(--accent); border-left: 3px solid var(--accent); }
+
+  /* Progress bar */
+  .progress-bar {
+    height: 3px;
+    background: var(--line);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 16px;
+    display: none;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  footer {
+    padding: 32px 40px 40px;
+    font-size: 0.75rem;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+  }
+
+  @media (max-width: 640px) {
+    header { padding: 18px 20px; }
+    main { padding: 120px 20px 60px; }
+    .field-row { grid-template-columns: 1fr; }
+    footer { padding: 24px 20px; }
+  }
+
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 </style>
 </head>
 <body>
 
-<div class="wrap">
-  <h1>Prepara una foto per il portfolio</h1>
-  <p class="sub">Strumento locale: tutto avviene nel tuo browser, nessun file viene inviato altrove. Carica uno scatto, compila i dati, poi scarica l'immagine compressa e copia il blocco dati nel repository.</p>
+<header>
+  <a class="logo" href="index.html">My life on the rawd</a>
+  <nav>
+    <a href="travel.html">Travel</a>
+    <a href="map.html">Map</a>
+    <a href="blog.html">Blog</a>
+    <a href="bio.html">Bio</a>
+    <a href="gear.html">Gear</a>
+  </nav>
+</header>
 
-  <div class="panel">
-    <h2><span class="step-num">1</span>Immagine</h2>
+<main>
+  <div class="page-label">Admin</div>
+  <h1>Upload</h1>
 
-    <div class="drop" id="drop">
-      <p class="main">Trascina qui una foto, o clicca per scegliere il file</p>
-      <p>JPEG, PNG o WebP — verrà ridimensionata automaticamente</p>
-      <input type="file" id="fileInput" accept="image/*">
+  <!-- Token -->
+  <div class="token-section" id="token-section">
+    <div class="token-label">GitHub Personal Access Token</div>
+    <div class="token-row">
+      <input type="password" id="token-input" placeholder="github_pat_..." autocomplete="off">
+      <button class="btn-publish" onclick="salvaToken()" style="white-space:nowrap">Save</button>
     </div>
-
-    <div class="preview" id="preview">
-      <img id="previewImg" alt="Anteprima">
-      <div class="preview-info">
-        <span id="sizeOriginal"></span>
-        <span class="ok" id="sizeCompressed"></span>
-      </div>
-    </div>
+    <div class="token-status" id="token-status">Token saved in this browser only — never sent anywhere except GitHub.</div>
   </div>
 
-  <div class="panel">
-    <h2><span class="step-num">2</span>Dati dello scatto</h2>
-
-    <label for="titolo">Titolo</label>
-    <input type="text" id="titolo" placeholder="es. Galizia">
-
-    <label for="categoria">Categoria</label>
-    <select id="categoria">
-      <option value="reportage">Reportage</option>
-      <option value="street">Street</option>
-      <option value="architettura">Architettura</option>
-      <option value="arte">Arte</option>
-      <option value="paesaggi" selected>Paesaggi</option>
-    </select>
-
-    <label for="luogo">Luogo</label>
-    <input type="text" id="luogo" placeholder="es. Vigo, ES">
-
-    <div class="row">
-      <div>
-        <label for="lat">Latitudine</label>
-        <input type="number" id="lat" step="0.000001" placeholder="es. 42.231358">
-      </div>
-      <div>
-        <label for="lng">Longitudine</label>
-        <input type="number" id="lng" step="0.000001" placeholder="es. -8.712447">
-      </div>
-    </div>
-    <p class="hint">Se non conosci le coordinate esatte, lasciale vuote: il sito mostrerà solo titolo e luogo.</p>
-
-    <label for="data">Data dello scatto</label>
-    <input type="text" id="data" placeholder="AAAA-MM-GG">
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('travel', this)">Travel photo</button>
+    <button class="tab" onclick="switchTab('blog', this)">Museum / Blog</button>
   </div>
 
-  <button class="btn-primary" id="generaBtn" disabled>Genera file pronti</button>
+  <!-- TAB: TRAVEL -->
+  <div class="tab-panel active" id="panel-travel">
 
-  <div class="panel output" id="output">
-    <h2><span class="step-num">3</span>File pronti da salvare</h2>
-
-    <div class="output-row">
-      <span>Immagine compressa, pronta per <code>images/</code></span>
-      <button class="btn-secondary" id="downloadImg">Scarica immagine</button>
+    <div class="drop-zone" id="drop-travel" ondragover="onDragOver(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event,'travel')">
+      <input type="file" accept="image/jpeg,image/jpg" onchange="onFileSelect(event,'travel')">
+      <div class="drop-icon">📷</div>
+      <div class="drop-text"><strong>Choose a photo</strong> or drag it here<br><span style="font-size:0.75rem;opacity:0.6">JPEG only</span></div>
     </div>
 
-    <div class="output-row">
-      <span>Blocco da aggiungere a <code>foto.json</code></span>
-      <button class="btn-secondary" id="copyJson">Copia<span class="copied" id="copiedLabel">Copiato ✓</span></button>
+    <div class="preview-wrap" id="preview-travel">
+      <img id="preview-travel-img" src="" alt="">
+      <span class="preview-name" id="preview-travel-name"></span>
+      <button class="preview-remove" onclick="removeFile('travel')" title="Remove">✕</button>
     </div>
-    <pre id="jsonOutput"></pre>
 
-    <p class="hint" style="margin-top:16px;">
-      1. Salva l'immagine scaricata nella cartella <code>images/</code> del repository.<br>
-      2. Apri <code>foto.json</code> su GitHub, incolla questo blocco dentro l'array (separato dagli altri con una virgola).<br>
-      3. Fai commit. Il sito si aggiorna in automatico in pochi secondi.
-    </p>
+    <div class="field">
+      <label>Title</label>
+      <input type="text" id="t-titolo" placeholder="e.g. Sunset over the Andes">
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label>Category</label>
+        <select id="t-categoria">
+          <option value="">— select —</option>
+          <option value="reportage">Reportage</option>
+          <option value="street">Street</option>
+          <option value="architettura">Architecture</option>
+          <option value="arte">Art</option>
+          <option value="paesaggi">Landscapes</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Date</label>
+        <input type="date" id="t-data">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Trip name</label>
+      <input type="text" id="t-viaggio" placeholder="e.g. Japan 2019">
+    </div>
+
+    <div class="field">
+      <label>Location</label>
+      <input type="text" id="t-luogo" placeholder="e.g. Kyoto, Japan">
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label>Latitude <span class="optional">optional</span></label>
+        <input type="number" id="t-lat" step="any" placeholder="e.g. 34.9671">
+      </div>
+      <div class="field">
+        <label>Longitude <span class="optional">optional</span></label>
+        <input type="number" id="t-lng" step="any" placeholder="e.g. 135.7727">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Crop position <span class="optional">optional</span></label>
+      <input type="text" id="t-crop" placeholder="e.g. center top, center 30%">
+    </div>
+
+    <div class="submit-row">
+      <button class="btn-publish" id="btn-travel" onclick="pubblica('travel')">Publish photo</button>
+    </div>
+
+    <div class="progress-bar" id="prog-travel"><div class="progress-fill" id="fill-travel"></div></div>
+    <div class="status" id="status-travel"></div>
+
   </div>
-</div>
+
+  <!-- TAB: BLOG -->
+  <div class="tab-panel" id="panel-blog">
+
+    <div class="drop-zone" id="drop-blog" ondragover="onDragOver(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event,'blog')">
+      <input type="file" accept="image/jpeg,image/jpg" onchange="onFileSelect(event,'blog')">
+      <div class="drop-icon">🖼️</div>
+      <div class="drop-text"><strong>Choose artwork photo</strong> or drag it here<br><span style="font-size:0.75rem;opacity:0.6">JPEG only</span></div>
+    </div>
+
+    <div class="preview-wrap" id="preview-blog">
+      <img id="preview-blog-img" src="" alt="">
+      <span class="preview-name" id="preview-blog-name"></span>
+      <button class="preview-remove" onclick="removeFile('blog')" title="Remove">✕</button>
+    </div>
+
+    <div class="field">
+      <label>Museum / Album</label>
+      <select id="b-museo" onchange="onMuseoChange()">
+        <option value="">— select or create new —</option>
+        <option value="__new__">+ New album</option>
+      </select>
+    </div>
+
+    <div id="new-museo-fields" style="display:none">
+      <div class="field">
+        <label>Album name</label>
+        <input type="text" id="b-nome-nuovo" placeholder="e.g. Uffizi, Florence">
+      </div>
+      <div class="field">
+        <label>Location</label>
+        <input type="text" id="b-luogo-nuovo" placeholder="e.g. Florence, IT">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Artwork title</label>
+      <input type="text" id="b-titolo" placeholder="e.g. The Birth of Venus">
+    </div>
+
+    <div class="field">
+      <label>Artist &amp; year</label>
+      <input type="text" id="b-artista" placeholder="e.g. Sandro Botticelli, 1484-86">
+    </div>
+
+    <div class="field">
+      <label>Description</label>
+      <textarea id="b-descrizione" placeholder="Your notes on this work..."></textarea>
+    </div>
+
+    <div class="field">
+      <label>Use as album cover <span class="optional">optional</span></label>
+      <select id="b-copertina">
+        <option value="no">No</option>
+        <option value="si">Yes — use this photo as cover</option>
+      </select>
+    </div>
+
+    <div class="submit-row">
+      <button class="btn-publish" id="btn-blog" onclick="pubblica('blog')">Publish artwork</button>
+    </div>
+
+    <div class="progress-bar" id="prog-blog"><div class="progress-fill" id="fill-blog"></div></div>
+    <div class="status" id="status-blog"></div>
+
+  </div>
+</main>
+
+<footer>
+  <span>© 2026 — All rights reserved</span>
+</footer>
 
 <script>
-  const drop = document.getElementById('drop');
-  const fileInput = document.getElementById('fileInput');
-  const preview = document.getElementById('preview');
-  const previewImg = document.getElementById('previewImg');
-  const sizeOriginal = document.getElementById('sizeOriginal');
-  const sizeCompressed = document.getElementById('sizeCompressed');
-  const generaBtn = document.getElementById('generaBtn');
-  const output = document.getElementById('output');
+const OWNER = 'HaruoY';
+const REPO  = 'mylifeontherawd';
+const files = { travel: null, blog: null };
+let fotoJson = null, blogJson = null;
 
-  let compressedBlob = null;
-  let compressedDataUrl = null;
-  let suggestedFilename = 'foto.jpg';
+// ---- TOKEN ----
+function salvaToken() {
+  const v = document.getElementById('token-input').value.trim();
+  if (!v) return;
+  localStorage.setItem('rawd-gh-token', v);
+  document.getElementById('token-input').value = '';
+  document.getElementById('token-section').classList.add('saved');
+  document.getElementById('token-status').textContent = '✓ Token saved.';
+  document.getElementById('token-status').className = 'token-status ok';
+  caricaJson();
+}
 
-  const MAX_DIMENSION = 2000;
-  const JPEG_QUALITY = 0.85;
+function getToken() {
+  return localStorage.getItem('rawd-gh-token') || '';
+}
 
-  // Imposta la data di oggi come default
-  document.getElementById('data').value = new Date().toISOString().split('T')[0];
+// ---- TABS ----
+function switchTab(name, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('panel-' + name).classList.add('active');
+}
 
-  drop.addEventListener('click', () => fileInput.click());
+// ---- FILE HANDLING ----
+function onDragOver(e) { e.preventDefault(); e.currentTarget.classList.add('drag-over'); }
+function onDragLeave(e) { e.currentTarget.classList.remove('drag-over'); }
+function onDrop(e, tab) {
+  e.preventDefault();
+  e.currentTarget.classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (file) setFile(file, tab);
+}
+function onFileSelect(e, tab) {
+  const file = e.target.files[0];
+  if (file) setFile(file, tab);
+}
 
-  drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('dragover'); });
-  drop.addEventListener('dragleave', () => drop.classList.remove('dragover'));
-  drop.addEventListener('drop', e => {
-    e.preventDefault();
-    drop.classList.remove('dragover');
-    if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+function setFile(file, tab) {
+  if (!file.type.match('image/jpe?g')) return setStatus(tab, 'err', 'Only JPEG files are supported.');
+  files[tab] = file;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    document.getElementById('preview-' + tab + '-img').src = ev.target.result;
+    document.getElementById('preview-' + tab + '-name').textContent = file.name;
+    document.getElementById('preview-' + tab).style.display = 'block';
+    document.getElementById('drop-' + tab).style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeFile(tab) {
+  files[tab] = null;
+  document.getElementById('preview-' + tab).style.display = 'none';
+  document.getElementById('drop-' + tab).style.display = 'block';
+}
+
+// ---- GITHUB API ----
+async function ghGet(path) {
+  const r = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`, {
+    headers: { Authorization: `Bearer ${getToken()}`, Accept: 'application/vnd.github+json' }
   });
+  if (!r.ok) throw new Error(`GitHub ${r.status}: ${await r.text()}`);
+  return r.json();
+}
 
-  fileInput.addEventListener('change', () => {
-    if (fileInput.files.length) handleFile(fileInput.files[0]);
+async function ghPut(path, content, message, sha) {
+  const body = { message, content };
+  if (sha) body.sha = sha;
+  const r = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`, {
+    method: 'PUT',
+    headers: { Authorization: `Bearer ${getToken()}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
   });
+  if (!r.ok) throw new Error(`GitHub ${r.status}: ${await r.text()}`);
+  return r.json();
+}
 
-  function handleFile(file) {
-    if (!file.type.startsWith('image/')) {
-      alert('Seleziona un file immagine (JPEG, PNG, WebP).');
-      return;
-    }
-
-    suggestedFilename = slugify(file.name.replace(/\.[^.]+$/, '')) + '.jpg';
-
-    const reader = new FileReader();
-    reader.onload = e => {
-      const img = new Image();
-      img.onload = () => compressImage(img, file.size);
-      img.src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-  }
-
-  function compressImage(img, originalSize) {
-    let { width, height } = img;
-
-    if (width > MAX_DIMENSION || height > MAX_DIMENSION) {
-      if (width > height) {
-        height = Math.round(height * (MAX_DIMENSION / width));
-        width = MAX_DIMENSION;
-      } else {
-        width = Math.round(width * (MAX_DIMENSION / height));
-        height = MAX_DIMENSION;
-      }
-    }
-
-    const canvas = document.createElement('canvas');
-    canvas.width = width;
-    canvas.height = height;
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(img, 0, 0, width, height);
-
-    canvas.toBlob(blob => {
-      compressedBlob = blob;
-      compressedDataUrl = canvas.toDataURL('image/jpeg', JPEG_QUALITY);
-
-      previewImg.src = compressedDataUrl;
-      preview.classList.add('show');
-
-      sizeOriginal.textContent = `Originale: ${formatBytes(originalSize)}`;
-      sizeCompressed.textContent = `Compressa: ${formatBytes(blob.size)} (${width}×${height})`;
-
-      generaBtn.disabled = false;
-    }, 'image/jpeg', JPEG_QUALITY);
-  }
-
-  function formatBytes(bytes) {
-    if (bytes < 1024) return bytes + ' B';
-    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(0) + ' KB';
-    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
-  }
-
-  function slugify(str) {
-    return str
-      .toLowerCase()
-      .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '') || 'foto';
-  }
-
-  generaBtn.addEventListener('click', () => {
-    const titolo = document.getElementById('titolo').value.trim();
-    const categoria = document.getElementById('categoria').value;
-    const luogo = document.getElementById('luogo').value.trim();
-    const latVal = document.getElementById('lat').value;
-    const lngVal = document.getElementById('lng').value;
-    const data = document.getElementById('data').value.trim();
-
-    if (!titolo) {
-      alert('Inserisci almeno il titolo dello scatto.');
-      return;
-    }
-
-    const filename = slugify(titolo) + '.jpg';
-    suggestedFilename = filename;
-
-    const entry = {
-      id: Date.now(),
-      titolo,
-      categoria,
-      luogo: luogo || null,
-      lat: latVal !== '' ? parseFloat(latVal) : null,
-      lng: lngVal !== '' ? parseFloat(lngVal) : null,
-      data: data || null,
-      immagine_url: `images/${filename}`,
-      pubblicato: true
-    };
-
-    document.getElementById('jsonOutput').textContent = JSON.stringify(entry, null, 2) + ',';
-    output.classList.add('show');
-    output.scrollIntoView({ behavior: 'smooth', block: 'start' });
+function toBase64(file) {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(r.result.split(',')[1]);
+    r.onerror = rej;
+    r.readAsDataURL(file);
   });
+}
 
-  document.getElementById('downloadImg').addEventListener('click', () => {
-    if (!compressedBlob) return;
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(compressedBlob);
-    a.download = suggestedFilename;
-    a.click();
-  });
+function slugify(str) {
+  return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'') || 'foto';
+}
 
-  document.getElementById('copyJson').addEventListener('click', () => {
-    const text = document.getElementById('jsonOutput').textContent;
-    navigator.clipboard.writeText(text).then(() => {
-      const label = document.getElementById('copiedLabel');
-      label.classList.add('show');
-      setTimeout(() => label.classList.remove('show'), 1800);
+function setProgress(tab, pct) {
+  document.getElementById('prog-' + tab).style.display = 'block';
+  document.getElementById('fill-' + tab).style.width = pct + '%';
+}
+
+function setStatus(tab, type, msg) {
+  const el = document.getElementById('status-' + tab);
+  el.className = 'status ' + type;
+  el.innerHTML = msg;
+}
+
+// ---- LOAD JSON ----
+async function caricaJson() {
+  if (!getToken()) return;
+  try {
+    const fj = await ghGet('foto.json');
+    fotoJson = { sha: fj.sha, data: JSON.parse(atob(fj.content.replace(/\n/g,''))) };
+
+    const bj = await ghGet('blog.json');
+    blogJson = { sha: bj.sha, data: JSON.parse(atob(bj.content.replace(/\n/g,''))) };
+
+    // Popola select musei
+    const sel = document.getElementById('b-museo');
+    sel.innerHTML = '<option value="">— select or create new —</option>';
+    blogJson.data.forEach(m => {
+      const o = document.createElement('option');
+      o.value = m.id;
+      o.textContent = m.nome;
+      sel.appendChild(o);
     });
+    const newOpt = document.createElement('option');
+    newOpt.value = '__new__';
+    newOpt.textContent = '+ New album';
+    sel.appendChild(newOpt);
+  } catch(e) {
+    console.warn('Could not load JSON:', e.message);
+  }
+}
+
+function onMuseoChange() {
+  const v = document.getElementById('b-museo').value;
+  document.getElementById('new-museo-fields').style.display = v === '__new__' ? 'block' : 'none';
+}
+
+// ---- PUBLISH TRAVEL ----
+async function pubblicaTravel() {
+  const file    = files.travel;
+  const titolo  = document.getElementById('t-titolo').value.trim();
+  const cat     = document.getElementById('t-categoria').value;
+  const data    = document.getElementById('t-data').value;
+  const viaggio = document.getElementById('t-viaggio').value.trim();
+  const luogo   = document.getElementById('t-luogo').value.trim();
+  const latV    = document.getElementById('t-lat').value;
+  const lngV    = document.getElementById('t-lng').value;
+  const crop    = document.getElementById('t-crop').value.trim();
+
+  if (!file)    throw new Error('Select a photo first.');
+  if (!titolo)  throw new Error('Title is required.');
+  if (!cat)     throw new Error('Category is required.');
+
+  if (!fotoJson) throw new Error('Could not load foto.json. Check your token.');
+
+  const nextId = fotoJson.data.length > 0 ? Math.max(...fotoJson.data.map(f=>f.id)) + 1 : 1;
+  const slug   = slugify(titolo);
+  const imgPath = `images/${slug}-${nextId}.jpg`;
+  const thumbPath = `images/${slug}-${nextId}-thumb.jpg`;
+
+  setProgress('travel', 20);
+  setStatus('travel', 'info', 'Uploading image…');
+
+  const imgB64 = await toBase64(file);
+  await ghPut(imgPath, imgB64, `Aggiunge immagine: ${titolo}`);
+
+  setProgress('travel', 50);
+  setStatus('travel', 'info', 'Image uploaded. Generating thumbnail…');
+
+  // Thumbnail via canvas (resize to 600px wide max)
+  const thumbB64 = await resizeToBase64(file, 600);
+  await ghPut(thumbPath, thumbB64, `Aggiunge thumbnail: ${titolo}`);
+
+  setProgress('travel', 75);
+  setStatus('travel', 'info', 'Thumbnail done. Updating foto.json…');
+
+  const nuovaFoto = {
+    id: nextId,
+    titolo,
+    categoria: cat,
+    viaggio: viaggio || null,
+    luogo: luogo || null,
+    lat: latV ? parseFloat(latV) : null,
+    lng: lngV ? parseFloat(lngV) : null,
+    data: data || new Date().toISOString().split('T')[0],
+    immagine_url: imgPath,
+    thumbnail_url: thumbPath,
+    pubblicato: true
+  };
+
+  if (crop) nuovaFoto.crop_position = crop;
+
+  fotoJson.data.push(nuovaFoto);
+
+  const newContent = btoa(unescape(encodeURIComponent(JSON.stringify(fotoJson.data, null, 2) + '\n')));
+  const res = await ghPut('foto.json', newContent, `Upload: ${titolo}`, fotoJson.sha);
+  fotoJson.sha = res.content.sha;
+
+  setProgress('travel', 100);
+  setStatus('travel', 'ok', `✓ <strong>${titolo}</strong> published successfully. The site will update in 1–2 minutes.`);
+
+  // Reset
+  removeFile('travel');
+  ['t-titolo','t-viaggio','t-luogo','t-lat','t-lng','t-crop'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('t-categoria').value = '';
+  document.getElementById('t-data').value = '';
+}
+
+// ---- PUBLISH BLOG ----
+async function pubblicaBlog() {
+  const file      = files.blog;
+  const museoId   = document.getElementById('b-museo').value;
+  const titolo    = document.getElementById('b-titolo').value.trim();
+  const artista   = document.getElementById('b-artista').value.trim();
+  const desc      = document.getElementById('b-descrizione').value.trim();
+  const isCopert  = document.getElementById('b-copertina').value === 'si';
+  const isNew     = museoId === '__new__';
+  const nomeNuovo = document.getElementById('b-nome-nuovo').value.trim();
+  const luogoNuovo = document.getElementById('b-luogo-nuovo').value.trim();
+
+  if (!file)   throw new Error('Select a photo first.');
+  if (!titolo) throw new Error('Artwork title is required.');
+  if (!museoId) throw new Error('Select a museum or create a new album.');
+  if (isNew && !nomeNuovo) throw new Error('New album name is required.');
+  if (!blogJson) throw new Error('Could not load blog.json. Check your token.');
+
+  const slug    = slugify(titolo);
+  const imgPath = `images/${slug}.jpg`;
+
+  setProgress('blog', 20);
+  setStatus('blog', 'info', 'Uploading image…');
+
+  const imgB64 = await toBase64(file);
+  await ghPut(imgPath, imgB64, `Aggiunge opera: ${titolo}`);
+
+  setProgress('blog', 60);
+  setStatus('blog', 'info', 'Image uploaded. Updating blog.json…');
+
+  const opera = { titolo, artista, immagine_url: imgPath, descrizione: desc };
+
+  if (isNew) {
+    const newId = blogJson.data.length > 0 ? Math.max(...blogJson.data.map(m=>m.id)) + 1 : 1;
+    const nuovoMuseo = {
+      id: newId,
+      nome: nomeNuovo,
+      luogo: luogoNuovo || null,
+      pubblicato: true,
+      opere: [opera]
+    };
+    if (isCopert) { nuovoMuseo.copertina = imgPath; nuovoMuseo.copertina_position = 'center center'; }
+    blogJson.data.push(nuovoMuseo);
+  } else {
+    const museo = blogJson.data.find(m => String(m.id) === String(museoId));
+    if (!museo) throw new Error('Museum not found in blog.json.');
+    if (!museo.opere) museo.opere = [];
+    museo.opere.push(opera);
+    if (isCopert) { museo.copertina = imgPath; museo.copertina_position = 'center center'; }
+  }
+
+  const newContent = btoa(unescape(encodeURIComponent(JSON.stringify(blogJson.data, null, 2) + '\n')));
+  const res = await ghPut('blog.json', newContent, `Upload opera: ${titolo}`, blogJson.sha);
+  blogJson.sha = res.content.sha;
+
+  setProgress('blog', 100);
+  setStatus('blog', 'ok', `✓ <strong>${titolo}</strong> added to the album. The site will update in 1–2 minutes.`);
+
+  // Reset
+  removeFile('blog');
+  ['b-titolo','b-artista','b-descrizione'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('b-museo').value = '';
+  document.getElementById('b-copertina').value = 'no';
+  document.getElementById('new-museo-fields').style.display = 'none';
+}
+
+// ---- CANVAS RESIZE ----
+function resizeToBase64(file, maxWidth) {
+  return new Promise((res, rej) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      const scale = Math.min(1, maxWidth / img.width);
+      const w = Math.round(img.width * scale);
+      const h = Math.round(img.height * scale);
+      const c = document.createElement('canvas');
+      c.width = w; c.height = h;
+      c.getContext('2d').drawImage(img, 0, 0, w, h);
+      URL.revokeObjectURL(url);
+      const b64 = c.toDataURL('image/jpeg', 0.75).split(',')[1];
+      res(b64);
+    };
+    img.onerror = rej;
+    img.src = url;
   });
+}
+
+// ---- MAIN PUBLISH DISPATCHER ----
+async function pubblica(tab) {
+  if (!getToken()) return setStatus(tab, 'err', 'Save your GitHub token first.');
+  const btn = document.getElementById('btn-' + tab);
+  btn.disabled = true;
+  setProgress(tab, 5);
+  try {
+    if (tab === 'travel') await pubblicaTravel();
+    else await pubblicaBlog();
+  } catch(e) {
+    setStatus(tab, 'err', '✕ ' + e.message);
+    setProgress(tab, 0);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+// ---- INIT ----
+document.addEventListener('DOMContentLoaded', () => {
+  const token = getToken();
+  if (token) {
+    document.getElementById('token-section').classList.add('saved');
+    document.getElementById('token-status').textContent = '✓ Token already saved.';
+    document.getElementById('token-status').className = 'token-status ok';
+    caricaJson();
+  }
+  document.getElementById('t-data').value = new Date().toISOString().split('T')[0];
+});
 </script>
 
 <script src="theme-toggle.js"></script>
