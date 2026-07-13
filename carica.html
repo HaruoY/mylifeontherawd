@@ -927,6 +927,12 @@ async function pubblica(tab) {
 
 // ---- INIT ----
 document.addEventListener('DOMContentLoaded', () => {
+  // Controllo autenticazione — reindirizza ad admin.html se non autenticato
+  if (sessionStorage.getItem('rawd-admin') !== '1') {
+    window.location.href = 'admin.html';
+    return;
+  }
+
   const token = getToken();
   if (token) {
     document.getElementById('token-section').classList.add('saved');
