@@ -402,6 +402,113 @@
   <div class="tabs">
     <button class="tab active" onclick="switchTab('travel', this)">Travel photo</button>
     <button class="tab" onclick="switchTab('blog', this)">Museum / Blog</button>
+    <button class="tab" onclick="switchTab('edit', this)">Edit</button>
+  </div>
+
+  <!-- TAB: EDIT -->
+  <div class="tab-panel" id="panel-edit">
+
+    <div class="field">
+      <label>Section</label>
+      <select id="e-sezione" onchange="onEditSezioneChange()">
+        <option value="">— select —</option>
+        <option value="travel">Travel photo</option>
+        <option value="blog">Museum / Blog artwork</option>
+      </select>
+    </div>
+
+    <div class="field" id="e-foto-field" style="display:none">
+      <label>Photo</label>
+      <select id="e-foto-select" onchange="onEditFotoChange()">
+        <option value="">— select photo —</option>
+      </select>
+    </div>
+
+    <div class="field" id="e-opera-museo-field" style="display:none">
+      <label>Museum</label>
+      <select id="e-museo-select" onchange="onEditMuseoChange()">
+        <option value="">— select museum —</option>
+      </select>
+    </div>
+
+    <div class="field" id="e-opera-field" style="display:none">
+      <label>Artwork</label>
+      <select id="e-opera-select" onchange="onEditOperaChange()">
+        <option value="">— select artwork —</option>
+      </select>
+    </div>
+
+    <!-- Campi edit travel -->
+    <div id="e-form-travel" style="display:none">
+      <div class="field">
+        <label>Title</label>
+        <input type="text" id="e-titolo">
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Category</label>
+          <select id="e-categoria">
+            <option value="reportage">Reportage</option>
+            <option value="street">Street</option>
+            <option value="architettura">Architecture</option>
+            <option value="arte">Art</option>
+            <option value="paesaggi">Landscapes</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Date</label>
+          <input type="date" id="e-data">
+        </div>
+      </div>
+      <div class="field">
+        <label>Trip</label>
+        <input type="text" id="e-viaggio">
+      </div>
+      <div class="field">
+        <label>Location</label>
+        <input type="text" id="e-luogo">
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Latitude</label>
+          <input type="number" id="e-lat" step="any">
+        </div>
+        <div class="field">
+          <label>Longitude</label>
+          <input type="number" id="e-lng" step="any">
+        </div>
+      </div>
+      <div class="field">
+        <label>Crop position <span class="optional">optional</span></label>
+        <input type="text" id="e-crop" placeholder="e.g. center top">
+      </div>
+      <div class="submit-row">
+        <button class="btn-publish" onclick="salvaEdit('travel')">Save changes</button>
+      </div>
+    </div>
+
+    <!-- Campi edit blog -->
+    <div id="e-form-blog" style="display:none">
+      <div class="field">
+        <label>Artwork title</label>
+        <input type="text" id="e-b-titolo">
+      </div>
+      <div class="field">
+        <label>Artist &amp; year</label>
+        <input type="text" id="e-b-artista">
+      </div>
+      <div class="field">
+        <label>Description</label>
+        <textarea id="e-b-descrizione"></textarea>
+      </div>
+      <div class="submit-row">
+        <button class="btn-publish" onclick="salvaEdit('blog')">Save changes</button>
+      </div>
+    </div>
+
+    <div class="progress-bar" id="prog-edit"><div class="progress-fill" id="fill-edit"></div></div>
+    <div class="status" id="status-edit"></div>
+
   </div>
 
   <!-- TAB: TRAVEL -->
@@ -922,6 +1029,126 @@ async function pubblica(tab) {
     setProgress(tab, 0);
   } finally {
     btn.disabled = false;
+  }
+}
+
+// ---- EDIT ----
+function onEditSezioneChange() {
+  const v = document.getElementById('e-sezione').value;
+  document.getElementById('e-foto-field').style.display = v === 'travel' ? 'block' : 'none';
+  document.getElementById('e-opera-museo-field').style.display = v === 'blog' ? 'block' : 'none';
+  document.getElementById('e-opera-field').style.display = 'none';
+  document.getElementById('e-form-travel').style.display = 'none';
+  document.getElementById('e-form-blog').style.display = 'none';
+
+  if (v === 'travel' && fotoJson) {
+    const sel = document.getElementById('e-foto-select');
+    sel.innerHTML = '<option value="">— select photo —</option>';
+    fotoJson.data.forEach(f => {
+      const o = document.createElement('option');
+      o.value = f.id;
+      o.textContent = `${f.titolo}${f.viaggio ? ' — ' + f.viaggio : ''}`;
+      sel.appendChild(o);
+    });
+  }
+
+  if (v === 'blog' && blogJson) {
+    const sel = document.getElementById('e-museo-select');
+    sel.innerHTML = '<option value="">— select museum —</option>';
+    blogJson.data.forEach(m => {
+      const o = document.createElement('option');
+      o.value = m.id;
+      o.textContent = m.nome;
+      sel.appendChild(o);
+    });
+  }
+}
+
+function onEditFotoChange() {
+  const id = parseInt(document.getElementById('e-foto-select').value);
+  if (!id || !fotoJson) return;
+  const foto = fotoJson.data.find(f => f.id === id);
+  if (!foto) return;
+  document.getElementById('e-titolo').value = foto.titolo || '';
+  document.getElementById('e-categoria').value = foto.categoria || '';
+  document.getElementById('e-data').value = foto.data || '';
+  document.getElementById('e-viaggio').value = foto.viaggio || '';
+  document.getElementById('e-luogo').value = foto.luogo || '';
+  document.getElementById('e-lat').value = foto.lat ?? '';
+  document.getElementById('e-lng').value = foto.lng ?? '';
+  document.getElementById('e-crop').value = foto.crop_position || '';
+  document.getElementById('e-form-travel').style.display = 'block';
+}
+
+function onEditMuseoChange() {
+  const id = parseInt(document.getElementById('e-museo-select').value);
+  if (!id || !blogJson) return;
+  const museo = blogJson.data.find(m => m.id === id);
+  if (!museo || !museo.opere) return;
+  const sel = document.getElementById('e-opera-select');
+  sel.innerHTML = '<option value="">— select artwork —</option>';
+  museo.opere.forEach((op, i) => {
+    const o = document.createElement('option');
+    o.value = i;
+    o.textContent = op.titolo;
+    sel.appendChild(o);
+  });
+  document.getElementById('e-opera-field').style.display = 'block';
+  document.getElementById('e-form-blog').style.display = 'none';
+}
+
+function onEditOperaChange() {
+  const museoId = parseInt(document.getElementById('e-museo-select').value);
+  const operaIdx = parseInt(document.getElementById('e-opera-select').value);
+  if (isNaN(museoId) || isNaN(operaIdx) || !blogJson) return;
+  const museo = blogJson.data.find(m => m.id === museoId);
+  if (!museo || !museo.opere[operaIdx]) return;
+  const opera = museo.opere[operaIdx];
+  document.getElementById('e-b-titolo').value = opera.titolo || '';
+  document.getElementById('e-b-artista').value = opera.artista || '';
+  document.getElementById('e-b-descrizione').value = opera.descrizione || '';
+  document.getElementById('e-form-blog').style.display = 'block';
+}
+
+async function salvaEdit(sezione) {
+  setProgress('edit', 10);
+  try {
+    if (sezione === 'travel') {
+      const id = parseInt(document.getElementById('e-foto-select').value);
+      const foto = fotoJson.data.find(f => f.id === id);
+      if (!foto) throw new Error('Photo not found.');
+      foto.titolo    = document.getElementById('e-titolo').value.trim();
+      foto.categoria = document.getElementById('e-categoria').value;
+      foto.data      = document.getElementById('e-data').value;
+      foto.viaggio   = document.getElementById('e-viaggio').value.trim() || null;
+      foto.luogo     = document.getElementById('e-luogo').value.trim() || null;
+      foto.lat       = document.getElementById('e-lat').value ? parseFloat(document.getElementById('e-lat').value) : null;
+      foto.lng       = document.getElementById('e-lng').value ? parseFloat(document.getElementById('e-lng').value) : null;
+      const crop     = document.getElementById('e-crop').value.trim();
+      if (crop) foto.crop_position = crop;
+      else delete foto.crop_position;
+      setProgress('edit', 50);
+      const content = btoa(unescape(encodeURIComponent(JSON.stringify(fotoJson.data, null, 2) + '\n')));
+      const res = await ghPut('foto.json', content, `Edit: ${foto.titolo}`, fotoJson.sha);
+      fotoJson.sha = res.content.sha;
+    } else {
+      const museoId  = parseInt(document.getElementById('e-museo-select').value);
+      const operaIdx = parseInt(document.getElementById('e-opera-select').value);
+      const museo    = blogJson.data.find(m => m.id === museoId);
+      if (!museo) throw new Error('Museum not found.');
+      museo.opere[operaIdx].titolo      = document.getElementById('e-b-titolo').value.trim();
+      museo.opere[operaIdx].artista     = document.getElementById('e-b-artista').value.trim();
+      museo.opere[operaIdx].descrizione = document.getElementById('e-b-descrizione').value.trim();
+      setProgress('edit', 50);
+      const content = btoa(unescape(encodeURIComponent(JSON.stringify(blogJson.data, null, 2) + '\n')));
+      const res = await ghPut('blog.json', content, `Edit opera: ${museo.opere[operaIdx].titolo}`, blogJson.sha);
+      blogJson.sha = res.content.sha;
+    }
+    setProgress('edit', 100);
+    setStatus('edit', 'ok', '✓ Changes saved. The site will update in 1–2 minutes.');
+  } catch(e) {
+    setStatus('edit', 'err', '✕ ' + e.message);
+    setProgress('edit', 0);
   }
 }
 
