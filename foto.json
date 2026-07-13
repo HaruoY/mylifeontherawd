@@ -171,17 +171,6 @@
     "pubblicato": true
   },
   {
-  "id": 1783936330398,
-  "titolo": "Cooling",
-  "categoria": "street",
-  "luogo": "New York",
-  "lat": 40.7128,
-  "lng": -74.0060°,
-  "data": "2022-08-04",
-  "immagine_url": "images/cooling.jpg",
-  "pubblicato": true
-},
-  {
     "id": 14,
     "titolo": "Statue of Liberty",
     "categoria": "architettura",
