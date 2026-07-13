@@ -443,8 +443,16 @@
     </div>
 
     <div class="field">
-      <label>Trip name</label>
-      <input type="text" id="t-viaggio" placeholder="e.g. Japan 2019">
+      <label>Trip</label>
+      <select id="t-viaggio-select" onchange="onViaggioChange()">
+        <option value="">— select or create new —</option>
+        <option value="__new__">+ New trip</option>
+      </select>
+    </div>
+
+    <div class="field" id="new-viaggio-field" style="display:none">
+      <label>New trip name</label>
+      <input type="text" id="t-viaggio-nuovo" placeholder="e.g. Japan 2019">
     </div>
 
     <div class="field">
@@ -666,6 +674,26 @@ async function caricaJson() {
     const bj = await ghGet('blog.json');
     blogJson = { sha: bj.sha, data: JSON.parse(atob(bj.content.replace(/\n/g,''))) };
 
+    // Popola select viaggi (unici, ordinati per data)
+    const selViaggio = document.getElementById('t-viaggio-select');
+    selViaggio.innerHTML = '<option value="">— select or create new —</option>';
+    const viaggiUnici = [...new Set(
+      fotoJson.data
+        .filter(f => f.viaggio)
+        .sort((a,b) => new Date(a.data||0) - new Date(b.data||0))
+        .map(f => f.viaggio)
+    )];
+    viaggiUnici.forEach(v => {
+      const o = document.createElement('option');
+      o.value = v;
+      o.textContent = v;
+      selViaggio.appendChild(o);
+    });
+    const newVOpt = document.createElement('option');
+    newVOpt.value = '__new__';
+    newVOpt.textContent = '+ New trip';
+    selViaggio.appendChild(newVOpt);
+
     // Popola select musei
     const sel = document.getElementById('b-museo');
     sel.innerHTML = '<option value="">— select or create new —</option>';
@@ -684,9 +712,15 @@ async function caricaJson() {
   }
 }
 
+function onViaggioChange() {
+  const v = document.getElementById('t-viaggio-select').value;
+  document.getElementById('new-viaggio-field').style.display = v === '__new__' ? 'block' : 'none';
+}
+
 function onMuseoChange() {
   const v = document.getElementById('b-museo').value;
   document.getElementById('new-museo-fields').style.display = v === '__new__' ? 'block' : 'none';
+}
 }
 
 // ---- PUBLISH TRAVEL ----
@@ -695,7 +729,10 @@ async function pubblicaTravel() {
   const titolo  = document.getElementById('t-titolo').value.trim();
   const cat     = document.getElementById('t-categoria').value;
   const data    = document.getElementById('t-data').value;
-  const viaggio = document.getElementById('t-viaggio').value.trim();
+  const selViaggio = document.getElementById('t-viaggio-select').value;
+  const viaggio = selViaggio === '__new__'
+    ? document.getElementById('t-viaggio-nuovo').value.trim()
+    : selViaggio || null;
   const luogo   = document.getElementById('t-luogo').value.trim();
   const latV    = document.getElementById('t-lat').value;
   const lngV    = document.getElementById('t-lng').value;
@@ -755,9 +792,11 @@ async function pubblicaTravel() {
 
   // Reset
   removeFile('travel');
-  ['t-titolo','t-viaggio','t-luogo','t-lat','t-lng','t-crop'].forEach(id => document.getElementById(id).value = '');
+  ['t-titolo','t-luogo','t-lat','t-lng','t-crop','t-viaggio-nuovo'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('t-categoria').value = '';
   document.getElementById('t-data').value = '';
+  document.getElementById('t-viaggio-select').value = '';
+  document.getElementById('new-viaggio-field').style.display = 'none';
 }
 
 // ---- PUBLISH BLOG ----
