@@ -375,5 +375,18 @@
     "immagine_url": "images/route-66-general-store-28.jpg",
     "thumbnail_url": "images/route-66-general-store-28-thumb.jpg",
     "pubblicato": true
+  },
+  {
+    "id": 29,
+    "titolo": "Cooling",
+    "categoria": "street",
+    "viaggio": "New York 2022",
+    "luogo": "New York, NY",
+    "lat": 40.7128,
+    "lng": -74.006,
+    "data": "2022-08-04",
+    "immagine_url": "images/cooling.jpg",
+    "thumbnail_url": "images/cooling.jpg",
+    "pubblicato": true
   }
 ]
