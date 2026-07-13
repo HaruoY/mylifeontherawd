@@ -164,40 +164,40 @@
     "copertina_position": "center 40%",
     "opere": [
       {
-        "titolo": "La Pyramide InversÃ©e",
+        "titolo": "La Pyramide InversÃÂ©e",
         "artista": "I. M. Pei, 1993",
         "immagine_url": "images/louvre-pyramide-inversee.jpg",
-        "descrizione": "The inverted pyramid hangs above the underground mall beneath the Louvre like a question mark aimed at the original above. Pei designed both: the entrance pyramid in the courtyard and this smaller counterpoint below it, pointing down toward a miniature stone pyramid on the floor â a detail most visitors miss entirely."
+        "descrizione": "The inverted pyramid hangs above the underground mall beneath the Louvre like a question mark aimed at the original above. Pei designed both: the entrance pyramid in the courtyard and this smaller counterpoint below it, pointing down toward a miniature stone pyramid on the floor Ã¢ÂÂ a detail most visitors miss entirely."
       },
       {
         "titolo": "Winged Victory of Samothrace",
         "artista": "Unknown, c. 190 BC",
         "immagine_url": "images/louvre-winged-victory.jpg",
-        "descrizione": "She has no head, no arms, and still commands the entire staircase. Carved to stand on the prow of a stone ship, the drapery pressed flat against her body by wind that no longer blows â the sculptor froze a moment of arrival in marble so convincingly that the stillness reads as motion."
+        "descrizione": "She has no head, no arms, and still commands the entire staircase. Carved to stand on the prow of a stone ship, the drapery pressed flat against her body by wind that no longer blows Ã¢ÂÂ the sculptor froze a moment of arrival in marble so convincingly that the stillness reads as motion."
       },
       {
         "titolo": "Mona Lisa",
-        "artista": "Leonardo da Vinci, 1503â19",
+        "artista": "Leonardo da Vinci, 1503Ã¢ÂÂ19",
         "immagine_url": "images/louvre-mona-lisa.jpg",
-        "descrizione": "The painting is smaller than you expect and further away than you'd like, behind bulletproof glass and a rope barrier, surrounded by people photographing it with their backs turned. The famous smile survives all of this â a side effect of sfumato, Leonardo's technique of blurring outlines so the expression shifts depending on where your eye lands."
+        "descrizione": "The painting is smaller than you expect and further away than you'd like, behind bulletproof glass and a rope barrier, surrounded by people photographing it with their backs turned. The famous smile survives all of this Ã¢ÂÂ a side effect of sfumato, Leonardo's technique of blurring outlines so the expression shifts depending on where your eye lands."
       },
       {
         "titolo": "The Death of Marat",
         "artista": "Jacques-Louis David, 1793",
         "immagine_url": "images/louvre-death-marat.jpg",
-        "descrizione": "David painted this within months of Marat's assassination, while the Revolution was still in progress. The composition borrows from PietÃ  paintings â a deliberate political act, casting a journalist and political agitator as a secular martyr. The quill still in his hand, the letter from his killer still in the other."
+        "descrizione": "David painted this within months of Marat's assassination, while the Revolution was still in progress. The composition borrows from PietÃÂ  paintings Ã¢ÂÂ a deliberate political act, casting a journalist and political agitator as a secular martyr. The quill still in his hand, the letter from his killer still in the other."
       },
       {
         "titolo": "Psyche Revived by Cupid's Kiss",
-        "artista": "Antonio Canova, 1787â93",
+        "artista": "Antonio Canova, 1787Ã¢ÂÂ93",
         "immagine_url": "images/louvre-canova-psyche.jpg",
-        "descrizione": "Canova carved this from a single block of marble, which makes the interlocked arms and the void between the two faces â the moment just before the kiss â structurally improbable and visually breathtaking. The surface was finished to imitate skin, polished in some places, left rough in others."
+        "descrizione": "Canova carved this from a single block of marble, which makes the interlocked arms and the void between the two faces Ã¢ÂÂ the moment just before the kiss Ã¢ÂÂ structurally improbable and visually breathtaking. The surface was finished to imitate skin, polished in some places, left rough in others."
       },
       {
         "titolo": "Venus de Milo",
         "artista": "Unknown, c. 100 BC",
         "immagine_url": "images/louvre-venus-milo.jpg",
-        "descrizione": "Discovered on the island of Milos in 1820, the statue arrived in Paris within the year â a diplomatic gift that became one of the museum's defining works. The missing arms have been debated for two centuries; the leading theory places one reaching forward, one holding a shield. The marble background installed in the 1980s matches the reddish walls of the original room and is almost never noticed."
+        "descrizione": "Discovered on the island of Milos in 1820, the statue arrived in Paris within the year Ã¢ÂÂ a diplomatic gift that became one of the museum's defining works. The missing arms have been debated for two centuries; the leading theory places one reaching forward, one holding a shield. The marble background installed in the 1980s matches the reddish walls of the original room and is almost never noticed."
       }
     ]
   },
@@ -219,7 +219,7 @@
         "titolo": "Cadillac Ranch",
         "artista": "Ant Farm collective, 1974",
         "immagine_url": "images/cadillac-ranch-20.jpg",
-        "descrizione": "Ten Cadillacs buried nose-first in a wheat field outside Amarillo. Visitors are encouraged to bring spray paint â the surface changes completely every few weeks."
+        "descrizione": "Ten Cadillacs buried nose-first in a wheat field outside Amarillo. Visitors are encouraged to bring spray paint Ã¢ÂÂ the surface changes completely every few weeks."
       },
       {
         "titolo": "Blue Swallow Motel",
@@ -249,7 +249,7 @@
         "titolo": "Along the road",
         "artista": "",
         "immagine_url": "images/along-the-road.jpg",
-        "descrizione": ""
+        "descrizione": "Somewhere in the Mojave, a roadside stop offers cigarettes, reading glasses, and a hand-painted approximation of Starbucks. The real one is probably two hundred miles away. This one will do."
       }
     ]
   }
