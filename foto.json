@@ -404,5 +404,18 @@
     "thumbnail_url": "images/edinburgh-castle-at-dawn-31-thumb.jpg",
     "pubblicato": true,
     "crop_position": "center 40%"
+  },
+  {
+    "id": 32,
+    "titolo": "Red Phone Boxes - Royal Mile",
+    "categoria": "reportage",
+    "viaggio": "Scotland 2025",
+    "luogo": "Edinburgh",
+    "lat": 55.9498,
+    "lng": -3.1883,
+    "data": "2025-01-10",
+    "immagine_url": "images/red-phone-boxes-royal-mile-32.jpg",
+    "thumbnail_url": "images/red-phone-boxes-royal-mile-32-thumb.jpg",
+    "pubblicato": true
   }
 ]
