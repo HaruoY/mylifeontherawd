@@ -443,5 +443,18 @@
     "immagine_url": "images/canongate-kirk-34.jpg",
     "thumbnail_url": "images/canongate-kirk-34-thumb.jpg",
     "pubblicato": true
+  },
+  {
+    "id": 35,
+    "titolo": "Greyfriars Bobby",
+    "categoria": "arte",
+    "viaggio": "Scotland 2025",
+    "luogo": "Edinburgh",
+    "lat": 55.9469,
+    "lng": -3.1917,
+    "data": "2025-01-11",
+    "immagine_url": "images/greyfriars-bobby-35.jpg",
+    "thumbnail_url": "images/greyfriars-bobby-35-thumb.jpg",
+    "pubblicato": true
   }
 ]
