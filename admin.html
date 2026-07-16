@@ -61,9 +61,7 @@
     margin-bottom: 36px;
   }
 
-  .field {
-    margin-bottom: 16px;
-  }
+  .field { margin-bottom: 16px; }
 
   .field label {
     display: block;
@@ -86,10 +84,7 @@
     transition: border-color 0.2s;
   }
 
-  .field input:focus {
-    outline: 2px solid var(--accent);
-    border-color: transparent;
-  }
+  .field input:focus { outline: 2px solid var(--accent); border-color: transparent; }
 
   .btn {
     width: 100%;
@@ -109,14 +104,7 @@
 
   .btn:hover { opacity: 0.88; }
 
-  .error {
-    display: none;
-    margin-top: 16px;
-    font-size: 0.8rem;
-    color: var(--accent);
-    text-align: center;
-  }
-
+  .error { display: none; margin-top: 16px; font-size: 0.8rem; color: var(--accent); text-align: center; }
   .error.show { display: block; }
 </style>
 </head>
@@ -137,17 +125,13 @@
 </div>
 
 <script>
-  // Controlla se già autenticato
   if (sessionStorage.getItem('rawd-admin') === '1') {
     window.location.href = 'carica.html';
   }
 
   function login() {
     const pwd = document.getElementById('pwd').value;
-    // SHA-256 della password — cambia questo hash con quello della tua password
-    
-    const HASH = 'a8bafa2a4f572c9a7868512c1dacc4b32ef0df519efe78e6f9b8175f835cb4cf';
-
+    const HASH = 'f5be3d84197f4ce4565d7b86814bc4a4756fe36687bffda7e545139a319788d6';
     sha256(pwd).then(h => {
       if (h === HASH) {
         sessionStorage.setItem('rawd-admin', '1');
