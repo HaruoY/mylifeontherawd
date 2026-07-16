@@ -442,7 +442,8 @@
     "data": "2026-07-16",
     "immagine_url": "images/canongate-kirk-34.jpg",
     "thumbnail_url": "images/canongate-kirk-34-thumb.jpg",
-    "pubblicato": true
+    "pubblicato": true,
+    "crop_position": "center top"
   },
   {
     "id": 35,
