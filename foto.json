@@ -417,5 +417,18 @@
     "immagine_url": "images/red-phone-boxes-royal-mile-32.jpg",
     "thumbnail_url": "images/red-phone-boxes-royal-mile-32-thumb.jpg",
     "pubblicato": true
+  },
+  {
+    "id": 33,
+    "titolo": "Door No. 13",
+    "categoria": "reportage",
+    "viaggio": "Scotland 2025",
+    "luogo": "Dean Village",
+    "lat": 55.9498,
+    "lng": -3.1883,
+    "data": "2026-02-11",
+    "immagine_url": "images/door-no-13-33.jpg",
+    "thumbnail_url": "images/door-no-13-33-thumb.jpg",
+    "pubblicato": true
   }
 ]
