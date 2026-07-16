@@ -430,5 +430,18 @@
     "immagine_url": "images/door-no-13-33.jpg",
     "thumbnail_url": "images/door-no-13-33-thumb.jpg",
     "pubblicato": true
+  },
+  {
+    "id": 34,
+    "titolo": "Canongate Kirk",
+    "categoria": "street",
+    "viaggio": "Scotland 2025",
+    "luogo": "Edinburgh",
+    "lat": 55.9497,
+    "lng": -3.1826,
+    "data": "2026-07-16",
+    "immagine_url": "images/canongate-kirk-34.jpg",
+    "thumbnail_url": "images/canongate-kirk-34-thumb.jpg",
+    "pubblicato": true
   }
 ]
