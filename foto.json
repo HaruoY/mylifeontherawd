@@ -376,7 +376,8 @@
     "data": "2022-08-04",
     "immagine_url": "images/cooling.jpg",
     "thumbnail_url": "images/cooling.jpg",
-    "pubblicato": true
+    "pubblicato": true,
+    "crop_position": "center"
   },
   {
     "id": 30,
