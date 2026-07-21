@@ -129,7 +129,8 @@
     "data": "2022-08-08",
     "immagine_url": "images/the-vessel-10.jpg",
     "thumbnail_url": "images/the-vessel-10-thumb.jpg",
-    "pubblicato": true
+    "pubblicato": true,
+    "crop_position": "center"
   },
   {
     "id": 11,
