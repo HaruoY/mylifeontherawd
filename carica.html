@@ -42,324 +42,72 @@
     background: linear-gradient(to bottom, rgba(22,20,18,0.95), rgba(22,20,18,0));
   }
 
-  .logo {
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-  }
-
+  .logo { font-family: 'Archivo Black', sans-serif; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.02em; }
   nav { display: flex; flex-wrap: nowrap; gap: 16px; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; }
   nav a { color: var(--muted); padding: 10px 0; transition: color 0.2s; }
   nav a:hover { color: var(--ink); }
 
-  main {
-    padding: 140px 40px 80px;
-    max-width: 760px;
-  }
+  main { padding: 140px 40px 80px; max-width: 760px; }
 
-  .page-label {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    color: var(--accent);
-    font-size: 0.85rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
+  .page-label { font-family: 'Fraunces', serif; font-style: italic; color: var(--accent); font-size: 0.85rem; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 10px; }
 
-  h1 {
-    font-family: 'Archivo Black', sans-serif;
-    font-weight: 400;
-    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-    text-transform: uppercase;
-    letter-spacing: -0.01em;
-    margin-bottom: 40px;
-  }
+  h1 { font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: clamp(1.6rem, 3.5vw, 2.4rem); text-transform: uppercase; letter-spacing: -0.01em; margin-bottom: 40px; }
 
-  /* Token section */
-  .token-section {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    padding: 24px;
-    margin-bottom: 32px;
-  }
-
+  .token-section { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 24px; margin-bottom: 32px; }
   .token-section.saved { border-color: var(--green); }
-
-  .token-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 10px;
-  }
-
-  .token-row {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-  }
-
-  .token-row input {
-    flex: 1;
-    background: var(--bg);
-    border: 1px solid var(--line);
-    border-radius: 3px;
-    padding: 10px 14px;
-    color: var(--ink);
-    font-family: 'Inter', monospace;
-    font-size: 0.82rem;
-    letter-spacing: 0.02em;
-  }
-
+  .token-label { font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .token-row { display: flex; gap: 10px; align-items: center; }
+  .token-row input { flex: 1; background: var(--bg); border: 1px solid var(--line); border-radius: 3px; padding: 10px 14px; color: var(--ink); font-family: 'Inter', monospace; font-size: 0.82rem; }
   .token-row input:focus { outline: 2px solid var(--accent); border-color: transparent; }
-
-  .token-status {
-    font-size: 0.72rem;
-    margin-top: 8px;
-    color: var(--muted);
-  }
-
+  .token-status { font-size: 0.72rem; margin-top: 8px; color: var(--muted); }
   .token-status.ok { color: var(--green); }
 
-  /* Tabs */
-  .tabs {
-    display: flex;
-    gap: 0;
-    border-bottom: 1px solid var(--line);
-    margin-bottom: 32px;
-  }
-
-  .tab {
-    padding: 12px 24px;
-    font-size: 0.75rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--muted);
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -1px;
-    transition: color 0.2s;
-    background: none;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    font-family: 'Inter', sans-serif;
-  }
-
-  .tab.active {
-    color: var(--ink);
-    border-bottom-color: var(--accent);
-  }
-
+  .tabs { display: flex; border-bottom: 1px solid var(--line); margin-bottom: 32px; }
+  .tab { padding: 12px 24px; font-size: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color 0.2s; background: none; border-top: none; border-left: none; border-right: none; font-family: 'Inter', sans-serif; }
+  .tab.active { color: var(--ink); border-bottom-color: var(--accent); }
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
 
-  /* Drop zone */
-  .drop-zone {
-    border: 2px dashed var(--line);
-    border-radius: 4px;
-    padding: 48px 24px;
-    text-align: center;
-    cursor: pointer;
-    transition: border-color 0.2s, background 0.2s;
-    margin-bottom: 28px;
-    position: relative;
-  }
-
-  .drop-zone:hover, .drop-zone.drag-over {
-    border-color: var(--accent);
-    background: rgba(238,19,55,0.04);
-  }
-
-  .drop-zone input[type="file"] {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    cursor: pointer;
-    width: 100%;
-    height: 100%;
-  }
-
-  .drop-icon {
-    font-size: 2rem;
-    margin-bottom: 12px;
-    color: var(--muted);
-  }
-
-  .drop-text {
-    font-size: 0.88rem;
-    color: var(--muted);
-  }
-
+  .drop-zone { border: 2px dashed var(--line); border-radius: 4px; padding: 48px 24px; text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; margin-bottom: 28px; position: relative; }
+  .drop-zone:hover, .drop-zone.drag-over { border-color: var(--accent); background: rgba(238,19,55,0.04); }
+  .drop-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+  .drop-icon { font-size: 2rem; margin-bottom: 12px; color: var(--muted); }
+  .drop-text { font-size: 0.88rem; color: var(--muted); }
   .drop-text strong { color: var(--ink); }
 
-  /* Preview */
-  .preview-wrap {
-    display: none;
-    margin-bottom: 28px;
-    position: relative;
-  }
+  .preview-wrap { display: none; margin-bottom: 28px; position: relative; }
+  .preview-wrap img { width: 100%; max-height: 360px; object-fit: cover; border-radius: 4px; filter: brightness(0.85); }
+  .preview-name { position: absolute; bottom: 12px; left: 12px; font-size: 0.72rem; color: rgba(255,255,255,0.7); }
+  .preview-remove { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.6); border: none; color: var(--ink); width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
 
-  .preview-wrap img {
-    width: 100%;
-    max-height: 360px;
-    object-fit: cover;
-    border-radius: 4px;
-    filter: brightness(0.85);
-  }
-
-  .preview-name {
-    position: absolute;
-    bottom: 12px;
-    left: 12px;
-    font-size: 0.72rem;
-    color: rgba(255,255,255,0.7);
-    letter-spacing: 0.03em;
-  }
-
-  .preview-remove {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: rgba(0,0,0,0.6);
-    border: none;
-    color: var(--ink);
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Form fields */
-  .field {
-    margin-bottom: 20px;
-  }
-
-  .field label {
-    display: block;
-    font-size: 0.7rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 8px;
-  }
-
-  .field input, .field select, .field textarea {
-    width: 100%;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 3px;
-    padding: 11px 14px;
-    color: var(--ink);
-    font-family: 'Inter', sans-serif;
-    font-size: 0.88rem;
-    transition: border-color 0.2s;
-    -webkit-appearance: none;
-  }
-
-  .field select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239B9690' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 14px center;
-    padding-right: 36px;
-    cursor: pointer;
-  }
-
-  .field input:focus, .field select:focus, .field textarea:focus {
-    outline: 2px solid var(--accent);
-    border-color: transparent;
-  }
-
+  .field { margin-bottom: 20px; }
+  .field label { display: block; font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .field input, .field select, .field textarea { width: 100%; background: var(--surface); border: 1px solid var(--line); border-radius: 3px; padding: 11px 14px; color: var(--ink); font-family: 'Inter', sans-serif; font-size: 0.88rem; transition: border-color 0.2s; -webkit-appearance: none; }
+  .field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239B9690' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; cursor: pointer; }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: 2px solid var(--accent); border-color: transparent; }
   .field textarea { resize: vertical; min-height: 90px; }
-
-  .field-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .field input::placeholder, .field textarea::placeholder { color: var(--muted); opacity: 0.6; }
+  .optional { font-size: 0.62rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); opacity: 0.6; margin-left: 6px; }
 
-  /* Optional badge */
-  .optional {
-    font-size: 0.62rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--muted);
-    opacity: 0.6;
-    margin-left: 6px;
-    font-weight: 400;
-  }
+  .submit-row { display: flex; align-items: center; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
 
-  /* Submit */
-  .submit-row {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-top: 32px;
-  }
-
-  .btn-publish {
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    padding: 13px 28px;
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 0.78rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: opacity 0.2s;
-  }
-
+  .btn-publish { background: var(--accent); color: #fff; border: none; border-radius: 3px; padding: 13px 28px; font-family: 'Archivo Black', sans-serif; font-size: 0.78rem; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: opacity 0.2s; }
   .btn-publish:hover { opacity: 0.88; }
   .btn-publish:disabled { opacity: 0.4; cursor: not-allowed; }
 
-  /* Status messages */
-  .status {
-    display: none;
-    padding: 14px 18px;
-    border-radius: 3px;
-    font-size: 0.83rem;
-    line-height: 1.5;
-    margin-top: 20px;
-  }
+  .btn-delete { background: transparent; color: var(--accent); border: 1px solid var(--accent); border-radius: 3px; padding: 13px 28px; font-family: 'Archivo Black', sans-serif; font-size: 0.78rem; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, color 0.2s; }
+  .btn-delete:hover { background: var(--accent); color: #fff; }
 
+  .status { display: none; padding: 14px 18px; border-radius: 3px; font-size: 0.83rem; line-height: 1.5; margin-top: 20px; }
   .status.info { display: block; background: var(--surface2); color: var(--muted); border-left: 3px solid var(--muted); }
   .status.ok   { display: block; background: rgba(45,155,90,0.12); color: var(--green); border-left: 3px solid var(--green); }
   .status.err  { display: block; background: rgba(238,19,55,0.1); color: var(--accent); border-left: 3px solid var(--accent); }
 
-  /* Progress bar */
-  .progress-bar {
-    height: 3px;
-    background: var(--line);
-    border-radius: 2px;
-    overflow: hidden;
-    margin-top: 16px;
-    display: none;
-  }
+  .progress-bar { height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; margin-top: 16px; display: none; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; }
 
-  .progress-fill {
-    height: 100%;
-    background: var(--accent);
-    width: 0%;
-    transition: width 0.4s ease;
-  }
-
-  footer {
-    padding: 32px 40px 40px;
-    font-size: 0.75rem;
-    color: var(--muted);
-    border-top: 1px solid var(--line);
-  }
+  footer { padding: 32px 40px 40px; font-size: 0.75rem; color: var(--muted); border-top: 1px solid var(--line); }
 
   @media (max-width: 640px) {
     header { padding: 18px 20px; }
@@ -388,7 +136,6 @@
   <div class="page-label">Admin</div>
   <h1>Upload</h1>
 
-  <!-- Token -->
   <div class="token-section" id="token-section">
     <div class="token-label">GitHub Personal Access Token</div>
     <div class="token-row">
@@ -398,7 +145,6 @@
     <div class="token-status" id="token-status">Token saved in this browser only — never sent anywhere except GitHub.</div>
   </div>
 
-  <!-- Tabs -->
   <div class="tabs">
     <button class="tab active" onclick="switchTab('travel', this)">Travel photo</button>
     <button class="tab" onclick="switchTab('blog', this)">Museum / Blog</button>
@@ -438,7 +184,6 @@
       </select>
     </div>
 
-    <!-- Campi edit travel -->
     <div id="e-form-travel" style="display:none">
       <div class="field">
         <label>Title</label>
@@ -484,10 +229,10 @@
       </div>
       <div class="submit-row">
         <button class="btn-publish" onclick="salvaEdit('travel')">Save changes</button>
+        <button class="btn-delete" onclick="eliminaFoto()">Delete photo</button>
       </div>
     </div>
 
-    <!-- Campi edit blog -->
     <div id="e-form-blog" style="display:none">
       <div class="field">
         <label>Artwork title</label>
@@ -503,34 +248,30 @@
       </div>
       <div class="submit-row">
         <button class="btn-publish" onclick="salvaEdit('blog')">Save changes</button>
+        <button class="btn-delete" onclick="eliminaOpera()">Delete artwork</button>
       </div>
     </div>
 
     <div class="progress-bar" id="prog-edit"><div class="progress-fill" id="fill-edit"></div></div>
     <div class="status" id="status-edit"></div>
-
   </div>
 
   <!-- TAB: TRAVEL -->
   <div class="tab-panel active" id="panel-travel">
-
     <div class="drop-zone" id="drop-travel" ondragover="onDragOver(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event,'travel')">
       <input type="file" accept="image/jpeg,image/jpg" onchange="onFileSelect(event,'travel')">
       <div class="drop-icon">📷</div>
       <div class="drop-text"><strong>Choose a photo</strong> or drag it here<br><span style="font-size:0.75rem;opacity:0.6">JPEG only</span></div>
     </div>
-
     <div class="preview-wrap" id="preview-travel">
       <img id="preview-travel-img" src="" alt="">
       <span class="preview-name" id="preview-travel-name"></span>
       <button class="preview-remove" onclick="removeFile('travel')" title="Remove">✕</button>
     </div>
-
     <div class="field">
       <label>Title</label>
       <input type="text" id="t-titolo" placeholder="e.g. Sunset over the Andes">
     </div>
-
     <div class="field-row">
       <div class="field">
         <label>Category</label>
@@ -548,7 +289,6 @@
         <input type="date" id="t-data">
       </div>
     </div>
-
     <div class="field">
       <label>Trip</label>
       <select id="t-viaggio-select" onchange="onViaggioChange()">
@@ -556,12 +296,10 @@
         <option value="__new__">+ New trip</option>
       </select>
     </div>
-
     <div class="field" id="new-viaggio-field" style="display:none">
       <label>New trip name</label>
       <input type="text" id="t-viaggio-nuovo" placeholder="e.g. Japan 2019">
     </div>
-
     <div class="field" id="new-viaggio-copertina-field" style="display:none">
       <label>Use this photo as trip cover <span class="optional">optional</span></label>
       <select id="t-copertina-nuovo">
@@ -569,12 +307,10 @@
         <option value="si">Yes — use as cover image</option>
       </select>
     </div>
-
     <div class="field">
       <label>Location</label>
       <input type="text" id="t-luogo" placeholder="e.g. Kyoto, Japan">
     </div>
-
     <div class="field-row">
       <div class="field">
         <label>Latitude <span class="optional">optional</span></label>
@@ -585,36 +321,29 @@
         <input type="number" id="t-lng" step="any" placeholder="e.g. 135.7727">
       </div>
     </div>
-
     <div class="field">
       <label>Crop position <span class="optional">optional</span></label>
       <input type="text" id="t-crop" placeholder="e.g. center top, center 30%">
     </div>
-
     <div class="submit-row">
       <button class="btn-publish" id="btn-travel" onclick="pubblica('travel')">Publish photo</button>
     </div>
-
     <div class="progress-bar" id="prog-travel"><div class="progress-fill" id="fill-travel"></div></div>
     <div class="status" id="status-travel"></div>
-
   </div>
 
   <!-- TAB: BLOG -->
   <div class="tab-panel" id="panel-blog">
-
     <div class="drop-zone" id="drop-blog" ondragover="onDragOver(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event,'blog')">
       <input type="file" accept="image/jpeg,image/jpg" onchange="onFileSelect(event,'blog')">
       <div class="drop-icon">🖼️</div>
       <div class="drop-text"><strong>Choose artwork photo</strong> or drag it here<br><span style="font-size:0.75rem;opacity:0.6">JPEG only</span></div>
     </div>
-
     <div class="preview-wrap" id="preview-blog">
       <img id="preview-blog-img" src="" alt="">
       <span class="preview-name" id="preview-blog-name"></span>
       <button class="preview-remove" onclick="removeFile('blog')" title="Remove">✕</button>
     </div>
-
     <div class="field">
       <label>Museum / Album</label>
       <select id="b-museo" onchange="onMuseoChange()">
@@ -622,7 +351,6 @@
         <option value="__new__">+ New album</option>
       </select>
     </div>
-
     <div id="new-museo-fields" style="display:none">
       <div class="field">
         <label>Album name</label>
@@ -633,22 +361,18 @@
         <input type="text" id="b-luogo-nuovo" placeholder="e.g. Florence, IT">
       </div>
     </div>
-
     <div class="field">
       <label>Artwork title</label>
       <input type="text" id="b-titolo" placeholder="e.g. The Birth of Venus">
     </div>
-
     <div class="field">
       <label>Artist &amp; year</label>
       <input type="text" id="b-artista" placeholder="e.g. Sandro Botticelli, 1484-86">
     </div>
-
     <div class="field">
       <label>Description</label>
       <textarea id="b-descrizione" placeholder="Your notes on this work..."></textarea>
     </div>
-
     <div class="field">
       <label>Use as album cover <span class="optional">optional</span></label>
       <select id="b-copertina">
@@ -656,14 +380,11 @@
         <option value="si">Yes — use this photo as cover</option>
       </select>
     </div>
-
     <div class="submit-row">
       <button class="btn-publish" id="btn-blog" onclick="pubblica('blog')">Publish artwork</button>
     </div>
-
     <div class="progress-bar" id="prog-blog"><div class="progress-fill" id="fill-blog"></div></div>
     <div class="status" id="status-blog"></div>
-
   </div>
 </main>
 
@@ -677,7 +398,6 @@ const REPO  = 'mylifeontherawd';
 const files = { travel: null, blog: null };
 let fotoJson = null, blogJson = null;
 
-// ---- TOKEN ----
 function salvaToken() {
   const v = document.getElementById('token-input').value.trim();
   if (!v) return;
@@ -689,11 +409,8 @@ function salvaToken() {
   caricaJson();
 }
 
-function getToken() {
-  return localStorage.getItem('rawd-gh-token') || '';
-}
+function getToken() { return localStorage.getItem('rawd-gh-token') || ''; }
 
-// ---- TABS ----
 function switchTab(name, el) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
@@ -701,19 +418,10 @@ function switchTab(name, el) {
   document.getElementById('panel-' + name).classList.add('active');
 }
 
-// ---- FILE HANDLING ----
 function onDragOver(e) { e.preventDefault(); e.currentTarget.classList.add('drag-over'); }
 function onDragLeave(e) { e.currentTarget.classList.remove('drag-over'); }
-function onDrop(e, tab) {
-  e.preventDefault();
-  e.currentTarget.classList.remove('drag-over');
-  const file = e.dataTransfer.files[0];
-  if (file) setFile(file, tab);
-}
-function onFileSelect(e, tab) {
-  const file = e.target.files[0];
-  if (file) setFile(file, tab);
-}
+function onDrop(e, tab) { e.preventDefault(); e.currentTarget.classList.remove('drag-over'); const file = e.dataTransfer.files[0]; if (file) setFile(file, tab); }
+function onFileSelect(e, tab) { const file = e.target.files[0]; if (file) setFile(file, tab); }
 
 function setFile(file, tab) {
   if (!file.type.match('image/jpe?g')) return setStatus(tab, 'err', 'Only JPEG files are supported.');
@@ -734,7 +442,6 @@ function removeFile(tab) {
   document.getElementById('drop-' + tab).style.display = 'block';
 }
 
-// ---- GITHUB API ----
 async function ghGet(path) {
   const r = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`, {
     headers: { Authorization: `Bearer ${getToken()}`, Accept: 'application/vnd.github+json' }
@@ -753,6 +460,15 @@ async function ghPut(path, content, message, sha) {
   });
   if (!r.ok) throw new Error(`GitHub ${r.status}: ${await r.text()}`);
   return r.json();
+}
+
+async function ghDelete(path, message, sha) {
+  const r = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`, {
+    method: 'DELETE',
+    headers: { Authorization: `Bearer ${getToken()}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message, sha })
+  });
+  if (!r.ok && r.status !== 404) throw new Error(`GitHub ${r.status}`);
 }
 
 function toBase64(file) {
@@ -779,52 +495,25 @@ function setStatus(tab, type, msg) {
   el.innerHTML = msg;
 }
 
-// ---- LOAD JSON ----
 async function caricaJson() {
   if (!getToken()) return;
   try {
     const fj = await ghGet('foto.json');
     fotoJson = { sha: fj.sha, data: JSON.parse(atob(fj.content.replace(/\n/g,''))) };
-
     const bj = await ghGet('blog.json');
     blogJson = { sha: bj.sha, data: JSON.parse(atob(bj.content.replace(/\n/g,''))) };
 
-    // Popola select viaggi (unici, ordinati per data)
     const selViaggio = document.getElementById('t-viaggio-select');
     selViaggio.innerHTML = '<option value="">— select or create new —</option>';
-    const viaggiUnici = [...new Set(
-      fotoJson.data
-        .filter(f => f.viaggio)
-        .sort((a,b) => new Date(a.data||0) - new Date(b.data||0))
-        .map(f => f.viaggio)
-    )];
-    viaggiUnici.forEach(v => {
-      const o = document.createElement('option');
-      o.value = v;
-      o.textContent = v;
-      selViaggio.appendChild(o);
-    });
-    const newVOpt = document.createElement('option');
-    newVOpt.value = '__new__';
-    newVOpt.textContent = '+ New trip';
-    selViaggio.appendChild(newVOpt);
+    const viaggiUnici = [...new Set(fotoJson.data.filter(f => f.viaggio).sort((a,b) => new Date(a.data||0) - new Date(b.data||0)).map(f => f.viaggio))];
+    viaggiUnici.forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v; selViaggio.appendChild(o); });
+    const newVOpt = document.createElement('option'); newVOpt.value = '__new__'; newVOpt.textContent = '+ New trip'; selViaggio.appendChild(newVOpt);
 
-    // Popola select musei
     const sel = document.getElementById('b-museo');
     sel.innerHTML = '<option value="">— select or create new —</option>';
-    blogJson.data.forEach(m => {
-      const o = document.createElement('option');
-      o.value = m.id;
-      o.textContent = m.nome;
-      sel.appendChild(o);
-    });
-    const newOpt = document.createElement('option');
-    newOpt.value = '__new__';
-    newOpt.textContent = '+ New album';
-    sel.appendChild(newOpt);
-  } catch(e) {
-    console.warn('Could not load JSON:', e.message);
-  }
+    blogJson.data.forEach(m => { const o = document.createElement('option'); o.value = m.id; o.textContent = m.nome; sel.appendChild(o); });
+    const newOpt = document.createElement('option'); newOpt.value = '__new__'; newOpt.textContent = '+ New album'; sel.appendChild(newOpt);
+  } catch(e) { console.warn('Could not load JSON:', e.message); }
 }
 
 function onViaggioChange() {
@@ -839,85 +528,59 @@ function onMuseoChange() {
   document.getElementById('new-museo-fields').style.display = v === '__new__' ? 'block' : 'none';
 }
 
-// ---- PUBLISH TRAVEL ----
 async function pubblicaTravel() {
-  const file    = files.travel;
-  const titolo  = document.getElementById('t-titolo').value.trim();
-  const cat     = document.getElementById('t-categoria').value;
-  const data    = document.getElementById('t-data').value;
+  const file = files.travel;
+  const titolo = document.getElementById('t-titolo').value.trim();
+  const cat = document.getElementById('t-categoria').value;
+  const data = document.getElementById('t-data').value;
   const selViaggio = document.getElementById('t-viaggio-select').value;
-  const viaggio = selViaggio === '__new__'
-    ? document.getElementById('t-viaggio-nuovo').value.trim()
-    : selViaggio || null;
+  const viaggio = selViaggio === '__new__' ? document.getElementById('t-viaggio-nuovo').value.trim() : selViaggio || null;
   const isCopertina = selViaggio === '__new__' && document.getElementById('t-copertina-nuovo').value === 'si';
-  const luogo   = document.getElementById('t-luogo').value.trim();
-  const latV    = document.getElementById('t-lat').value;
-  const lngV    = document.getElementById('t-lng').value;
-  const crop    = document.getElementById('t-crop').value.trim();
+  const luogo = document.getElementById('t-luogo').value.trim();
+  const latV = document.getElementById('t-lat').value;
+  const lngV = document.getElementById('t-lng').value;
+  const crop = document.getElementById('t-crop').value.trim();
 
-  if (!file)    throw new Error('Select a photo first.');
-  if (!titolo)  throw new Error('Title is required.');
-  if (!cat)     throw new Error('Category is required.');
-
+  if (!file) throw new Error('Select a photo first.');
+  if (!titolo) throw new Error('Title is required.');
+  if (!cat) throw new Error('Category is required.');
   if (!fotoJson) throw new Error('Could not load foto.json. Check your token.');
 
   const nextId = fotoJson.data.length > 0 ? Math.max(...fotoJson.data.map(f=>f.id)) + 1 : 1;
-  const slug   = slugify(titolo);
+  const slug = slugify(titolo);
   const imgPath = `images/${slug}-${nextId}.jpg`;
   const thumbPath = `images/${slug}-${nextId}-thumb.jpg`;
 
   setProgress('travel', 20);
   setStatus('travel', 'info', 'Uploading image…');
-
   const imgB64 = await toBase64(file);
   await ghPut(imgPath, imgB64, `Aggiunge immagine: ${titolo}`);
 
   setProgress('travel', 50);
-  setStatus('travel', 'info', 'Image uploaded. Generating thumbnail…');
-
-  // Thumbnail via canvas (resize to 600px wide max)
+  setStatus('travel', 'info', 'Generating thumbnail…');
   const thumbB64 = await resizeToBase64(file, 600);
   await ghPut(thumbPath, thumbB64, `Aggiunge thumbnail: ${titolo}`);
 
   setProgress('travel', 75);
-  setStatus('travel', 'info', 'Thumbnail done. Updating foto.json…');
+  setStatus('travel', 'info', 'Updating foto.json…');
 
-  const nuovaFoto = {
-    id: nextId,
-    titolo,
-    categoria: cat,
-    viaggio: viaggio || null,
-    luogo: luogo || null,
-    lat: latV ? parseFloat(latV) : null,
-    lng: lngV ? parseFloat(lngV) : null,
-    data: data || new Date().toISOString().split('T')[0],
-    immagine_url: imgPath,
-    thumbnail_url: thumbPath,
-    pubblicato: true
-  };
-
+  const nuovaFoto = { id: nextId, titolo, categoria: cat, viaggio: viaggio || null, luogo: luogo || null, lat: latV ? parseFloat(latV) : null, lng: lngV ? parseFloat(lngV) : null, data: data || new Date().toISOString().split('T')[0], immagine_url: imgPath, thumbnail_url: thumbPath, pubblicato: true };
   if (crop) nuovaFoto.crop_position = crop;
   if (isCopertina) nuovaFoto.copertina_viaggio = true;
-
   fotoJson.data.push(nuovaFoto);
 
   const newContent = btoa(unescape(encodeURIComponent(JSON.stringify(fotoJson.data, null, 2) + '\n')));
   const res = await ghPut('foto.json', newContent, `Upload: ${titolo}`, fotoJson.sha);
   fotoJson.sha = res.content.sha;
 
-  // Aggiorna select viaggi con il nuovo viaggio
   if (selViaggio === '__new__' && viaggio) {
     const sel = document.getElementById('t-viaggio-select');
-    const newOpt = document.createElement('option');
-    newOpt.value = viaggio;
-    newOpt.textContent = viaggio;
+    const newOpt = document.createElement('option'); newOpt.value = viaggio; newOpt.textContent = viaggio;
     sel.insertBefore(newOpt, sel.querySelector('[value="__new__"]'));
   }
 
   setProgress('travel', 100);
-  setStatus('travel', 'ok', `✓ <strong>${titolo}</strong> published successfully. The site will update in 1–2 minutes.`);
-
-  // Reset
+  setStatus('travel', 'ok', `✓ <strong>${titolo}</strong> published successfully.`);
   removeFile('travel');
   ['t-titolo','t-luogo','t-lat','t-lng','t-crop','t-viaggio-nuovo'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('t-categoria').value = '';
@@ -928,47 +591,38 @@ async function pubblicaTravel() {
   document.getElementById('new-viaggio-copertina-field').style.display = 'none';
 }
 
-// ---- PUBLISH BLOG ----
 async function pubblicaBlog() {
-  const file      = files.blog;
-  const museoId   = document.getElementById('b-museo').value;
-  const titolo    = document.getElementById('b-titolo').value.trim();
-  const artista   = document.getElementById('b-artista').value.trim();
-  const desc      = document.getElementById('b-descrizione').value.trim();
-  const isCopert  = document.getElementById('b-copertina').value === 'si';
-  const isNew     = museoId === '__new__';
+  const file = files.blog;
+  const museoId = document.getElementById('b-museo').value;
+  const titolo = document.getElementById('b-titolo').value.trim();
+  const artista = document.getElementById('b-artista').value.trim();
+  const desc = document.getElementById('b-descrizione').value.trim();
+  const isCopert = document.getElementById('b-copertina').value === 'si';
+  const isNew = museoId === '__new__';
   const nomeNuovo = document.getElementById('b-nome-nuovo').value.trim();
   const luogoNuovo = document.getElementById('b-luogo-nuovo').value.trim();
 
-  if (!file)   throw new Error('Select a photo first.');
+  if (!file) throw new Error('Select a photo first.');
   if (!titolo) throw new Error('Artwork title is required.');
   if (!museoId) throw new Error('Select a museum or create a new album.');
   if (isNew && !nomeNuovo) throw new Error('New album name is required.');
   if (!blogJson) throw new Error('Could not load blog.json. Check your token.');
 
-  const slug    = slugify(titolo);
+  const slug = slugify(titolo);
   const imgPath = `images/${slug}.jpg`;
 
   setProgress('blog', 20);
   setStatus('blog', 'info', 'Uploading image…');
-
   const imgB64 = await toBase64(file);
   await ghPut(imgPath, imgB64, `Aggiunge opera: ${titolo}`);
 
   setProgress('blog', 60);
-  setStatus('blog', 'info', 'Image uploaded. Updating blog.json…');
-
+  setStatus('blog', 'info', 'Updating blog.json…');
   const opera = { titolo, artista, immagine_url: imgPath, descrizione: desc };
 
   if (isNew) {
     const newId = blogJson.data.length > 0 ? Math.max(...blogJson.data.map(m=>m.id)) + 1 : 1;
-    const nuovoMuseo = {
-      id: newId,
-      nome: nomeNuovo,
-      luogo: luogoNuovo || null,
-      pubblicato: true,
-      opere: [opera]
-    };
+    const nuovoMuseo = { id: newId, nome: nomeNuovo, luogo: luogoNuovo || null, pubblicato: true, opere: [opera] };
     if (isCopert) { nuovoMuseo.copertina = imgPath; nuovoMuseo.copertina_position = 'center center'; }
     blogJson.data.push(nuovoMuseo);
   } else {
@@ -984,9 +638,7 @@ async function pubblicaBlog() {
   blogJson.sha = res.content.sha;
 
   setProgress('blog', 100);
-  setStatus('blog', 'ok', `✓ <strong>${titolo}</strong> added to the album. The site will update in 1–2 minutes.`);
-
-  // Reset
+  setStatus('blog', 'ok', `✓ <strong>${titolo}</strong> added to the album.`);
   removeFile('blog');
   ['b-titolo','b-artista','b-descrizione'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('b-museo').value = '';
@@ -994,7 +646,6 @@ async function pubblicaBlog() {
   document.getElementById('new-museo-fields').style.display = 'none';
 }
 
-// ---- CANVAS RESIZE ----
 function resizeToBase64(file, maxWidth) {
   return new Promise((res, rej) => {
     const img = new Image();
@@ -1007,15 +658,13 @@ function resizeToBase64(file, maxWidth) {
       c.width = w; c.height = h;
       c.getContext('2d').drawImage(img, 0, 0, w, h);
       URL.revokeObjectURL(url);
-      const b64 = c.toDataURL('image/jpeg', 0.75).split(',')[1];
-      res(b64);
+      res(c.toDataURL('image/jpeg', 0.75).split(',')[1]);
     };
     img.onerror = rej;
     img.src = url;
   });
 }
 
-// ---- MAIN PUBLISH DISPATCHER ----
 async function pubblica(tab) {
   if (!getToken()) return setStatus(tab, 'err', 'Save your GitHub token first.');
   const btn = document.getElementById('btn-' + tab);
@@ -1051,16 +700,10 @@ function onEditSezioneChange() {
       sel.appendChild(o);
     });
   }
-
   if (v === 'blog' && blogJson) {
     const sel = document.getElementById('e-museo-select');
     sel.innerHTML = '<option value="">— select museum —</option>';
-    blogJson.data.forEach(m => {
-      const o = document.createElement('option');
-      o.value = m.id;
-      o.textContent = m.nome;
-      sel.appendChild(o);
-    });
+    blogJson.data.forEach(m => { const o = document.createElement('option'); o.value = m.id; o.textContent = m.nome; sel.appendChild(o); });
   }
 }
 
@@ -1087,12 +730,7 @@ function onEditMuseoChange() {
   if (!museo || !museo.opere) return;
   const sel = document.getElementById('e-opera-select');
   sel.innerHTML = '<option value="">— select artwork —</option>';
-  museo.opere.forEach((op, i) => {
-    const o = document.createElement('option');
-    o.value = i;
-    o.textContent = op.titolo;
-    sel.appendChild(o);
-  });
+  museo.opere.forEach((op, i) => { const o = document.createElement('option'); o.value = i; o.textContent = op.titolo; sel.appendChild(o); });
   document.getElementById('e-opera-field').style.display = 'block';
   document.getElementById('e-form-blog').style.display = 'none';
 }
@@ -1125,8 +763,7 @@ async function salvaEdit(sezione) {
       foto.lat       = document.getElementById('e-lat').value ? parseFloat(document.getElementById('e-lat').value) : null;
       foto.lng       = document.getElementById('e-lng').value ? parseFloat(document.getElementById('e-lng').value) : null;
       const crop     = document.getElementById('e-crop').value.trim();
-      if (crop) foto.crop_position = crop;
-      else delete foto.crop_position;
+      if (crop) foto.crop_position = crop; else delete foto.crop_position;
       setProgress('edit', 50);
       const content = btoa(unescape(encodeURIComponent(JSON.stringify(fotoJson.data, null, 2) + '\n')));
       const res = await ghPut('foto.json', content, `Edit: ${foto.titolo}`, fotoJson.sha);
@@ -1152,14 +789,94 @@ async function salvaEdit(sezione) {
   }
 }
 
+// ---- DELETE ----
+async function eliminaFoto() {
+  const id = parseInt(document.getElementById('e-foto-select').value);
+  if (!id || !fotoJson) return;
+  const foto = fotoJson.data.find(f => f.id === id);
+  if (!foto) return;
+  if (!confirm(`Delete "${foto.titolo}" permanently? This cannot be undone.`)) return;
+
+  setProgress('edit', 10);
+  setStatus('edit', 'info', 'Deleting image files…');
+
+  try {
+    // Elimina immagine principale
+    try {
+      const imgFile = await ghGet(foto.immagine_url);
+      await ghDelete(foto.immagine_url, `Elimina immagine: ${foto.titolo}`, imgFile.sha);
+    } catch {}
+
+    // Elimina thumbnail
+    if (foto.thumbnail_url) {
+      try {
+        const thumbFile = await ghGet(foto.thumbnail_url);
+        await ghDelete(foto.thumbnail_url, `Elimina thumbnail: ${foto.titolo}`, thumbFile.sha);
+      } catch {}
+    }
+
+    setProgress('edit', 60);
+    setStatus('edit', 'info', 'Updating foto.json…');
+
+    fotoJson.data = fotoJson.data.filter(f => f.id !== id);
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(fotoJson.data, null, 2) + '\n')));
+    const res = await ghPut('foto.json', content, `Elimina foto: ${foto.titolo}`, fotoJson.sha);
+    fotoJson.sha = res.content.sha;
+
+    setProgress('edit', 100);
+    setStatus('edit', 'ok', `✓ "${foto.titolo}" deleted permanently.`);
+
+    // Aggiorna la select
+    onEditSezioneChange();
+    document.getElementById('e-form-travel').style.display = 'none';
+  } catch(e) {
+    setStatus('edit', 'err', '✕ ' + e.message);
+    setProgress('edit', 0);
+  }
+}
+
+async function eliminaOpera() {
+  const museoId  = parseInt(document.getElementById('e-museo-select').value);
+  const operaIdx = parseInt(document.getElementById('e-opera-select').value);
+  if (!blogJson) return;
+  const museo = blogJson.data.find(m => m.id === museoId);
+  if (!museo || isNaN(operaIdx)) return;
+  const opera = museo.opere[operaIdx];
+  if (!confirm(`Delete "${opera.titolo}" permanently? This cannot be undone.`)) return;
+
+  setProgress('edit', 10);
+  setStatus('edit', 'info', 'Deleting image file…');
+
+  try {
+    try {
+      const imgFile = await ghGet(opera.immagine_url);
+      await ghDelete(opera.immagine_url, `Elimina opera: ${opera.titolo}`, imgFile.sha);
+    } catch {}
+
+    setProgress('edit', 60);
+    setStatus('edit', 'info', 'Updating blog.json…');
+
+    museo.opere.splice(operaIdx, 1);
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(blogJson.data, null, 2) + '\n')));
+    const res = await ghPut('blog.json', content, `Elimina opera: ${opera.titolo}`, blogJson.sha);
+    blogJson.sha = res.content.sha;
+
+    setProgress('edit', 100);
+    setStatus('edit', 'ok', `✓ "${opera.titolo}" deleted permanently.`);
+    onEditSezioneChange();
+    document.getElementById('e-form-blog').style.display = 'none';
+  } catch(e) {
+    setStatus('edit', 'err', '✕ ' + e.message);
+    setProgress('edit', 0);
+  }
+}
+
 // ---- INIT ----
 document.addEventListener('DOMContentLoaded', () => {
-  // Controllo autenticazione — reindirizza ad admin.html se non autenticato
   if (sessionStorage.getItem('rawd-admin') !== '1') {
     window.location.href = 'admin.html';
     return;
   }
-
   const token = getToken();
   if (token) {
     document.getElementById('token-section').classList.add('saved');
