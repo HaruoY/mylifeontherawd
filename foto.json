@@ -381,19 +381,6 @@
     "crop_position": "center"
   },
   {
-    "id": 30,
-    "titolo": "Cooling",
-    "categoria": "street",
-    "viaggio": "USA 2018",
-    "luogo": "New York",
-    "lat": 40.7128,
-    "lng": -74.006,
-    "data": "2026-07-13",
-    "immagine_url": "images/cooling-30.jpg",
-    "thumbnail_url": "images/cooling-30-thumb.jpg",
-    "pubblicato": true
-  },
-  {
     "id": 31,
     "titolo": "Edinburgh Castle at Dawn",
     "categoria": "reportage",
