@@ -553,12 +553,12 @@ async function pubblicaTravel() {
 
   setProgress('travel', 20);
   setStatus('travel', 'info', 'Uploading image…');
-  const imgB64 = await toBase64(file);
+  const imgB64 = await resizeToBase64(file, 1400, 0.82);
   await ghPut(imgPath, imgB64, `Aggiunge immagine: ${titolo}`);
 
   setProgress('travel', 50);
   setStatus('travel', 'info', 'Generating thumbnail…');
-  const thumbB64 = await resizeToBase64(file, 600);
+  const thumbB64 = await resizeToBase64(file, 600, 0.70);
   await ghPut(thumbPath, thumbB64, `Aggiunge thumbnail: ${titolo}`);
 
   setProgress('travel', 75);
@@ -646,19 +646,20 @@ async function pubblicaBlog() {
   document.getElementById('new-museo-fields').style.display = 'none';
 }
 
-function resizeToBase64(file, maxWidth) {
+function resizeToBase64(file, maxWidth, quality) {
+  quality = quality || 0.75;
   return new Promise((res, rej) => {
     const img = new Image();
     const url = URL.createObjectURL(file);
     img.onload = () => {
-      const scale = Math.min(1, maxWidth / img.width);
+      const scale = Math.min(1, maxWidth / Math.max(img.width, img.height));
       const w = Math.round(img.width * scale);
       const h = Math.round(img.height * scale);
       const c = document.createElement('canvas');
       c.width = w; c.height = h;
       c.getContext('2d').drawImage(img, 0, 0, w, h);
       URL.revokeObjectURL(url);
-      res(c.toDataURL('image/jpeg', 0.75).split(',')[1]);
+      res(c.toDataURL('image/jpeg', quality).split(',')[1]);
     };
     img.onerror = rej;
     img.src = url;
