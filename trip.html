@@ -415,7 +415,9 @@
 
       slice.forEach((photo, j) => {
         const idx = i + j;
-        const src = photo.thumbnail_url || photo.immagine_url;
+        // Usa thumbnail solo per le celle quadrate (r-3), originale per le grandi
+        const useThumb = (pat.cls === 'r-3' || (slice.length === 1 && pat.cls !== 'r-1'));
+        const src = (useThumb && photo.thumbnail_url) ? photo.thumbnail_url : photo.immagine_url;
         const pos = photo.crop_position || 'center 30%';
         const cell = document.createElement('div');
         cell.className = 'photo-cell';
