@@ -224,19 +224,6 @@
     "pubblicato": true
   },
   {
-    "id": 18,
-    "titolo": "Lower Manhattan Panorama",
-    "categoria": "paesaggi",
-    "viaggio": "New York 2022",
-    "luogo": "Brooklyn Bridge Park, New York",
-    "lat": 40.7024,
-    "lng": -73.9961,
-    "data": "2022-08-07",
-    "immagine_url": "images/lower-manhattan-panorama-18.jpg",
-    "thumbnail_url": "images/lower-manhattan-panorama-18-thumb.jpg",
-    "pubblicato": true
-  },
-  {
     "id": 19,
     "titolo": "Big Texan Steak Ranch",
     "categoria": "reportage",
